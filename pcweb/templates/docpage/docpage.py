@@ -331,7 +331,7 @@ def menu_socials() -> rx.Component:
 
 @rx.memo
 def docpage_footer(path: str):
-    from pcweb.pages.docs.gallery import gallery
+    from pcweb.pages.gallery import gallery
     from pcweb.pages.docs import getting_started, hosting
     from pcweb.pages.docs.library import library
     from pcweb.pages.changelog import changelog
@@ -831,44 +831,22 @@ def docpage(
                 )
                 links.append(
                     rx.link(
-                        rx.hstack(
-                            get_icon(icon="arrow_right", transform="rotate(180deg)"),
+                        rx.box(
+                            get_icon(icon="arrow_right", class_name="rotate-180"),
                             next_prev_name,
-                            align_items="center",
-                            gap="8px",
-                            width="100%",
-                            justify_content=[
-                                "center",
-                                "center",
-                                "flex-start",
-                                "flex-start",
-                                "flex-start",
-                            ],
-                            border_radius="8px",
+                            class_name="flex flex-row justify-center md:justify-start items-center gap-2 rounded-lg w-full",
                         ),
                         underline="none",
                         href=prev.link,
-                        _hover={"color": c_color("slate", 11)},
-                        transition="color 0.035s ease-out",
-                        background_color=[
-                            c_color("slate", 3),
-                            c_color("slate", 3),
-                            "transparent",
-                            "transparent",
-                            "transparent",
-                        ],
-                        border_radius="8px",
-                        padding=["2px 6px", "2px 6px", "0px", "0px", "0px"],
+                        _hover={"color": "var(--c-slate-11)"},
                         style={
-                            "color": c_color("slate", 9),
-                            **small,
                             ":hover": {"color": c_color("slate", 11)},
                         },
-                        width=["100%", "100%", "auto", "auto", "auto"],
+                        class_name="bg-slate-3 md:bg-transparent px-1.5 md:px-0 py-0.5 md:py-0 rounded-lg md:w-auto font-small text-slate-9 hover:text-slate-11 transition-color",
                     )
                 )
             else:
-                links.append(rx.box())
+                links.append(rx.fragment())
 
             # Create the next component link.
             if next:
@@ -879,50 +857,29 @@ def docpage(
                 )
                 links.append(
                     rx.link(
-                        rx.hstack(
+                        rx.box(
                             next_prev_name,
                             get_icon(icon="arrow_right"),
-                            align_items="center",
-                            gap="8px",
-                            width="100%",
-                            justify_content=[
-                                "center",
-                                "center",
-                                "flex-end",
-                                "flex-end",
-                                "flex-end",
-                            ],
-                            background_color=[
-                                c_color("slate", 3),
-                                c_color("slate", 3),
-                                "transparent",
-                                "transparent",
-                                "transparent",
-                            ],
-                            padding=["2px 6px", "2px 6px", "0px", "0px", "0px"],
-                            border_radius="8px",
+                            class_name="flex flex-row justify-center md:justify-end items-center gap-2 bg-slate-3 md:bg-transparent px-1.5 md:px-0 py-0.5 md:py-0 rounded-lg w-full md:w-auto",
                         ),
                         underline="none",
                         href=next.link,
-                        _hover={"color": c_color("slate", 11)},
-                        transition="color 0.035s ease-out",
+                        _hover={"color": "var(--c-slate-11)"},
                         style={
-                            "color": c_color("slate", 9),
-                            **small,
-                            ":hover": {"color": c_color("slate", 11)},
+                            ":hover": {"color": "var(--c-slate-11)"},
                         },
-                        width=["100%", "100%", "auto", "auto", "auto"],
+                        class_name="w-full md:w-auto font-small text-slate-9 hover:text-slate-11 transition-color",
                     ),
                 )
             else:
-                links.append(rx.box())
+                links.append(rx.fragment())
 
             toc = []
             if not isinstance(contents, rx.Component):
                 comp = contents(*args, **kwargs)
             else:
                 comp = contents
-                
+
             if isinstance(comp, tuple):
                 toc, comp = comp
 
@@ -932,71 +889,39 @@ def docpage(
                 rx.el.main(
                     rx.box(
                         sidebar,
-                        margin_top="105px",
-                        height="100%",
-                        width="24%",
-                        display=["none", "none", "none", "none", "flex", "flex"],
-                        flex_shrink=0,
+                        class_name="md:flex hidden mt-[105px] w-[24%] h-full shrink-0",
                     ),
                     rx.box(
                         rx.box(
                             breadcrumb(path, nav_sidebar),
-                            padding_x=[
-                                "0px",
-                                "0px",
-                                "0px",
-                                "48px",
-                                "96px",
-                            ],
+                            class_name="px-0 md:px-12 lg:px-24",
                         ),
                         rx.box(
                             rx.el.article(comp),
                             rx.el.nav(
                                 *links,
-                                justify="between",
-                                margin_top=["32px", "32px", "40px", "40px", "40px"],
-                                margin_bottom=[
-                                    "24px",
-                                    "24px",
-                                    "24pxpx",
-                                    "48px",
-                                    "48px",
-                                ],
-                                gap="8px",
-                                display="flex",
-                                flex_direction="row",
-                                justify_content="space-between",
+                                class_name="flex flex-row justify-between gap-2 mt-8 md:mt-10 mb-6 md:mb-12",
                             ),
                             docpage_footer(path=path),
-                            padding_x=["16px", "24px", "24px", "48px", "96px"],
-                            margin_top=["105px", "145px", "0px", "0px", "0px"],
+                            class_name="mt-[105px] sm:mt-[145px] md:mt-0 px-4 sm:px-6 md:px-12 lg:px-24",
                         ),
-                        width=(
-                            ["100%", "100%", "100%", "90%", "70%", "60%"]
+                        class_name="h-full"
+                        + (
+                            " w-full md:w-[90%] lg:w-[70%] xl:w-[60%]"
                             if right_sidebar
-                            else "100%"
+                            else ""
                         ),
-                        height="100%",
                     ),
                     rx.el.nav(
-                        rx.flex(
-                            rx.heading(
+                        rx.box(
+                            rx.el.h5(
                                 "On this page",
-                                as_="h5",
-                                style={
-                                    "color": c_color("slate", 12),
-                                    "font-family": "Instrument Sans",
-                                    "font-size": "14px",
-                                    "font-style": "normal",
-                                    "font-weight": "600",
-                                    "line-height": "20px",
-                                    "letter-spacing": "-0.21px",
-                                },
+                                class_name="font-smbold text-[0.875rem] text-slate-12 hover:text-violet-9 leading-5 tracking-[-0.01313rem] transition-color",
                             ),
-                            rx.unordered_list(
+                            rx.el.ul(
                                 *[
                                     (
-                                        rx.list_item(
+                                        rx.el.li(
                                             rx.link(
                                                 text,
                                                 style={
@@ -1025,12 +950,6 @@ def docpage(
                                                 rx.link(
                                                     text,
                                                     style={
-                                                        "transition": "color 0.035s ease-out",
-                                                        "overflow": "hidden",
-                                                        "text-overflow": "ellipsis",
-                                                        "white-space": "nowrap",
-                                                        "color": c_color("slate", 9),
-                                                        **small,
                                                         ":hover": {
                                                             "color": c_color(
                                                                 "slate", 11
@@ -1040,6 +959,7 @@ def docpage(
                                                     _hover={
                                                         "color": c_color("slate", 11),
                                                     },
+                                                    class_name="font-small text-slate-9 truncate transition-color",
                                                     underline="none",
                                                     href=path
                                                     + "#"
@@ -1047,16 +967,10 @@ def docpage(
                                                 )
                                             )
                                             if level == 2
-                                            else rx.list_item(
+                                            else rx.el.li(
                                                 rx.link(
                                                     text,
                                                     style={
-                                                        "transition": "color 0.035s ease-out",
-                                                        "overflow": "hidden",
-                                                        "text-overflow": "ellipsis",
-                                                        "white-space": "nowrap",
-                                                        "color": c_color("slate", 9),
-                                                        **small,
                                                         ":hover": {
                                                             "color": c_color(
                                                                 "slate", 11
@@ -1067,7 +981,7 @@ def docpage(
                                                         "color": c_color("slate", 11),
                                                     },
                                                     underline="none",
-                                                    padding_left="24px",
+                                                    class_name="pl-6 font-small text-slate-9 truncate transition-color",
                                                     href=path
                                                     + "#"
                                                     + text.lower().replace(" ", "-"),
@@ -1077,47 +991,17 @@ def docpage(
                                     )
                                     for level, text in toc
                                 ],
-                                list_style_type="none",
-                                display="flex",
-                                gap="16px",
-                                flex_direction="column",
-                                margin_left="0px !important",
+                                class_name="flex flex-col gap-4 list-none",
                             ),
-                            direction="column",
-                            width="100%",
-                            position="fixed",
-                            gap="16px",
                             padding="14px 8px 0px 8px",
-                            max_width="280px",
-                            justify="start",
-                            overflow="hidden",
-                            max_height="80vh",
-                            overflow_y="scroll",
+                            class_name="fixed flex flex-col justify-start gap-4 p-[0.875rem_0.5rem_0px_0.5rem] w-full max-w-[280px] max-h-[80vh] overflow-hidden",
                         ),
-                        margin_top="105px",
-                        width="18%",
-                        height="100%",
-                        display=(
-                            ["none", "none", "none", "none", "none", "flex"]
-                            if right_sidebar
-                            else "none"
-                        ),
-                        flex_shrink=0,
+                        class_name="mt-[105px] w-[18%] h-full shrink-0"
+                        + (" hidden xl:flex" if right_sidebar else " hidden"),
                     ),
-                    max_width="110em",
-                    margin_left="auto",
-                    margin_right="auto",
-                    margin_top="0px",
-                    height="100%",
-                    min_height="100vh",
-                    width="100%",
-                    display="flex",
-                    flex_direction="row",
+                    class_name="flex flex-row mx-auto mt-0 max-w-[110em] h-full min-h-screen",
                 ),
-                background=c_color("slate", 1),
-                width="100%",
-                justify="center",
-                flex_direction="column",
+                class_name="flex flex-col justify-center bg-slate-1 w-full",
             )
 
         # Return the route.
@@ -1144,42 +1028,19 @@ class RadixDocState(rx.State):
     color: str = "tomato"
 
 
+@rx.memo
 def hover_item(component: rx.Component, component_str: str) -> rx.Component:
     return rx.hover_card.root(
         rx.hover_card.trigger(rx.flex(component)),
         rx.hover_card.content(
-            # rx.code_block(f"{component_str}", can_copy=True, language="python"),
             rx.el.button(
-                get_icon(icon="copy", padding="5px"),
-                rx.text(
+                get_icon(icon="copy", class_name="p-[5px]"),
+                rx.el.p(
                     component_str,
-                    as_="p",
-                    overflow="hidden",
-                    white_space="nowrap",
-                    style=small,
-                    text_overflow="ellipsis",
-                    flex_grow=1,
-                    flex_shrink=1,
-                    min_width=0,
+                    class_name="flex-1 font-small truncate",
                 ),
-                gap="6px",
-                color=c_color("slate", 9),
-                width="100%",
-                padding_right="6px",
-                align_items="center",
-                background=c_color("slate", 1),
-                border_radius="6px",
-                box_shadow=shadows["small"],
                 on_click=rx.set_clipboard(component_str),
-                cursor="pointer",
-                _hover={
-                    "transition": "background 0.075s ease-out",
-                    "background": c_color("slate", 3),
-                },
-                border=f"1px solid {c_color('slate', 5)}",
-                display="flex",
-                flex_direction="row",
-                max_width="300px",
+                class_name="flex flex-row items-center gap-1.5 border-slate-5 bg-slate-1 hover:bg-slate-3 shadow-small pr-1.5 border rounded-md w-full max-w-[300px] text-slate-9 transition-bg cursor-pointer",
             ),
         ),
     )
@@ -1258,16 +1119,17 @@ def style_grid(
     disabled: bool = False,
     **kwargs,
 ) -> rx.Component:
-    text_style = {"color": c_color("slate", 11), "text-wrap": "nowrap", **medium}
-    return rx.vstack(
+    text_cn = "text-nowrap font-md"
+    return rx.box(
         rx.grid(
             rx.text("", size="5"),
             *[
-                rx.text(variant, style=text_style, color=c_color("slate", 11))
+                rx.text(variant, class_name=text_cn + " text-slate-11")
                 for variant in variants
             ],
             rx.text(
-                "Accent", style=text_style, color=f"var(--{RadixDocState.color}-10)"
+                "Accent",
+                class_name=text_cn + f" text-[var(--{RadixDocState.color}-10)]",
             ),
             *[
                 hover_item(
@@ -1298,7 +1160,7 @@ def style_grid(
                 )
                 for variant in variants
             ],
-            rx.text("Gray", style=text_style, color=c_color("slate", 11)),
+            rx.text("Gray", class_name=text_cn + " text-slate-11"),
             *[
                 hover_item(
                     component=used_component(
@@ -1330,7 +1192,7 @@ def style_grid(
             ],
             (
                 rx.fragment(
-                    rx.text("Disabled", style=text_style, color=c_color("slate", 11)),
+                    rx.text("Disabled", class_name=text_cn + " text-slate-11"),
                     *[
                         hover_item(
                             component=used_component(
@@ -1365,11 +1227,10 @@ def style_grid(
                             """<svg width="9" height="9" viewBox="0 0 9 9" fill="currentcolor" xmlns="http://www.w3.org/2000/svg" class="rt-SelectIcon" aria-hidden="true"><path d="M0.135232 3.15803C0.324102 2.95657 0.640521 2.94637 0.841971 3.13523L4.5 6.56464L8.158 3.13523C8.3595 2.94637 8.6759 2.95657 8.8648 3.15803C9.0536 3.35949 9.0434 3.67591 8.842 3.86477L4.84197 7.6148C4.64964 7.7951 4.35036 7.7951 4.15803 7.6148L0.158031 3.86477C-0.0434285 3.67591 -0.0536285 3.35949 0.135232 3.15803Z"></path></svg>"""
                         ),
                         color_scheme=RadixDocState.color,
-                        width="8em",
                         variant="surface",
-                        justify_content="space-between",
+                        class_name="justify-between w-32",
                     ),
-                    margin_top="18px",
+                    class_name="mt-[18px]",
                 ),
             ),
             rx.popover.content(
@@ -1378,27 +1239,17 @@ def style_grid(
                         rx.box(
                             rx.icon(
                                 "check",
-                                color=rx.color("gray", 12),
                                 size=15,
-                                position="absolute",
-                                top="50%",
-                                left="50%",
-                                transform="translate(-50%, -50%)",
                                 display=rx.cond(
                                     RadixDocState.color == color, "block", "none"
                                 ),
+                                class_name="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-12",
                             ),
-                            width="30px",
-                            height="30px",
-                            border_radius="max(var(--radius-2), var(--radius-full))",
-                            bg=f"var(--{color}-9)",
-                            cursor="pointer",
-                            position="relative",
-                            flex_shrink=0,
                             on_click=RadixDocState.setvar("color", color),
-                            border=rx.cond(
+                            class_name="relative cursor-pointer bg-[var(--{color}-9)] size-[30px] shrink-0 rounded-[max(var(--radius-2), var(--radius-full))]"
+                            + rx.cond(
                                 RadixDocState.color == color,
-                                "2px solid var(--gray-12)",
+                                " border-2 border-gray-12",
                                 "",
                             ),
                         )
@@ -1409,10 +1260,7 @@ def style_grid(
                 ),
             ),
         ),
-        padding="24px",
-        border_radius="12px",
-        border=f"1px solid {c_color('slate', 4)}",
-        background=c_color("slate", 2),
+        class_name="flex flex-col border-slate-4 bg-slate-2 p-6 border rounded-xl",
     )
 
 

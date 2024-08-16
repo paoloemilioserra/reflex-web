@@ -159,5 +159,4 @@ def dashboard():
         
         height=demo_height,
     ),
-    appearance="dark",
     ))

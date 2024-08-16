@@ -18,11 +18,16 @@ def example_button(text):
     return rx.button(
     text,
     border_radius="8px;",
-    border="1px solid rgba(186, 199, 247, 0.12);",
+    border="1px solid var(--c-slate-5);",
+    color=rx.cond(
+        DemoState.demo == text,
+        "white",
+        "var(--c-slate-9)",
+    ),
     background= rx.cond(
         DemoState.demo == text,
-        "rgba(161, 157, 213, 0.2);",
-        "rgba(161, 157, 213, 0.05);",
+        "var(--c-violet-9)",
+        "var(--c-slate-2)",
     ),
     backdrop_filter= "blur(2px);",
     on_click= lambda: DemoState.set_demo(text)
@@ -42,15 +47,16 @@ def heading():
             ],
             font_size=["24px", "30px", "44px", "44px", "44px", "44px"],
             text_align="left",
-            color="#D6D6ED",
+            color="var(--c-slate-11)",
             font_weight="bold",
             line_height="1",
         ),
-        rx.chakra.text(
+        rx.el.h3(
             "Create your whole app in a single language. Don't worry about writing APIs to connect your frontend and backend.", 
-            color="#6C6C81",
+            color="var(--c-slate-10)",
             font_size=[".8em", ".8em", "1em", "1em", "1em", "1em"],
             text_align="center",
+            class_name="font-small"
         ),
         padding_y="1em",
     )
@@ -65,12 +71,13 @@ def more_examples():
                         stroke_width="1px",
                         padding_left=".1em",
                     ),   
-                    background="rgba(161, 157, 213, 0.05);", 
+                    background="var(--c-slate-2)",
+                    color="var(--c-slate-9)",
                     border_radius="8px;",
-                    border="1px solid rgba(186, 199, 247, 0.12);",
+                    border="1px solid var(--c-slate-5);",
                     text_wrap="nowrap",
                 ),
-                href="/docs/gallery",
+                href="/gallery",
             )
 
 def demos():
@@ -101,20 +108,21 @@ def demos():
                 image_gen()
             ),
             border_radius= "10px;",
-            border= "1px solid #2F2B37;",
-            background_color= rx.color("mauve", 1),
+            border= "1px solid var(--c-slate-5);",
+            background_color= "var(--c-slate-2)",
             overflow="hidden",
             width="100%",  
         ),
         padding_bottom="4em",
         width="100%",
         direction="column",
-        background_image="url(/grid.png)",
+        # background_image="url(/grid.png)",
         background_position= ["50% 50%;", "50% 40%;", "50% 70%;", "50% 70%;", "50% 70%;", "50% 70%;"],
         background_repeat= "no-repeat;",
         background_size= "auto;",
         padding_top="5em",
         gap="1em",
+        class_name="bg-slate-1"
     )
 
  

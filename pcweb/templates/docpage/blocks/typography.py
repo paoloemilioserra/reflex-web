@@ -63,7 +63,8 @@ def doclink(text: str, href: str, **props) -> rx.Component:
     Returns:
         The styled link.
     """
-    return rx.link(text, underline="always", href=href, **props)
+    return rx.link(text, underline="always", href=href, **props, class_name="text-violet-9")
+
 
 
 def doclink2(text: str, **props) -> rx.Component:

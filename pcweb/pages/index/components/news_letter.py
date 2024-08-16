@@ -7,22 +7,22 @@ def news_letter_text() -> rx.Component:
         rx.chakra.text(
             "Join Our Newsletter!",
             text_align="left",
-            background_image="linear-gradient(95deg, #D6D6ED 42.14%, #727280 63.21%)",
             font_size=["20px", "20px", "28px", "42px", "42px", "42px"],
-            background_clip="text",
             font_weight="bold",
-            line_height="1",            
+            line_height="1",
+            class_name="inline-block bg-clip-text bg-gradient-to-r from-slate-12 to-slate-11 w-full text-start text-transparent",
         ),
         rx.chakra.text(
             " Get the latest updates and news about Reflex.",
             text_align="left",
-            color="#6C6C81",
+            color="var(--c-slate-10)",
             font_weight="bold",
             line_height="2",
             max_width=["200px", "300px", "400px", "650px", "650px", "650px"],
         ),
         align_items="left",
         width="100%",
+        class_name="font-small",
     )
 
 def message_group():

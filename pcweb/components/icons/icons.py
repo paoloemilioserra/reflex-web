@@ -105,7 +105,6 @@ ICONS = {
 
 LiteralIcon = Literal["github", "discord", "twitter", "sun", "moon", "arrow_right", "copy", "arrow_down", "arrow_down_big", "new_tab", "eye", "select", "history", "clipboard"]
 
-
 def get_icon(icon: LiteralIcon, **props) -> rx.Component:
     if icon not in ICONS:
         raise ValueError(

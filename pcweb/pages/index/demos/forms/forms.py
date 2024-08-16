@@ -84,7 +84,6 @@ def forms():
                     height=demo_height,
                     overflow_y="hidden",
                 ),
-                appearance="dark",
             ),
             display="flex",
         ),

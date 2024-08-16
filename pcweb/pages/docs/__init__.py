@@ -14,7 +14,7 @@ from reflex.components.chakra.base import ChakraComponent
 from reflex.components.radix.primitives.base import RadixPrimitiveComponent
 from reflex.components.radix.themes.base import RadixThemesComponent
 
-from .gallery import gallery
+from pcweb.pages.gallery import gallery
 from .library import library
 from .recipes_overview import overview
 from .resources import resources

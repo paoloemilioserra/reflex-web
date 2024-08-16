@@ -1,72 +1,52 @@
 import reflex as rx
-from pcweb import constants, styles
+from pcweb import constants
 from pcweb.templates.webpage import webpage
-from pcweb.components.logo import logo
+from pcweb.components.icons.icons import get_icon
+from pcweb.components.webpage.comps import h1_title
+from pcweb.components.webpage.pill import pill
 
 
-def change(date, title, description, points, link):
-    return rx.vstack(
-        rx.vstack(
-            logo(
-                width=["10em", "12em", "14em"],
+def change(
+    date: str, version: str, description: str, points: list[str], link: str
+) -> rx.Component:
+    return rx.el.li(
+        rx.box(
+            rx.box(
+                rx.text(version, class_name="max-w-fit text-xl code-style"),
+                rx.moment(date, from_now=True, class_name="font-small text-slate-10"),
+                class_name="flex flex-col gap-2",
             ),
-            rx.hstack(
-                rx.hstack(
-                    rx.icon(tag="copy", size=18, color="#6C6C81"),
-                    rx.text(title, font_weight=styles.BOLD_WEIGHT, color="#D6D6ED"),
+            rx.link(
+                rx.el.button(
+                    "Full Notes",
+                    get_icon("new_tab"),
+                    class_name="flex flex-row items-center gap-2 border-slate-5 bg-slate-1 hover:bg-slate-3 shadow-small p-[0.3125rem] border rounded-md h-6 font-small text-slate-9 transition-background",
                 ),
-                rx.tablet_and_desktop(
-                    rx.divider(margin_x="1em", size="4"),
-                    width="100%",
-                ),
-                rx.link(
-                    rx.button(
-                        rx.icon(tag="github", size=18),
-                        "Full Notes ->",
-                        color="#A2A2B9",
-                        padding_x="1em",
-                        border_radius="7px;",
-                        border="1px solid rgba(107, 107, 127, 0.50);",
-                        background="rgba(107, 107, 127, 0.10);",
-                        box_shadow="0px 3px 4px -1px rgba(23, 26, 43, 0.40);",
-                        backdrop_filter="blur(2px);",
-                        text_wrap="nowrap",
-                    ),
-                    href=link,
-                ),
-                width="100%",
-                padding_top=["1em", "1em", "0", "0", "0", "0"],
-                justify="between",
+                underline="none",
+                href=link,
             ),
-            padding_right="1em",
-            border_radius="10px",
-            border="1px solid #3C3646",
-            background="linear-gradient(115deg, #1D1B23 14.13%, #131217 73.41%)",
-            box_shadow="0px 27px 44px -13px rgba(214, 214, 237, 0.10) inset, 0px 0px 27px -4px rgba(0, 0, 0, 0.30);",
-            padding="1em",
-            padding_top="2em",
-            width="100%",
+            class_name="flex flex-row justify-between items-start border-slate-5 pb-3 md:pb-4 border-b w-full",
         ),
-        rx.text(description, color="#D6D6ED", font_family=styles.MONO),
-        rx.chakra.unordered_list(
+        rx.el.h3(
+            description, class_name="pt-3 md:pt-4 pb-2 md:pb-3 font-md text-balance text-slate-12"
+        ),
+        rx.el.ul(
             *[
-                rx.list_item(
-                    d, font_size=".8em", color="#6C6C81", font_family=styles.MONO
+                rx.el.li(
+                    rx.markdown(d, class_name="markdown-code"),
+                    class_name="font-small text-slate-11",
                 )
                 for d in points
             ],
-            padding_left="1.5em",
+            list_style_type="disc",
+            class_name="space-y-2 pl-4 w-full",
         ),
-        align_items="flex-start",
-        width="100%",
-        padding_bottom="3em",
-        padding_left=["0", "0", "1em", "1em", "1em", "1em"],
-        border_left="1px solid #23222B",
+        class_name="flex flex-col gap-0 border-slate-5 bg-slate-2 shadow-large p-4 md:p-6 border rounded-xl w-full",
     )
 
 
 def changelog_content():
-    return rx.chakra.vstack(
+    return rx.el.ul(
         change(
             "2024-08-06",
             "v0.5.9",
@@ -86,7 +66,7 @@ def changelog_content():
             "Use templates from reflex-dev/templates",
             [
                 "Nicer looking default style for charts and graphs",
-                "Support rx.svg circle, polygon and rect components",
+                "Support `rx.svg` circle, polygon and rect components",
                 "Bug fixes for background tasks, class_name prop, fully controlled inputs and more",
                 "Progress on Var Operations refactor",
             ],
@@ -124,7 +104,7 @@ def changelog_content():
                 "More Recharts improvements",
                 "Better support for interactive stateless apps",
                 "Fix websocket disconnect when navigating to another domain",
-                "Make .web folder location configurable with REFLEX_WEB_WORKDIR",
+                "Make .web folder location configurable with `REFLEX_WEB_WORKDIR`",
             ],
             "https://github.com/reflex-dev/reflex/releases/tag/v0.5.5",
         ),
@@ -170,7 +150,7 @@ def changelog_content():
                 "rx.toast supports action buttons and on_dismiss/on_auto_close",
                 "Improved typing for ConnectionState and State mixins",
                 "Faster CLI launch time",
-                "Better customizability for rx.accordion",
+                "Better customizability for `rx.accordion`",
             ],
             "https://github.com/reflex-dev/reflex/releases/tag/v0.5.1",
         ),
@@ -181,8 +161,8 @@ def changelog_content():
             [
                 "New public API methods for wrapping 3rd-Party Components",
                 "Generic throttle and debounce for all event handlers",
-                "Use Alembic batch mode for db makemigrations",
-                "Experimental toast component in rx._x.toast",
+                "Use Alembic batch mode for `db makemigrations`",
+                "Experimental toast component in `rx._x.toast`",
             ],
             "https://github.com/reflex-dev/reflex/releases/tag/v0.5.0",
         ),
@@ -215,8 +195,8 @@ def changelog_content():
             "New reflex init templates",
             [
                 "Use any Reflex app on Github as an initial template",
-                "reflex run will automatically init the app when required",
-                "Reflex Experimental Namespace: rx._x",
+                "`reflex run` will automatically init the app when required",
+                "Reflex Experimental Namespace: `rx._x`",
                 "Windows support for Python 3.12",
             ],
             "https://github.com/reflex-dev/reflex/releases/tag/v0.4.7",
@@ -241,7 +221,7 @@ def changelog_content():
                 "Experimental Multi-process Compilation",
                 "Better default titles for SEO",
                 "router.session.client_ip more likely to be correct now",
-                "Allow rx.download to resolve rx.get_upload_url links",
+                "Allow `rx.download` to resolve `rx.get_upload_url` links",
             ],
             "https://github.com/reflex-dev/reflex/releases/tag/v0.4.5",
         ),
@@ -250,8 +230,8 @@ def changelog_content():
             "v0.4.4",
             "Fix missing on_load and /_upload in prod deployments",
             [
-                "rx.upload exposes on_drop event trigger",
-                "rx.el.form supports on_submit event trigger",
+                "`rx.upload` exposes `on_drop` event trigger",
+                "`rx.el.form` supports `on_submit` event trigger",
                 "Improve 'Stateless' app detection",
                 "Expose lang and other attributes on <html> tag",
             ],
@@ -326,8 +306,8 @@ def changelog_content():
             "v0.3.8",
             "New rx.match helper acts as a switch statement",
             [
-                "app.compile() is no longer required",
-                "Add time_picker component",
+                "`app.compile()` is no longer required",
+                "Add `time_picker` component",
                 "Support bare SQLAlchemy DeclarativeBase models",
             ],
             "https://github.com/reflex-dev/reflex/releases/tag/v0.3.8",
@@ -377,7 +357,7 @@ def changelog_content():
             "Work with Github Codespaces",
             [
                 "Expose gunicorn_worker_class for extended configuration",
-                "stop_propagation and prevent_default for all events",
+                "`stop_propagation` and `prevent_default` for all events",
             ],
             "https://github.com/reflex-dev/reflex/releases/tag/v0.3.2",
         ),
@@ -450,57 +430,29 @@ def changelog_content():
             ],
             "https://github.com/reflex-dev/reflex/releases/tag/v0.2.5",
         ),
-        width="100%",
+        class_name="flex flex-col gap-6 w-full",
     )
 
 
 @webpage(path="/changelog", title="Changelog · Reflex")
 def changelog():
-    return rx.center(
+    return rx.el.section(
+        # pill(text="Timeline"),
+        h1_title(title="Changelog"),
         rx.box(
-            rx.flex(
-                rx.chakra.text(
-                    "Timeline",
-                    background_image="linear-gradient(95deg, #B1A9FB 25.71%, #867BF1 83.81%);",
-                    text_align="center",
-                    background_clip="text",
-                    padding_x="1em",
+            rx.el.h2(
+                "Reflex has new releases and features coming every week! Make sure to star and watch on ",
+                rx.link(
+                    "GitHub",
+                    underline="always",
+                    href=constants.GITHUB_URL,
+                    class_name="text-violet-9",
                 ),
-                width="7em",
-                justify="center",
-                border_radius="15px;",
-                border="1px solid #4435D4;",
-                background="linear-gradient(180deg, rgba(97, 81, 243, 0.20) 0%, rgba(86, 70, 237, 0.20) 100%);",
-                box_shadow="0px 3px 6px -3px rgba(34, 25, 121, 0.60), 0px 0px 4px -1px rgba(27, 21, 90, 0.40);",
+                " to stay up to date.",
             ),
-            rx.chakra.text(
-                "Changelog",
-                font_size="44px",
-                background_image="linear-gradient(95deg, #D6D6ED 42.14%, #727280 63.21%);",
-                background_clip="text",
-                font_weight="bold",
-                letter_spacing="-1.28px;",
-            ),
-            rx.center(
-                rx.chakra.span(
-                    "Reflex has new releases and features coming every week! Make sure to star and watch on ",
-                    rx.link("GitHub", href=constants.GITHUB_URL, color="#6151F3"),
-                    " to stay up to date.",
-                    color="#A2A2B9",
-                    width="100%",
-                ),
-                font_family=styles.MONO,
-                padding="1em",
-                margin_bottom="2em",
-                border_radius="7px;",
-                border="1px solid rgba(107, 107, 127, 0.50);",
-                background="rgba(107, 107, 127, 0.10);",
-                box_shadow="0px 3px 4px -1px rgba(23, 26, 43, 0.40);",
-                backdrop_filter="blur(2px);",
-                width="100%",
-            ),
-            changelog_content(),
-            max_width=["95vw", "95vw", "100vw", "100vw", "100vw", "100vw"],
+            class_name="border-slate-4 bg-slate-2 p-4 md:p-6 border rounded-xl w-full md:font-md text-slate-11 text-small",
         ),
-        width="100%",
+        changelog_content(),
+        id="changelog",
+        class_name="section-content",
     )

@@ -6,7 +6,7 @@ from pcweb.constants import GITHUB_URL, TWITTER_URL, DISCORD_URL
 from pcweb.pages.docs import getting_started, hosting
 from pcweb.pages.docs.library import library
 from pcweb.pages.blog import blogs
-from pcweb.pages.docs.gallery import gallery
+from pcweb.pages.gallery import gallery
 from reflex.style import toggle_color_mode
 
 
@@ -207,6 +207,7 @@ def docs_sidebar_drawer(sidebar: rx.Component, trigger):
             ),
         ),
     )
+
 
 def navbar_sidebar_button() -> rx.Component:
     return rx.flex(

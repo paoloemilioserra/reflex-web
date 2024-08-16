@@ -127,5 +127,4 @@ def image_gen():
         padding_x="1em",
         height=demo_height,
     ),
-    appearance="dark",
     )

@@ -3,15 +3,9 @@ from .logo import landing
 from pcweb.pages.docs import getting_started
 
 def feature_button(name: str):
-    return rx.flex(
+    return rx.box(
         name,
-        color="#848496",
-        size="2",
-        padding=".25em 1em",
-        background= "linear-gradient(#131217, #131217) padding-box, linear-gradient(to bottom right, #8F93BC 5%, #656484 15%, #232329) border-box;",
-        border= "1px solid transparent;",
-        font_size=".8em",
-        border_radius="50px", 
+        class_name="border-slate-5 bg-slate-2 px-3 py-1 border rounded-full font-small text-slate-9 shadow-small",
     )
 
 def feature_button_hstack(mobile=False):
@@ -26,27 +20,24 @@ def feature_button_hstack(mobile=False):
 
 def hero_section_text(mobile=False):
     return rx.vstack(
-        rx.chakra.text(
+        rx.el.h1(
             "Web apps in pure Python.",
             text_align="left" if not mobile else "center",
-            background_image="linear-gradient(95deg, #D6D6ED 42.14%, #727280 63.21%)",
             font_size=["24px", "30px", "40px", "54px", "54px", "54px"],
-            background_clip="text",
             font_weight="bold",
             line_height="1",
-            
+            class_name="inline-block bg-clip-text bg-gradient-to-r from-slate-12 to-slate-11 w-full text-start text-transparent",
         ),
-        rx.chakra.text(
+        rx.el.h2(
             "Deploy with a single command.",
             text_align="left" if not mobile else "center",
-            color="#6C6C81",
+            color="var(--c-slate-11)",
             font_size=["24px", "30px", "40px", "54px", "54px", "54px"],
             font_weight="bold",
             line_height="1",
             max_width=["200px", "300px", "400px", "650px", "650px", "650px"],
         ),
         align_items="center" if mobile else "start",
-        
     )
 
 def hero_section_buttons(mobile=False):
@@ -84,6 +75,8 @@ def hero_section_buttons(mobile=False):
                 padding="3px",
                 border_radius="8px",
             ),
+            cursor="pointer",
+            underline="none",
             href=getting_started.introduction.path,        
         ),
         rx.link(
@@ -98,13 +91,17 @@ def hero_section_buttons(mobile=False):
                 bg="none",
                 _hover={
                     "background": "linear-gradient(115deg, #1D1B23 14.13%, #131217 73.41%)",
+                    "color": "white",
                     "box-shadow": "0px 0px 27px -4px rgba(0, 0, 0, 0.30), 0px 27px 44px -13px rgba(214, 214, 237, 0.10) inset;"
                 },
+                color=rx.color_mode_cond("black", "white"),
                 style=button_size,
             ),
             href="https://5dha7vttyp3.typeform.com/to/hQDMLKdX", 
             is_external=True,
-            margin_left=".25em",        
+            margin_left=".25em",   
+            cursor="pointer", 
+            underline="none",    
         ),
         align_items="center",
         justify="start" if not mobile else "center",
@@ -139,4 +136,5 @@ def hero_section() -> rx.Component:
             padding_bottom=["0em", "0em", "10em", "10em", "10em", "10em"],
         ),
         width="100%",
+        class_name="bg-slate-1",
     )

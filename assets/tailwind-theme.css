@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --font-instrument-sans: 'Instrument Sans', sans-serif;
+    --font-source-code-pro: 'Source Code Pro', monospace;
+}
+
+@layer components {
+    .font-instrument-sans {
+        font-family: var(--font-instrument-sans);
+    }
+
+    .font-code {
+        font-family: var(--font-source-code-pro);
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5rem;
+        /* 171.429% */
+        letter-spacing: -0.01313rem;
+    }
+
+    .code-style {
+        font-family: var(--font-source-code-pro);
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5rem !important;
+        letter-spacing: -0.01313rem;
+        color: var(--c-violet-9);
+        background-color: var(--c-violet-3);
+        border-radius: 0.25rem;
+        border-width: 1px;
+        border-color: var(--c-violet-4);
+        /* padding: 0rem 0.125rem 0rem 0.125rem; */
+    }
+
+    .code-error-style {
+        font-family: var(--font-source-code-pro);
+        font-size: 0.8rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1rem;
+        letter-spacing: -0.01313rem;
+        color: var(--red-11);
+        background-color: var(--red-3);
+        border-radius: 0.25rem;
+        border-width: 1px;
+        border-color: var(--red-5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .markdown-code > p {
+        margin: 0 !important;
+    }
+
+    .markdown-code > p > code {
+        font-family: var(--font-source-code-pro);
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5rem !important;
+        letter-spacing: -0.01313rem;
+        color: var(--c-violet-9);
+        background-color: var(--c-violet-3);
+        border-radius: 0.25rem;
+        border-width: 1px;
+        border-color: var(--c-violet-4);
+        padding: 0rem 0.125rem 0rem 0.125rem;
+    }
+
+    .font-small {
+        font-family: var(--font-instrument-sans);
+        font-size: 0.9rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.25rem;
+        /* 142.857% */
+        letter-spacing: -0.01094rem;
+    }
+
+    .font-md {
+        font-family: var(--font-instrument-sans);
+        font-size: 1.125rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.625rem;
+        letter-spacing: -0.01688rem;
+    }
+
+    .font-smbold {
+        font-family: var(--font-instrument-sans);
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1.5rem;
+        /* 150% */
+        letter-spacing: -0.015rem;
+    }
+
+    .font-base {
+        font-family: var(--font-instrument-sans);
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.5rem;
+        /* 150% */
+        letter-spacing: -0.015rem;
+    }
+
+    .font-x-large {
+        font-family: var(--font-instrument-sans);
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 2.5rem;
+        /* 125% */
+        letter-spacing: -0.06rem;
+    }
+
+    .font-xxx-large {
+        font-family: var(--font-instrument-sans);
+        font-size: 3.5rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 4rem;
+        /* 114.286% */
+        letter-spacing: -0.175rem;
+    }
+
+    .mobile-only {
+        @apply flex sm:hidden;
+    }
+
+    .desktop-only {
+        @apply hidden md:flex;
+    }
+
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    .text-pretty {
+        text-wrap: pretty;
+    }
+
+    .text-white {
+        color: #fff !important;
+    }
+
+    .transition-color {
+        transition: color 0.035s ease-out;
+    }
+
+    .transition-bg {
+        transition: background-color 0.075s ease-out;
+    }
+
+    .text-transparent {
+        -webkit-text-fill-color: transparent;
+    }
+
+    .bg-transparent {
+        background-color: transparent;
+    }
+
+    .section-content {
+        @apply flex flex-col justify-center items-center gap-6 mx-auto mb-20 px-4 md:px-6 w-full max-w-6xl;
+    }
+
+    .section-header {
+        @apply flex flex-col justify-center items-start md:items-center gap-2 md:gap-4 w-full text-start md:text-center;
+    }
+
+    @keyframes enterFromRight {
+        from { opacity: 0; transform: translateX(200px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes enterFromLeft {
+        from { opacity: 0; transform: translateX(-200px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes exitToRight {
+        from { opacity: 1; transform: translateX(0); }
+        to { opacity: 0; transform: translateX(200px); }
+    }
+    @keyframes exitToLeft {
+        from { opacity: 1; transform: translateX(0); }
+        to { opacity: 0; transform: translateX(-200px); }
+    }
+    @keyframes scaleIn {
+        from { opacity: 0; transform: rotateX(-10deg) scale(0.9); }
+        to { opacity: 1; transform: rotateX(0deg) scale(1); }
+    }
+    @keyframes scaleOut {
+        from { opacity: 1; transform: rotateX(0deg) scale(1); }
+        to { opacity: 0; transform: rotateX(-10deg) scale(0.95); }
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+
+    .animate-scaleIn { animation: scaleIn 200ms ease; }
+    .animate-scaleOut { animation: scaleOut 200ms ease; }
+    .animate-fadeIn { animation: fadeIn 200ms ease; }
+    .animate-fadeOut { animation: fadeOut 200ms ease; }
+    .animate-enterFromLeft { animation: enterFromLeft 250ms ease; }
+    .animate-enterFromRight { animation: enterFromRight 250ms ease; }
+    .animate-exitToLeft { animation: exitToLeft 250ms ease; }
+    .animate-exitToRight { animation: exitToRight 250ms ease; }
+
+    .hidden-scrollbar::-webkit-scrollbar {
+        background-color: transparent;
+    }
+
+    .hidden-scrollbar::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+}
+
+.v-link {
+    /* text-decoration: underline; */
+    color: var(--c-violet-9);
+    /* transition: color 0.035s ease-out;
+    text-decoration-color: color-mix(in srgb, var(--c-violet-9) 75%, transparent);
+    text-decoration-thickness: min(2px, max(1px, .05em));
+    text-underline-offset: calc(.025em + 2px); */
+}
+
+/* .v-link:hover {
+    color: color-mix(in srgb, var(--c-violet-8) 75%, transparent);
+    text-decoration-color: color-mix(in srgb, var(--c-violet-8) 75%, transparent);
+} */
+
+.mobile-only {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .mobile-only {
+        display: flex;
+    }
+}
+
+.desktop-only {
+    display: flex;
+}
+
+@media (max-width: 767px) {
+    .desktop-only {
+        display: none;
+    }
+}

@@ -63,7 +63,9 @@ def spotlight():
     )
 
 
-def webpage(path: str, title: str = DEFAULT_TITLE, props=None, add_as_page=True) -> Callable:
+def webpage(
+    path: str, title: str = DEFAULT_TITLE, props=None, add_as_page=True
+) -> Callable:
     """A template that most pages on the reflex.dev site should use.
 
     This template wraps the webpage with the navbar and footer.
@@ -100,40 +102,35 @@ def webpage(path: str, title: str = DEFAULT_TITLE, props=None, add_as_page=True)
                 The component with the template applied.
             """
             # Import here to avoid circular imports.
-            from pcweb.components.webpage.footer import footer
-            from pcweb.components.webpage.navbar import navbar
-            from pcweb.components.webpage.sidebar import sb
+            # from pcweb.components.webpage.footer import footer
+            from pcweb.components.docpage.navbar import navbar
+            from pcweb.views.footer import footer
+
+            # from pcweb.components.webpage.sidebar import sb
 
             # Wrap the component in the template.
-            return rx.flex(
-                navbar(sidebar=sb),
-                spotlight(),
-                rx.container(
-                    margin_top="150px",
+            return rx.box(
+                navbar(),
+                # spotlight(),
+                # rx.box(
+                #     class_name="mt-24 md:mt-[8.5rem]",
+                # ),
+                rx.el.main(
+                    contents(*children, **props),
+                    rx.box(flex_grow=1),
+                    class_name="w-full mt-24 md:mt-[8.5rem]",
                 ),
-                contents(*children, **props),
-                rx.box(flex_grow=1),
                 footer(),
-                font_family=styles.SANS,
-                background="#131217",
-                align_items="center",
-                justify_content="start",
-                width="100%",
-                height="100%",
-                min_height="100vh",
-                position="relative",
-                direction="column",
-                z_index=-2,
-                overflow="hidden",
+                class_name="relative z-[-2] flex flex-col justify-start items-center bg-slate-1 w-full h-full min-h-screen overflow-hidden font-instrument-sans",
                 **props,
             )
 
         return Route(
             path=path,
             title=title,
-            background_color="#131217",
+            # background_color="#131217",
             component=wrapper,
-            add_as_page=add_as_page
+            add_as_page=add_as_page,
         )
 
     return webpage

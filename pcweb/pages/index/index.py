@@ -6,6 +6,7 @@ from .components.stats import stats
 from .components.news_letter import news_letter_section
 from .demos.demos import demos
 
+
 @webpage(path="/", title="Reflex · Web apps in Pure Python")
 def index() -> rx.Component:
     """Get the main Reflex landing page."""
@@ -33,4 +34,5 @@ def index() -> rx.Component:
         ),
         width="100%",
         direction="column",
+        class_name="bg-slate-1",
     )
