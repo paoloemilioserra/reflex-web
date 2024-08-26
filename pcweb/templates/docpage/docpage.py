@@ -16,39 +16,13 @@ import pcweb.templates.docpage.styles as st
 from reflex.components.radix.themes.base import LiteralAccentColor
 from pcweb.constants import GITHUB_URL, TWITTER_URL, DISCORD_URL
 
-# Docpage styles.
-link_style = {
-    "color": rx.color("mauve", 10),
-    "font_weight": "500",
-}
-
-footer_h4_style = {
-    "color": c_color("slate", 12),
-    "font-family": "Instrument Sans",
-    "font-size": "14px",
-    "font-style": "normal",
-    "font-weight": "600",
-    "line-height": "20px",
-    "letter-spacing": "-0.21px",
-}
 
 
-def doc_section(*contents):
-    return rx.box(
-        *contents,
-        margin_top="1em",
-        margin_left=".5em",
-        border_left="1px #F4F3F6 solid",
-        padding_left="1em",
-        width="100%",
-    )
 
 
 def footer_link(text: str, href: str):
     return rx.link(
         text,
-        **small,
-        color=c_color("slate", 9),
         _hover={
             "color": c_color("slate", 11),
         },
@@ -57,18 +31,23 @@ def footer_link(text: str, href: str):
                 "color": c_color("slate", 11),
             }
         },
-        transition="color 0.075s ease-out",
+        class_name="font-small text-slate-9 transition-color",
         href=href,
         underline="none",
     )
 
 
+
+
 def footer_link_flex(heading: str, links):
-    return rx.flex(
-        rx.heading(heading, as_="h4", style=footer_h4_style),
+    return rx.box(
+        rx.el.h4(
+            heading,
+            as_="h4",
+            class_name="font-semibold text-slate-12 text-sm tracking-[-0.01313rem]",
+        ),
         *links,
-        gap="16px",
-        flex_direction="column",
+        class_name="flex flex-col gap-4",
     )
 
 
@@ -262,7 +241,7 @@ def social_menu_item(
 ) -> rx.Component:
     return rx.link(
         rx.box(
-            get_icon(icon, color=c_color("slate", 9)),
+            get_icon(icon=icon, color=c_color("slate", 9)),
             style={
                 "display": "flex",
                 "padding": "4px 12px",
@@ -455,7 +434,10 @@ def docpage_footer(path: str):
                 justify_content="space-between",
             ),
             rx.flex(
-                rx.heading("Join Newsletter", as_="h4", style=footer_h4_style),
+                rx.el.h4(
+                    "Join Newsletter",
+                    class_name="font-semibold text-slate-12 text-sm tracking-[-0.01313rem]",
+                ),
                 rx.text(
                     "Get the latest updates and news about Reflex.",
                     style=small,
@@ -616,14 +598,9 @@ def drawer_socials():
     )
 
 
-def breadcrumb(path, nav_sidebar):
+def breadcrumb(path: str, nav_sidebar: rx.Component):
     from pcweb.components.docpage.navbar.buttons.sidebar import docs_sidebar_drawer
 
-    overflow_style = {
-        "overflow": "hidden",
-        "text_overflow": "ellipsis",
-        "white_space": "nowrap",
-    }
     # Split the path into segments, removing 'docs' and capitalizing each segment
     segments = [
         segment.capitalize()
@@ -640,9 +617,8 @@ def breadcrumb(path, nav_sidebar):
         breadcrumbs.append(
             rx.text(
                 segments[i],
-                color=c_color("slate", 9),
-                style=small,
-                **(overflow_style if i == len(segments) - 1 else {}),
+                class_name="text-slate-9 font-small"
+                + (" truncate" if i == len(segments) - 1 else ""),
             )
         )
 
@@ -652,58 +628,30 @@ def breadcrumb(path, nav_sidebar):
                 rx.icon(
                     tag="chevron-right",
                     size=14,
-                    color=c_color("slate", 8),
-                    display=["none", "none", "none", "flex", "flex"],
+                    class_name="desktop-only !text-slate-8",
                 ),
             )
             breadcrumbs.append(
                 rx.text(
                     "/",
-                    display=["flex", "flex", "flex", "none", "none"],
-                    style=small,
-                    color=c_color("slate", 8),
+                    class_name="font-sm text-slate-8 mobile-only",
                 )
             )
 
     # Return the list of breadcrumb items with separators
     return rx.flex(
-        rx.hstack(
+        rx.box(
             *breadcrumbs,
-            align_items="center",
-            gap=["5px", "16px"],
-            overflow="hidden",
+            class_name="flex flex-row items-center gap-[5px] md:gap-4 overflow-hidden",
         ),
         docs_sidebar_drawer(
             nav_sidebar,
             trigger=rx.el.button(
-                rx.icon(tag="chevron-down", size=14, color=c_color("slate", 9)),
-                padding="9px",
-                display=["flex", "flex", "flex", "none", "none"],
+                rx.icon(tag="chevron-down", size=14, class_name="text-slate-9"),
+                class_name="p-[0.563rem] mobile-only",
             ),
         ),
-        padding=[
-            "8px 12px 8px 16px",
-            "8px 19.5px 8px 24px",
-            "8px 19.5px 8px 24px",
-            "0px",
-            "0px",
-        ],
-        gap=["16px", "0px"],
-        align_items="center",
-        margin_bottom=["24px", "24px", "24px", "48px"],
-        margin_top=["48px", "64px", "64px", "119px"],
-        border_bottom=[
-            f"1px solid {c_color('slate', 4)}",
-            f"1px solid {c_color('slate', 4)}",
-            f"1px solid {c_color('slate', 4)}",
-            "none",
-            "none",
-        ],
-        justify_content="space-between",
-        width="100%",
-        z_index="10",
-        position="relative",
-        background_color=c_color("slate", 1),
+        class_name="relative z-10 flex flex-row justify-between items-center gap-4 md:gap-0 border-slate-4 bg-slate-1 mt-12 md:mt-16 lg:mt-[119px] mb-6 md:mb-12 p-[0.5rem_0.75rem_0.5rem_1rem] sm:p-[0.5rem_1.25rem_0.5rem_1.5rem] md:p-0 border-b md:border-none w-full",
     )
 
 
@@ -832,7 +780,7 @@ def docpage(
                 links.append(
                     rx.link(
                         rx.box(
-                            get_icon(icon="arrow_right", class_name="rotate-180"),
+                            get_icon(icon="arrow_right", transform="rotate(180deg)"),
                             next_prev_name,
                             class_name="flex flex-row justify-center md:justify-start items-center gap-2 rounded-lg w-full",
                         ),
@@ -893,7 +841,7 @@ def docpage(
                     ),
                     rx.box(
                         rx.box(
-                            breadcrumb(path, nav_sidebar),
+                            breadcrumb(path=path, nav_sidebar=nav_sidebar),
                             class_name="px-0 md:px-12 lg:px-24",
                         ),
                         rx.box(
@@ -1119,7 +1067,7 @@ def style_grid(
     disabled: bool = False,
     **kwargs,
 ) -> rx.Component:
-    text_cn = "text-nowrap font-md"
+    text_cn = "text-nowrap font-md flex items-center"
     return rx.box(
         rx.grid(
             rx.text("", size="5"),
@@ -1129,7 +1077,8 @@ def style_grid(
             ],
             rx.text(
                 "Accent",
-                class_name=text_cn + f" text-[var(--{RadixDocState.color}-10)]",
+                color=f"var(--{RadixDocState.color}-10)",
+                class_name=text_cn,
             ),
             *[
                 hover_item(
@@ -1230,7 +1179,6 @@ def style_grid(
                         variant="surface",
                         class_name="justify-between w-32",
                     ),
-                    class_name="mt-[18px]",
                 ),
             ),
             rx.popover.content(
@@ -1240,13 +1188,16 @@ def style_grid(
                             rx.icon(
                                 "check",
                                 size=15,
-                                display=rx.cond(
-                                    RadixDocState.color == color, "block", "none"
+                                class_name="top-1/2 left-1/2 absolute text-gray-12 transform -translate-x-1/2 -translate-y-1/2"
+                                + rx.cond(
+                                    RadixDocState.color == color,
+                                    " block",
+                                    " hidden",
                                 ),
-                                class_name="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-12",
                             ),
                             on_click=RadixDocState.setvar("color", color),
-                            class_name="relative cursor-pointer bg-[var(--{color}-9)] size-[30px] shrink-0 rounded-[max(var(--radius-2), var(--radius-full))]"
+                            background_color=f"var(--{color}-9)",
+                            class_name="relative cursor-pointer size-[30px] shrink-0 rounded-md"
                             + rx.cond(
                                 RadixDocState.color == color,
                                 " border-2 border-gray-12",
@@ -1260,48 +1211,5 @@ def style_grid(
                 ),
             ),
         ),
-        class_name="flex flex-col border-slate-4 bg-slate-2 p-6 border rounded-xl",
-    )
-
-
-def icon_grid(
-    category_name: str, icon_tags: list[str], columns: str = "4"
-) -> rx.Component:
-    return rx.flex(
-        rx.callout.root(
-            rx.callout.icon(
-                rx.icon(
-                    tag="circle_check_big",
-                    width=18,
-                    height=18,
-                )
-            ),
-            rx.callout.text(
-                f"Below is a list of all available ",
-                rx.text(category_name, weight="bold"),
-                " icons.",
-                color="black",
-            ),
-            color="green",
-        ),
-        rx.divider(size="4"),
-        rx.grid(
-            *[
-                rx.flex(
-                    rx.icon(tag=icon_tag, alias="Radix" + icon_tag.title()),
-                    rx.text(icon_tag),
-                    direction="column",
-                    align="center",
-                    bg="white",
-                    border="1px solid #EAEAEA",
-                    border_radius="0.5em",
-                    padding=".75em",
-                )
-                for icon_tag in icon_tags
-            ],
-            columns=columns,
-            spacing="1",
-        ),
-        direction="column",
-        spacing="2",
+        class_name="flex flex-col justify-center items-center gap-6 border-slate-4 bg-slate-2 p-6 border rounded-xl",
     )

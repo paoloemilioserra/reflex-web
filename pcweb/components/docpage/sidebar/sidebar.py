@@ -291,7 +291,7 @@ def sidebar_category(name: str, url: str, icon: str, index: int):
                         SidebarState.sidebar_index == index, " visible", " hidden"
                     ),
                 ),
-                class_name="flex flex-row justify-between items-center p-[0.5rem_1rem_0.5rem_0.5rem] rounded-2xl w-full transition-bg self-stretch hover:bg-slate-3"
+                class_name="flex flex-row justify-between items-center hover:bg-slate-3 p-[0.5rem_1rem_0.5rem_0.5rem] rounded-2xl w-full transition-bg self-stretch"
                 + rx.cond(
                     SidebarState.sidebar_index == index,
                     " bg-slate-3",
@@ -437,7 +437,7 @@ def sidebar_comp(
                                 rx.icon("atom", size=16),
                                 rx.el.h5(
                                     "Custom Components",
-                                    class_name="font-smbold text-[0.875rem] text-slate-12 hover:text-violet-9 leading-5 tracking-[-0.01313rem] transition-color",
+                                    class_name="font-smbold text-[0.875rem] text-slate-12 leading-5 tracking-[-0.01313rem] transition-color",
                                 ),
                                 class_name="flex flex-row items-center gap-3 text-slate-12",
                             ),

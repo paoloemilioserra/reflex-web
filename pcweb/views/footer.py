@@ -23,9 +23,7 @@ def footer_link(text: str, href: str) -> rx.Component:
     return rx.link(
         text,
         href=href,
-        style={":hover": {"color": "var(--c-slate-11)"}},
-        _hover={"color": "var(--c-slate-11)"},
-        class_name="font-small text-slate-9 !hover:text-slate-11 no-underline transition-color",
+        class_name="font-small text-slate-9 hover:!text-slate-11 no-underline transition-color",
     )
 
 
@@ -33,7 +31,7 @@ def footer_link_flex(heading: str, links: list[rx.Component]) -> rx.Component:
     return rx.box(
         rx.el.h4(
             heading,
-            class_name="font-instrument-sans font-semibold text-slate-12 text-sm leading-tight",
+            class_name="text-slate-12 font-smbold",
         ),
         *links,
         class_name="flex flex-col gap-4",
@@ -43,8 +41,8 @@ def footer_link_flex(heading: str, links: list[rx.Component]) -> rx.Component:
 def social_menu_item(icon: str, url: str = "/", border: bool = False) -> rx.Component:
     return rx.link(
         rx.box(
-            get_icon(icon, class_name="text-slate-9"),
-            class_name="flex justify-center items-center gap-2 bg-slate-1 hover:bg-slate-3 p-[0.125rem_0.75rem] transition-bg cursor-pointer overflow-hidden"
+            get_icon(icon=icon),
+            class_name="flex justify-center items-center text-slate-9 gap-2 bg-slate-1 hover:bg-slate-3 p-[0.125rem_0.75rem] transition-bg cursor-pointer overflow-hidden"
             + (" border-x border-slate-5" if border else ""),
         ),
         class_name="flex w-full",
@@ -82,17 +80,17 @@ def newsletter_form() -> rx.Component:
                     rx.box(
                         rx.icon(
                             tag="circle-check",
-                            size=14,
-                            class_name="text-violet-9",
+                            size=16,
+                            class_name="!text-violet-9",
                         ),
                         rx.text(
                             "Thanks for subscribing!",
                             class_name="font-smbold text-slate-11",
                         ),
-                        class_name="flex flex-row gap-2 align-center",
+                        class_name="flex flex-row gap-2 items-center",
                     ),
                     rx.el.button(
-                        "Sign up for another email.",
+                        "Sign up for another email",
                         class_name="bg-slate-3 hover:bg-slate-4 px-3 py-2 rounded-[10px] font-small text-slate-9 cursor-pointer",
                         on_click=IndexState.signup_for_another_user,
                     ),
@@ -127,7 +125,14 @@ def newsletter_form() -> rx.Component:
 def footer() -> rx.Component:
     return rx.el.footer(
         rx.box(
-            logo(),
+            rx.box(
+                menu_socials(),
+                rx.text(
+                    "© 2024 Pynecone, Inc.",
+                    class_name="font-small text-slate-9",
+                ),
+                class_name="flex flex-col justify-between gap-4 items-start self-stretch",
+            ),
             footer_link_flex(
                 "Links",
                 [
@@ -156,15 +161,7 @@ def footer() -> rx.Component:
                 ],
             ),
             newsletter_form(),
-            class_name="flex flex-row flex-wrap justify-between gap-12 w-full",
+            class_name="flex flex-row flex-wrap justify-between gap-[4.5rem] w-full max-w-[94.5rem] p-[3rem_1rem_3rem_1.5rem]",
         ),
-        rx.box(
-            rx.text(
-                "Copyright © 2024 Pynecone, Inc.",
-                class_name="font-small text-slate-9",
-            ),
-            menu_socials(),
-            class_name="flex flex-row justify-between w-full align-center",
-        ),
-        class_name="flex flex-col justify-between gap-10 border-slate-4 p-4 md:p-8 border-t w-full btn-blue",
+        class_name="flex border-slate-4 border-t w-full justify-center",
     )

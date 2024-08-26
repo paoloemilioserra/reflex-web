@@ -105,11 +105,15 @@ def webpage(
             # from pcweb.components.webpage.footer import footer
             from pcweb.components.docpage.navbar import navbar
             from pcweb.views.footer import footer
+            from pcweb.views.bottom_section.bottom_logo import bottom_logo
+            from pcweb.views.bottom_section.bottom_section import bottom_section
+            from pcweb.components.icons.patterns import landing_patterns
 
             # from pcweb.components.webpage.sidebar import sb
 
             # Wrap the component in the template.
             return rx.box(
+                # *landing_patterns(),
                 navbar(),
                 # spotlight(),
                 # rx.box(
@@ -117,11 +121,13 @@ def webpage(
                 # ),
                 rx.el.main(
                     contents(*children, **props),
-                    rx.box(flex_grow=1),
-                    class_name="w-full mt-24 md:mt-[8.5rem]",
+                    rx.box(class_name="flex-grow"),
+                    class_name="mt-24 md:mt-52 w-full",
                 ),
+                bottom_section(),
+                bottom_logo(),
                 footer(),
-                class_name="relative z-[-2] flex flex-col justify-start items-center bg-slate-1 w-full h-full min-h-screen overflow-hidden font-instrument-sans",
+                class_name="relative flex flex-col justify-start items-center bg-slate-1 w-full h-full min-h-screen font-instrument-sans overflow-hidden",
                 **props,
             )
 

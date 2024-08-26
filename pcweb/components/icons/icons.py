@@ -1,9 +1,9 @@
 import reflex as rx
 from typing import Literal
 
-github = """<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+github = """<svg width="17.25" height="17.25" viewBox="0 0 17.25 17.25" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_8358_8381)">
-<path d="M4.34603 11.4091C4.60899 11.794 5.40703 12.6155 6.49559 12.8225M6.57733 14.667C5.89169 14.554 1.33447 13.0708 1.33447 8.06202C1.33447 3.37581 5.33574 1.33362 8.00167 1.33362C10.6675 1.33362 14.6678 3.37581 14.6678 8.06202C14.6678 13.0708 10.1106 14.554 9.42494 14.667C9.42494 14.667 9.28561 12.3887 9.36694 11.9982C9.44821 11.6078 9.17127 10.9795 9.17127 10.9795C9.81861 10.7373 10.804 10.3901 11.1345 9.45855C11.391 8.73575 11.5523 7.68615 10.835 6.69955C10.835 6.69955 11.0223 5.10568 10.6675 5.04394C10.3128 4.9822 9.26767 5.6749 9.26767 5.6749C8.96327 5.5886 8.28401 5.42346 8.00234 5.45321C7.72061 5.42346 7.03901 5.5886 6.73461 5.6749C6.73461 5.6749 5.68947 4.9822 5.33471 5.04394C4.97996 5.10568 5.16725 6.69955 5.16725 6.69955C4.44991 7.68615 4.61125 8.73575 4.86774 9.45855C5.19831 10.3901 6.1837 10.7373 6.83101 10.9795C6.83101 10.9795 6.5541 11.6078 6.63537 11.9982C6.71667 12.3887 6.57733 14.667 6.57733 14.667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4.68516 12.3006C4.97029 12.7159 5.83472 13.6041 7.01409 13.8293M7.10229 15.8287C6.35944 15.7064 1.43903 14.1016 1.43903 8.69098C1.43903 3.63814 5.75437 1.43814 8.63929 1.43814C11.5241 1.43814 15.8384 3.63814 15.8384 8.69098C15.8384 14.1016 10.918 15.7064 10.1752 15.8287C10.1752 15.8287 10.0243 13.3534 10.1119 12.9301C10.1993 12.5069 9.89953 11.8267 9.89953 11.8267C10.6028 11.5648 11.6742 11.1901 12.0308 10.1837C12.3092 9.39926 12.4842 8.25913 11.7061 7.18252C11.7061 7.18252 11.9089 5.45485 11.5241 5.38784C11.1395 5.32084 10.0138 6.07219 10.0138 6.07219C9.67354 5.97987 8.93679 5.80247 8.63003 5.83472C8.32319 5.80247 7.58391 5.97987 7.24366 6.07219C7.24366 6.07219 6.11814 5.32084 5.73325 5.38784C5.34836 5.45485 5.55114 7.18252 5.55114 7.18252C4.77315 8.25913 4.94819 9.39926 5.22656 10.1837C5.58326 11.1901 6.65456 11.5648 7.35806 11.8267C7.35806 11.8267 7.05829 12.5069 7.14571 12.9301C7.23317 13.3534 7.10229 15.8287 7.10229 15.8287Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 </svg>
 """
@@ -84,6 +84,39 @@ clipboard = """<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" vi
 </svg>
 """
 
+radial_small = """<svg xmlns="http://www.w3.org/2000/svg" width="1113" height="946" viewBox="0 0 1113 946" fill="none">
+<path d="M374.945 944.945L804.732 644.005L280.317 -104.937M291.44 913.953L766.955 692.216L380.56 -136.411M214.585 868.931L721.38 733.136L484.745 -150M146.716 811.248L669.393 765.52L589.707 -145.29M89.8944 742.655L612.571 788.384L692.257 -122.426M45.8472 665.238L552.643 801.034L789.278 -82.1019M15.9125 581.348L491.428 803.085L877.823 -25.5426M0.999961 493.535L430.787 794.475L955.202 45.5331M1.56259 404.466L372.563 775.466L1019.06 128.966M17.5833 316.848L318.524 746.635L1067.47 222.22M48.5754 233.343L270.312 708.858L1098.94 322.463M93.5971 156.488L229.393 663.283L1112.53 426.648M151.281 88.6189L197.009 611.296L1107.82 531.61M219.873 31.7975L174.145 554.474L1084.95 634.16M297.29 -12.2497L161.495 494.546L1044.63 731.181M381.18 -42.1842L159.444 433.331L988.071 819.726M468.994 -57.0968L168.053 372.69L916.995 897.105" stroke="url(#paint0_radial_10039_17136)" stroke-dasharray="3 3"/>
+<defs>
+<radialGradient id="paint0_radial_10039_17136" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(556.764 397.473) rotate(-90) scale(547.472 223.333)">
+<stop offset="0.8" stop-color="var(--c-slate-5)"/>
+<stop offset="1" stop-color="var(--c-slate-1)" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
+"""
+
+radial_big = """<svg xmlns="http://www.w3.org/2000/svg" width="1113" height="1096" viewBox="0 0 1113 1096" fill="none">
+<path d="M738.584 0.998991L308.797 301.939L833.211 1050.88M822.089 31.9911L346.573 253.728L732.968 1082.35M898.943 77.0128L392.148 212.808L628.783 1095.94M966.812 134.696L444.136 180.424L523.821 1091.23M1023.63 203.289L500.957 157.56L421.272 1068.37M1067.68 280.706L560.886 144.91L324.25 1028.05M1097.62 364.596L622.1 142.859L235.705 971.487M1112.53 452.409L682.741 151.469L158.326 900.411M1111.97 541.478L740.966 170.478L94.4656 816.978M1095.94 629.096L795.005 199.309L46.0628 723.724M1064.95 712.601L843.216 237.086L14.5891 623.481M1019.93 789.456L884.136 282.661L1.00032 519.296M962.248 857.325L916.519 334.648L5.70944 414.334M893.655 914.147L939.384 391.47L28.5736 311.784M816.238 958.194L952.033 451.398L68.8979 214.763M732.348 988.128L954.085 512.613L125.457 126.218M644.535 1003.04L945.475 573.254L196.533 48.839" stroke="url(#paint0_radial_10067_25683)" stroke-dasharray="3 3"/>
+<defs>
+<radialGradient id="paint0_radial_10067_25683" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(556.764 548.471) rotate(90) scale(547.472 223.333)">
+<stop offset="0.893272" stop-color="var(--c-slate-4)"/>
+<stop offset="1" stop-color="var(--c-slate-1)" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
+"""
+
+bottom_logo = """<svg xmlns="http://www.w3.org/2000/svg" width="974" height="182" viewBox="0 0 974 182" fill="none">
+<path d="M853 73H817V1H853V73ZM853 73V109M853 73H937M853 109H817V181H853V109ZM853 109H937M937 109V181H973V109H937ZM937 109V73M937 73H973V1H937V73ZM121 109V181H157V109H121ZM121 109V73M121 109H37V181H1V1H157V73H121M121 73V37H37V73H121ZM349 181V1H469V37H385V73H469V109H385V181H349ZM505 181V1H541V145H625V181H505ZM661 181V1H781V37H697V73H781V109H697L697.526 145H781V181H661ZM193 1V181H313V145H229.526L229 109H313V73H229V37H313V1H193Z" stroke="url(#paint0_linear_10039_17181)" stroke-width="1.5"/>
+<defs>
+<linearGradient id="paint0_linear_10039_17181" x1="487" y1="1" x2="487" y2="181" gradientUnits="userSpaceOnUse">
+    <stop stop-color="var(--c-slate-4)"/>
+    <stop offset="1" stop-color="var(--c-slate-1)"/>
+</linearGradient>
+</defs>
+</svg>
+"""
+
 ICONS = {
     # Socials
     "github": github,
@@ -101,19 +134,39 @@ ICONS = {
     "select": select,
     "history": history,
     "clipboard": clipboard,
+    "bottom_logo": bottom_logo,
+    "radial_small": radial_small,
+    "radial_big": radial_big,
 }
 
-LiteralIcon = Literal["github", "discord", "twitter", "sun", "moon", "arrow_right", "copy", "arrow_down", "arrow_down_big", "new_tab", "eye", "select", "history", "clipboard"]
+LiteralIcon = Literal[
+    "github",
+    "discord",
+    "twitter",
+    "sun",
+    "moon",
+    "arrow_right",
+    "copy",
+    "arrow_down",
+    "arrow_down_big",
+    "new_tab",
+    "eye",
+    "select",
+    "history",
+    "clipboard",
+    "bottom_logo",
+    "radial_small",
+    "radial_big",
+]
 
-def get_icon(icon: LiteralIcon, **props) -> rx.Component:
+
+def get_icon(icon: LiteralIcon, class_name: str = "", **props) -> rx.Component:
     if icon not in ICONS:
         raise ValueError(
             f"Icon '{icon}' not found. Available icons: {list(ICONS.keys())}"
         )
     return rx.html(
         ICONS[icon],
-        display="flex",
-        justify_content="center",
-        align_items="center",
+        class_name=f"flex justify-center items-center {class_name}",
         **props,
     )

@@ -12,14 +12,14 @@ def change(
     return rx.el.li(
         rx.box(
             rx.box(
-                rx.text(version, class_name="max-w-fit text-xl code-style"),
+                rx.code(version, class_name="max-w-fit text-xl code-style"),
                 rx.moment(date, from_now=True, class_name="font-small text-slate-10"),
                 class_name="flex flex-col gap-2",
             ),
             rx.link(
                 rx.el.button(
                     "Full Notes",
-                    get_icon("new_tab"),
+                    get_icon(icon="new_tab"),
                     class_name="flex flex-row items-center gap-2 border-slate-5 bg-slate-1 hover:bg-slate-3 shadow-small p-[0.3125rem] border rounded-md h-6 font-small text-slate-9 transition-background",
                 ),
                 underline="none",
@@ -53,7 +53,7 @@ def changelog_content():
             "Bug Fixes",
             [
                 "Properly set `is_hydrated` to `false` on page navigation events",
-                "@rx.var(cache=True) now correctly gets the initial value",
+                "`@rx.var(cache=True)` now correctly gets the initial value",
                 "Accessing /404 now shows the 404 page content",
                 "Fix event actions for Recharts event triggers",
                 "Allow setting `rx.breakpoints` in the `style` prop",

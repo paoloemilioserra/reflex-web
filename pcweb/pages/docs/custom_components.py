@@ -199,7 +199,7 @@ def sorting_filters_dropdown_menu() -> rx.Component:
                     style=small,
                 ),
                 get_icon(
-                    "select",
+                    icon="select",
                 ),
                 justify_content="space-between",
             ),

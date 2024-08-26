@@ -1,4 +1,6 @@
 import reflex as rx
+from pcweb.components.icons import get_icon
+from pcweb.components.webpage.comps import h1_title
 from pcweb.flexdown import xd2 as xd
 
 
@@ -55,67 +57,50 @@ def back(title, url):
 def page(document, route) -> rx.Component:
     """Create a page."""
     meta = document.metadata
-    return rx.vstack(
-        back(meta["title"], route),
-        rx.container(
-            rx.vstack(
-                rx.hstack(
-                    # rx.flex(
-                    #     rx.chakra.text(
-                    #         "Blog posts",
-                    #         background_image="linear-gradient(95deg, #B1A9FB 25.71%, #867BF1 83.81%);",
-                    #         text_align="center",
-                    #         background_clip="text",
-                    #         padding_x="1em",
-                    #     ),
-                    #     border_radius="15px;",
-                    #     border="1px solid #4435D4;",
-                    #     # background="linear-gradient(180deg, rgba(97, 81, 243, 0.20) 0%, rgba(86, 70, 237, 0.20) 100%);",
-                    #     # box_shadow="0px 3px 6px -3px rgba(34, 25, 121, 0.60), 0px 0px 4px -1px rgba(27, 21, 90, 0.40);",
-                    # ),
-                    rx.text(str(meta["date"]), color="var(--c-slate-9)"),
+    return rx.el.section(
+        # back(meta["title"], route),
+        rx.el.article(
+            rx.link(
+                rx.box(
+                    get_icon("arrow_right", class_name="rotate-180"),
+                    "Back to Blog",
+                    class_name="box-border flex justify-center items-center gap-2 border-slate-5 bg-slate-1 hover:bg-slate-3 px-3 py-[0.125rem] border rounded-full font-small text-slate-9 transition-bg cursor-pointer -mb-4",
                 ),
-                rx.chakra.text(
-                    meta["title"],
-                    font_size="2em",
-                    # background_image="linear-gradient(95deg, #D6D6ED 42.14%, #727280 63.21%);",
-                    text_align="center",
-                    background_clip="text",
-                    font_weight="bold",
-                    letter_spacing="-1.28px;",
-                    line_height="1.2",
-                ),
-                align_items="center",
-                text_align="left",
-                width="100%",
-                spacing="1",
+                underline="none",
+                href="/blog",
             ),
-            rx.center(
-                rx.image(
-                    src=f"{meta['image']}",
-                    margin_top="1em",
-                    border_radius="8px",
-                    padding_bottom="1em",
+            rx.el.header(
+                h1_title(title=meta["title"]),
+                rx.el.h2(
+                    str(meta["description"]),
+                    class_name="font-md text-balance text-slate-10",
                 ),
-                width="100%",
+                rx.box(
+                    rx.text(
+                        meta["author"],
+                    ),
+                    rx.text(
+                        "·",
+                    ),
+                    rx.moment(
+                        str(meta["date"]),
+                        format="MMM DD, YYYY",
+                    ),
+                    class_name="flex items-center gap-2 font-small text-nowrap text-slate-9 !font-normal",
+                ),
+                class_name="section-header",
             ),
-            align="center",
-            border_radius="40px 40px 0px 0px;",
-            # background="linear-gradient(180deg, #0F0E12 0%, rgba(0, 0, 0, 0.00) 100%);",
-            # mix_blend_mode="plus-lighter;",
-            padding_x=["1em", "1em", "4em", "4em", "4em", "4em"],
-            padding_top="4em",
-            margin_x="auto",
-            size="2",
-            max_width=["100vw", "100vw", "100%", "100%", "100%", "100%"],
+            rx.image(
+                src=f"{meta['image']}",
+                alt=f"Image for blog post: {meta['title']}",
+                loading="lazy",
+                class_name="rounded-[1.125rem] w-auto h-[22.5rem] object-center object-cover",
+            ),
+            rx.box(
+                xd.render(document, "blog.md"),
+                class_name="flex flex-col gap-4 max-w-2xl markdown-code",
+            ),
+            class_name="flex flex-col justify-center items-center gap-12",
         ),
-        rx.container(
-            xd.render(document, "blog.md"),
-            margin_x="auto",
-            padding_bottom="4em",
-            size="2",
-            overflow="hidden",
-            # background="var(--c-slate-2)",
-            max_width=["90vw", "90vw", "100%", "100%", "100%", "100%"],
-        ),
+        class_name="section-content",
     )

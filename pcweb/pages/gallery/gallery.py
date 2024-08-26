@@ -144,9 +144,7 @@ def sorting_filters_dropdown_menu() -> rx.Component:
                     as_="span",
                     class_name="font-small",
                 ),
-                get_icon(
-                    "select",
-                ),
+                get_icon(icon="select"),
             ),
             class_name=common_class_name
             + rx.cond(

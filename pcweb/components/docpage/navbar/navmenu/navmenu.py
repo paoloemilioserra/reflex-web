@@ -34,7 +34,7 @@ class NavMenuRoot(NavMenu):
     dir: Var[LiteralMenuComponentDir]
 
     class_name: Var[str] = (
-        "relative z-[1] flex w-full items-center h-full justify-between gap-6 mx-auto z-10 flex-row"
+        "relative flex w-full items-center h-full justify-between gap-6 mx-auto z-[9999] flex-row max-w-[94.5rem]"
     )
 
     def get_event_triggers(self) -> Dict[str, Any]:

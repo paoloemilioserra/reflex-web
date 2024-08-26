@@ -6,7 +6,7 @@
   padding: 6px;
   justify-content: space-between;
   align-items: center;
-  border-radius: 1000px;
+  border-radius: 10px;
   border: 1px solid var(--c-slate-5, #E0E1E6);
   background: var(--c-slate-1);
   /* Small */
@@ -29,7 +29,7 @@
   padding: 6px;
   justify-content: space-between;
   align-items: center;
-  border-radius: 1000px;
+  border-radius: 10px;
   border: 1px solid var(--c-slate-5, #E0E1E6);
   background: var(--c-slate-1);
   /* Small */
@@ -92,7 +92,7 @@
   padding: 0px 8px;
   justify-content: center;
   align-items: center;
-  border-radius: 1000px;
+  border-radius: 4px;
   box-shadow: none;
   color: var(--c-slate-9, #8B8D98);
   font-family: "Instrument Sans";

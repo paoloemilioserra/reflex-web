@@ -25,7 +25,7 @@ def social_menu_item(
 ) -> rx.Component:
     return rx.link(
         rx.box(
-            get_icon(icon, color=c_color("slate", 9)),
+            get_icon(icon=icon, color=c_color("slate", 9)),
             style={
                 "display": "flex",
                 "padding": "4px 12px",

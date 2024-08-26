@@ -9,6 +9,7 @@ from pcweb.pages.docs import (
     getting_started,
     hosting,
 )
+from pcweb.components.button import button
 from pcweb.pages.docs.library import library
 from pcweb.pages.docs.custom_components import custom_components
 from pcweb.pages.gallery import gallery
@@ -51,9 +52,7 @@ def resource_item(text: str, url: str, icon: str):
                 ),
                 class_name="flex flex-row flex-nowrap items-center gap-3 hover:bg-slate-3 px-[1.125rem] py-2 rounded-md w-full transition-bg",
             ),
-            style={":hover": {"color": "var(--c-slate-9)"}},
-            _hover={"color": "var(--c-slate-9)"},
-            class_name="w-full text-slate-9",
+            class_name="w-full text-slate-9 hover:!text-slate-9",
             underline="none",
             href=url,
         ),
@@ -64,8 +63,7 @@ def resource_item(text: str, url: str, icon: str):
 def link_item(name: str, url: str, active_str: str = ""):
     # If URL doesnt end with a slash, add one
     router_path = rx.State.router.page.path
-    if not url.endswith("/"):
-        url += "/"
+    url = url.rstrip("/") + "/"
     active = router_path.contains(active_str)
     if active_str == "docs":
         active = rx.cond(
@@ -272,15 +270,13 @@ def logo() -> rx.Component:
             rx.image(
                 src="/logos/light/reflex.svg",
                 alt="Reflex Logo",
-                class_name="flex-shrink-0 justify-start",
             ),
             rx.image(
                 src="/logos/dark/reflex.svg",
                 alt="Reflex Logo",
-                class_name="flex-shrink-0 justify-start",
             ),
         ),
-        class_name="flex flex-shrink-0",
+        class_name="flex flex-shrink-0 mr-5",
         href="/",
     )
 
@@ -312,7 +308,7 @@ def new_component_section() -> rx.Component:
             new_nav_menu.item(
                 link_item("Hosting", hosting.deploy_quick_start.path, "hosting"),
             ),
-            class_name="desktop-only flex flex-row items-center gap-0 md:gap-6 m-0 h-full list-none",
+            class_name="desktop-only flex flex-row items-center gap-0 md:gap-7 m-0 h-full list-none",
         ),
         new_nav_menu.list(
             rx.box(
@@ -334,6 +330,17 @@ def new_component_section() -> rx.Component:
                 class_name="desktop-only",
             ),
             new_nav_menu.item(
+                rx.link(
+                    button(
+                        "Get Started",
+                        class_name="!h-8 !font-small-smbold !rounded-[0.625rem]",
+                    ),
+                    underline="none",
+                    href=getting_started.introduction.path,
+                ),
+                class_name="desktop-only",
+            ),
+            new_nav_menu.item(
                 navbar_sidebar_button(),
                 class_name="mobile-only",
             ),
@@ -349,5 +356,5 @@ def new_component_section() -> rx.Component:
 def navbar() -> rx.Component:
     return rx.el.header(
         new_component_section(),
-        class_name="top-0 z-20 fixed flex flex-row items-center gap-12 bg-slate-1 shadow-[inset_0_-1px_0_0_var(--c-slate-4)] px-4 md:px-6 w-screen h-[48px] md:h-[65px]",
+        class_name="top-0 z-[9999] fixed flex flex-row items-center gap-12 bg-slate-1 shadow-[inset_0_-1px_0_0_var(--c-slate-4)] px-4 md:px-6 w-screen h-[48px] md:h-[65px]",
     )

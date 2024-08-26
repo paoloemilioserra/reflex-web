@@ -10,13 +10,13 @@
 # - Incorrect: WHITELISTED_PAGES = ["/docs/getting-started/introduction/"]
 
 WHITELISTED_PAGES = [
-    "/docs/getting-started/introduction",
+    # "/docs/getting-started/introduction",
     # "/docs/library/datadisplay/avatar",
-    "/faq",
+    # "/faq",
     "/blog",
-    "/gallery",
-    "/changelog",
-    "/errors",
+    # "/gallery",
+    # "/changelog",
+    # "/errors",
 ]
 
 def _check_whitelisted_path(path):

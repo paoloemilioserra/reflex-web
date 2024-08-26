@@ -2,7 +2,6 @@ import reflex as rx
 from pcweb.templates.webpage import webpage
 from .page import page
 from .paths import blog_data
-from pcweb.components.webpage.pill import pill
 from pcweb.components.webpage.comps import h1_title
 from pcweb.components.icons.icons import get_icon
 
@@ -16,7 +15,7 @@ def first_post_card(meta: dict, path: str) -> rx.Component:
                 alt="Image preview for blog post: " + str(meta["title"]),
                 class_name="group-hover:scale-105 w-full h-full transition-transform duration-150 ease-out object-center object-cover",
             ),
-            class_name="relative flex-shrink-0 border-slate-5 border-b border-solid w-1/2 h-[18rem] overflow-hidden",
+            class_name="relative flex-shrink-0 w-1/2 h-[18rem] overflow-hidden",
         ),
         rx.box(
             rx.box(
@@ -131,6 +130,7 @@ def component_grid() -> rx.Component:
     return rx.box(
         *posts,
         class_name="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-[320px] w-full mb-4 blog-grid",
+
     )
 
 
@@ -139,12 +139,12 @@ def blogs():
     return rx.el.section(
         rx.el.header(
             # pill(text="Blog posts"),
-            h1_title(title="Reflex Blog"),
+            h1_title(title="Blog"),
             rx.el.h2(
                 "Stay current with the latest news from Reflex.",
-                class_name="font-md text-balance text-slate-11",
+                class_name="font-md text-balance text-slate-10",
             ),
-            class_name="section-header",
+            class_name="section-header pb-4",
         ),
         first_post(),
         rx.el.style(
