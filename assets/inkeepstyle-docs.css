@@ -24,7 +24,7 @@
 [data-theme='light'] .ikp-search-bar-trigger__container--variant_subtle,
 [data-theme='dark'] .ikp-search-bar-trigger__container--variant_subtle {
   display: flex;
-  width: 211px;
+  width: 256px;
   height: 32px;
   padding: 6px;
   justify-content: space-between;

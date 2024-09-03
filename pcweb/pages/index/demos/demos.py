@@ -3,7 +3,8 @@ import reflex as rx
 from .auth.auth import auth
 from .forms.forms import forms
 from .dashboard.dashboard import dashboard
-from .image_gen.image_gen import image_gen
+from .image_gen.image_gen import image_gen, image_gen_code, image_gen_2
+from .charts.charts import charts
 from reflex_type_animation import type_animation
 
 
@@ -132,21 +133,18 @@ def tab(name: str, icon: str) -> rx.Component:
     return rx.box(
         rx.icon(tag=icon, size=16),
         name,
-        class_name="flex flex-row justify-center items-center gap-2 hover:bg-slate-3 px-3 py-[0.125rem] rounded-[0.625rem] h-8 font-small text-slate-9 transition-bg cursor-pointer"
+        class_name="flex flex-row justify-center items-center gap-2 hover:bg-slate-3 px-3 py-[0.125rem] rounded-[0.625rem] h-8 font-small text-slate-9 transition-bg cursor-pointer box-border"
         + rx.cond(is_selected, " border border-slate-5 bg-slate-1", ""),
         on_click=DemoState.set_demo(name),
     )
 
 
 def code_block(code: str) -> rx.Component:
-    return rx.box(
-        rx.code_block(
-            code,
-            language="python",
-            # wrap_long_lines=True,
-            class_name="demo-code-block border-slate-4 !p-8 border-r",
-        ),
-        class_name="overflow-hidden",
+    return rx.code_block(
+        code,
+        language="python",
+        # wrap_long_lines=True,
+        class_name="demo-code-block border-slate-4 !p-8 border-r !rounded-none",
     )
 
 
@@ -257,7 +255,7 @@ def demo_section() -> rx.Component:
         rx.box(
             tab("Image Gen", "wand-sparkles"),
             tab("Forms", "scan-text"),
-            tab("Dashboard", "layout-panel-left"),
+            tab("Charts", "layout-panel-left"),
             tab("Authorization", "folder-open-dot"),
             tab("More", "layers"),
             class_name="flex flex-row items-center gap-2 border-slate-4 p-2 border-b",
@@ -265,30 +263,31 @@ def demo_section() -> rx.Component:
         # Preview
         # TODO: Add the real previews
         rx.box(
-            rx.fragment(
+            rx.box(
                 rx.match(
                     DemoState.demo,
-                    ("Image Gen", code_block(text_code)),
-                    ("Forms", *[forms()]),
-                    ("Dashboard", *[dashboard()]),
+                    ("Image Gen", code_block(image_gen_code)),
+                    ("Forms", code_block(image_gen_code)),
+                    ("Charts", code_block(image_gen_code)),
+                    ("Authorization", code_block(image_gen_code)),
+                    # ("More", more()),
+                    image_gen(),
+                ),
+                class_name="w-1/2 overflow-auto",
+            ),
+            rx.box(
+                rx.match(
+                    DemoState.demo,
+                    ("Image Gen", image_gen_2()),
+                    ("Forms", image_gen()),
+                    ("Charts", charts()),
                     ("Authorization", auth()),
                     # ("More", more()),
                     image_gen(),
                 ),
+                class_name="w-1/2 h-auto",
             ),
-            rx.fragment(
-                rx.match(
-                    DemoState.demo,
-                    ("Image Gen", image_gen()),
-                    ("Forms", *[forms()]),
-                    ("Dashboard", *[dashboard()]),
-                    ("Authorization", auth()),
-                    # ("More", more()),
-                    image_gen(),
-                ),
-                class_name="w-full h-full",
-            ),
-            class_name="flex flex-row w-full h-full",
+            class_name="flex flex-row w-full h-full max-h-[34rem] overflow-hidden",
         ),
-        class_name="flex flex-col border-slate-4 bg-slate-2 shadow-large border rounded-[1.125rem] w-full max-w-[67rem] h-full max-h-[35rem] overflow-hidden",
+        class_name="flex flex-col border-slate-4 bg-slate-2 shadow-large border rounded-[1.125rem] w-full max-w-[67rem] h-full overflow-hidden",
     )

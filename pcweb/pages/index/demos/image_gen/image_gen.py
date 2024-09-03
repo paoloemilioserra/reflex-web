@@ -1,14 +1,7 @@
 import reflex as rx
-from ..style import demo_height
 from pcweb.components.button import button
+from pcweb.components.icons import get_icon
 import replicate
-
-try:
-    import openai
-
-    openai_client = openai.OpenAI()
-except:
-    openai_client = None
 
 
 class ImageGenState(rx.State):
@@ -16,15 +9,13 @@ class ImageGenState(rx.State):
 
     image_url = ""
     processing = False
-    complete = False
 
     def get_image(self, form_data):
         """Get the image from the prompt."""
         prompt = form_data["prompt"]
         if prompt == "":
-            return rx.toast("Prompt is empty")
-
-        self.processing, self.complete = True, False
+            return
+        self.processing = True
         yield
         input = {"prompt": prompt}
 
@@ -33,55 +24,188 @@ class ImageGenState(rx.State):
             input=input,
         )
         self.image_url = output[0]
-        self.processing, self.complete = False, True
+        self.processing = False
 
 
-def image_gen():
+def image_gen_2():
     return rx.box(
         rx.skeleton(
-            rx.fragment(
+            rx.box(
                 rx.cond(
                     ImageGenState.image_url,
                     rx.image(
                         src=ImageGenState.image_url,
-                        class_name="rounded-lg w-auto max-w-full h-full max-h-full aspect-square flex-1",
+                        class_name="w-auto h-auto object-contain object-center rounded-[1.125rem]",
                     ),
                     rx.box(
-                        rx.icon("images", size=26, class_name="!text-slate-9"),
-                        class_name="flex justify-center items-center border-slate-4 border rounded-lg w-full max-w-full h-full max-h-full bg-slate-1 flex-1",
+                        get_icon("image_ai"),
+                        # rx.icon("image", size=26, class_name="!text-slate-7"),
+                        class_name="flex justify-center items-center border-slate-4 border bg-slate-1 w-full h-full rounded-[1.125rem]",
                     ),
                 ),
-                loading=True,
+                class_name="h-full w-full flex justify-center items-center overflow-hidden rounded-[1.125rem] aspect-square",
             ),
+            loading=ImageGenState.processing,
+            class_name="rounded-xl w-full h-full",
         ),
         rx.form(
-            rx.box(
-                rx.el.input(
-                    placeholder="What do you want to see?",
-                    name="prompt",
-                    type="text",
-                    class_name="box-border border-slate-5 focus:border-violet-9 focus:border-1 bg-white-1 p-[0.5rem_0.75rem] border rounded-[10px] font-small text-slate-11 placeholder:text-slate-9 outline-none focus:outline-none w-full",
-                ),
-                rx.form.submit(
-                    button(
-                        text=rx.cond(
-                            ImageGenState.processing, "Generating...", "Generate"
-                        ),
-                        style={
-                            "input:placeholder-shown + &": {
-                                "opacity": "0.65",
-                                "cursor": "default",
-                                "_hover": {
-                                    "background": "linear-gradient(180deg, var(--violet-9) 0%, var(--violet-10) 100%)"
-                                },
-                            },
-                        },
-                    ),
-                    as_child=True,
-                ),
-                class_name="flex flex-row gap-2 align-center",
+            rx.el.input(
+                placeholder="What do you want to see?",
+                name="prompt",
+                type="text",
+                class_name="box-border border-slate-5 focus:border-violet-9 focus:border-1 bg-white-1 p-[0.5rem_0.75rem] border rounded-[10px] font-small text-slate-11 placeholder:text-slate-9 outline-none focus:outline-none w-full",
             ),
+            button(
+                text=rx.cond(ImageGenState.processing, "Generating...", "Generate"),
+                style={
+                    "input:placeholder-shown + &": {
+                        "opacity": "0.65",
+                        "cursor": "default",
+                        "_hover": {
+                            "background": "linear-gradient(180deg, var(--violet-9) 0%, var(--violet-9) 100%)"
+                        },
+                    },
+                    "cursor": rx.cond(ImageGenState.processing, "default", "pointer"),
+                    "opacity": rx.cond(ImageGenState.processing, "0.65", "1"),
+                },
+                type="submit",
+            ),
+            class_name="flex flex-row gap-2 align-center",
+            reset_on_submit=True,
             on_submit=ImageGenState.get_image,
         ),
-        class_name="flex flex-col items-center gap-4 p-10",
+        class_name="flex flex-col items-center gap-4 p-8 h-full overflow-hidden",
     )
+
+
+def image_gen():
+    return rx.vstack(
+        rx.skeleton(
+            rx.flex(
+                rx.cond(
+                    ImageGenState.image_url,
+                    rx.image(
+                        src=ImageGenState.image_url,
+                        border_radius="0.75rem",
+                        width="auto",
+                        height="full",
+                        aspect_ratio="1/1",
+                        object_fit="contain",
+                    ),
+                    rx.flex(
+                        rx.icon("images", size=26, color=rx.color("slate", 7)),
+                        justify="center",
+                        align="center",
+                        border="1px solid",
+                        border_color=rx.color("slate", 4),
+                        bg=rx.color("slate", 1),
+                        border_radius="0.75rem",
+                        width="auto",
+                        height="100%",
+                        aspect_ratio="1/1",
+                    ),
+                ),
+                height="100%",
+                width="auto",
+                justify="center",
+                align="center",
+                overflow="hidden",
+                aspect_ratio="1/1",
+            ),
+            loading=ImageGenState.processing,
+            border_radius="0.75rem",
+            width="auto",
+            height="100%",
+            aspect_ratio="1/1",
+        ),
+        rx.form(
+            rx.input(
+                placeholder="What do you want to see?",
+                name="prompt",
+                type="text",
+                radius="large",
+                width="100%",
+            ),
+            rx.button(
+                rx.cond(ImageGenState.processing, "Generating...", "Generate"),
+                cursor="pointer",
+                loading=ImageGenState.processing,
+                type="submit",
+            ),
+            display="flex",
+            flex_direction="row",
+            gap="1rem",
+            align_items="center",
+            reset_on_submit=True,
+            on_submit=ImageGenState.get_image,
+        ),
+        padding="2.5rem",
+        gap="1rem",
+        height="100%",
+        overflow="hidden",
+        align="center",
+        font_family="Instrument Sans",
+    )
+
+
+image_gen_code = """class ImageGenState(rx.State):
+
+    image_url = ""
+    processing = False
+
+    def get_image(self, form_data):
+        prompt = form_data["prompt"]
+        if prompt == "":
+            return
+        self.processing = True
+        yield
+        input = {"prompt": prompt}
+
+        output = replicate.run(
+            "black-forest-labs/flux-schnell",
+            input=input,
+        )
+        self.image_url = output[0]
+        self.processing = False
+
+def image_gen():
+    return rx.vstack(
+        rx.skeleton(
+            rx.flex(
+                rx.cond(
+                    ImageGenState.image_url,
+                    rx.image(
+                        src=ImageGenState.image_url,
+                        class_name="image"
+                    ),
+                    rx.flex(
+                        rx.icon("image", size=26, color=rx.color("slate", 7)),
+                        class_name="placeholder",
+                    ),
+                ),
+                class_name="container"
+            ),
+            loading=ImageGenState.processing,
+            class_name="skeleton"
+        ),
+        rx.form(
+            rx.input(
+                placeholder="What do you want to see?",
+                name="prompt",
+                type="text",
+                class_name="input"
+            ),
+            rx.button(
+                rx.cond(ImageGenState.processing, "Generating...", "Generate"),
+                cursor="pointer",
+                loading=ImageGenState.processing,
+                type="submit",
+                class_name="button"
+            ),
+            reset_on_submit=True,
+            on_submit=ImageGenState.get_image,
+            class_name="form"
+        ),
+        class_name="image-gen"
+    )
+"""
