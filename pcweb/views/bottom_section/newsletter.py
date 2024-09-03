@@ -8,7 +8,7 @@ def newsletter() -> rx.Component:
         rx.box(
             rx.el.h2(
                 "Join our newsletter",
-                class_name="inline-block bg-clip-text bg-gradient-to-r from-slate-12 to-slate-11 w-full font-x-large text-balance text-transparent",
+                class_name="gradient-heading font-x-large",
             ),
             rx.el.h3(
                 "Get the latest updates and news about Reflex.",

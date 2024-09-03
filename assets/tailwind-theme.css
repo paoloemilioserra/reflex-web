@@ -99,6 +99,28 @@
         letter-spacing: -0.01313rem !important;
     }
 
+    .demo-code-block {
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        background: transparent !important;
+        color: var(--c-slate-9) !important;
+        resize: none !important;
+        outline: none !important;
+        scrollbar-width: thin !important;
+        font-family: "JetBrains Mono" !important;
+    }
+
+    .demo-code-block>* {
+        background: transparent !important;
+        font-family: "JetBrains Mono" !important;
+        font-size: 0.8125rem !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: 1.21875rem !important;
+        letter-spacing: -0.01313rem !important;
+    }
+
     .font-small {
         font-family: var(--font-instrument-sans);
         font-size: 0.9rem;
@@ -126,6 +148,15 @@
         line-height: 1.5rem;
         /* 150% */
         letter-spacing: -0.015rem;
+    }
+
+    .font-md-smbold {
+        font-family: var(--font-instrument-sans);
+        font-size: 1.125rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1.625rem;
+        letter-spacing: -0.01688rem;
     }
 
     .font-small-smbold {
@@ -206,11 +237,15 @@
     }
 
     .section-content {
-        @apply flex flex-col justify-center items-center gap-6 mx-auto mb-20 px-4 md:px-6 w-full max-w-6xl mt-4;
+        @apply flex flex-col justify-center items-center gap-10 mx-auto mb-20 px-4 md:px-6 w-full max-w-6xl mt-4;
     }
 
     .section-header {
-        @apply flex flex-col justify-center items-start md:items-center gap-6 md:gap-4 w-full text-start md:text-center;
+        @apply flex flex-col justify-center items-start md:items-center gap-6 w-full text-start md:text-center;
+    }
+
+    .gradient-heading {
+        @apply inline-block bg-clip-text bg-gradient-to-r from-slate-12 to-slate-11 w-full text-balance text-center text-transparent
     }
 
     @keyframes enterFromRight {

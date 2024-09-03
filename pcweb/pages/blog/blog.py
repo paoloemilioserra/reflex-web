@@ -129,8 +129,7 @@ def component_grid() -> rx.Component:
         posts.append(card_content(meta=meta, path=path))
     return rx.box(
         *posts,
-        class_name="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-[320px] w-full mb-4 blog-grid",
-
+        class_name="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-[320px] w-full mb-4 md:[&>*:first-child]:hidden",
     )
 
 
@@ -144,21 +143,9 @@ def blogs():
                 "Stay current with the latest news from Reflex.",
                 class_name="font-md text-balance text-slate-10",
             ),
-            class_name="section-header pb-4",
+            class_name="pb-4 section-header",
         ),
         first_post(),
-        rx.el.style(
-            """
-            .blog-grid > *:first-child {
-                display: flex;
-            }
-            @media (min-width: 768px) {
-                .blog-grid > *:first-child {
-                    display: none;
-                }
-            }
-            """
-        ),
         component_grid(),
         id="blog",
         class_name="section-content",

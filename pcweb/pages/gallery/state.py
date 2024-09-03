@@ -105,7 +105,6 @@ class SideBarState(rx.State):
                 if (
                     not app.get("hidden", False)
                     and app.get("health_status", False)
-                    and app.get("health_status", {}).get("frontend_reachable", False)
                     and app.get("health_status", {}).get("backend_reachable", False)
                 ):
                     remaining_apps.append(app)

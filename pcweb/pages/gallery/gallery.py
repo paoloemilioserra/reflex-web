@@ -27,7 +27,7 @@ def component_grid() -> rx.Component:
                 SideBarState.example_apps_to_return, lambda app: code_card(app=app)
             ),
         ),
-        class_name="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-[320px] w-full mb-4",
+        class_name="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-[320px] w-full mb-[7.5rem]",
     )
 
 
@@ -44,7 +44,7 @@ def community_component_grid() -> rx.Component:
                 lambda app: community_code_card(app=app),
             ),
         ),
-        class_name="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-[320px] w-full mb-4",
+        class_name="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-[320px] w-full",
     )
 
 
@@ -63,7 +63,7 @@ def pagination() -> rx.Component:
             on_click=SideBarState.set_page(SideBarState.page + 1),
             class_name="flex flex-row items-center gap-2 font-small text-slate-9 hover:text-slate-11 transition-color",
         ),
-        class_name="flex flex-row items-center gap-3",
+        class_name="flex flex-row justify-center items-center gap-3",
     )
 
 
@@ -80,7 +80,7 @@ def gallery_heading() -> rx.Component:
             " to run a showcase app locally.",
             class_name="font-md text-balance text-slate-11",
         ),
-        class_name="flex flex-col justify-center items-start md:items-center gap-4 text-start md:text-center",
+        class_name="section-header",
     )
 
 
@@ -98,7 +98,7 @@ def filter_item(icon: str, text: str) -> rx.Component:
             ),
         ),
         on_click=SideBarState.set_sort_by(text),
-        class_name="flex flex-row items-center gap-[0.875rem] hover:bg-slate-3 px- px-3.5 py-2 border-t w-full transition-bg cursor-pointer overflow-hidden"
+        class_name="flex flex-row items-center gap-[0.875rem] hover:bg-slate-3 px- px-3.5 py-2 w-full transition-bg cursor-pointer overflow-hidden"
         + active_class_name,
     )
 
@@ -188,14 +188,20 @@ def gallery() -> rx.Component:
     return rx.el.section(
         gallery_heading(),
         component_grid(),
-        h1_title(title="Community Showcase"),
-        rx.el.h2(
-            "Check out what the community is building with Reflex.",
-            class_name="font-md text-balance text-slate-11",
+        rx.box(
+            h1_title(title="Community Showcase"),
+            rx.el.h2(
+                "Check out what the community is building with Reflex.",
+                class_name="font-md text-balance text-slate-11",
+            ),
+            class_name="section-header",
         ),
-        sorting_menu(),
-        community_component_grid(),
-        pagination(),
+        rx.box(
+            sorting_menu(),
+            community_component_grid(),
+            pagination(),
+            class_name="flex flex-col gap-10",
+        ),
         id="gallery",
         class_name="section-content",
         on_mount=SideBarState.fetch_apps_list,

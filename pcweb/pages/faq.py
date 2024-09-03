@@ -124,6 +124,7 @@ Alternatively, you can set the `TELEMETRY_ENABLED` environment variable to `Fals
     },
 ]
 
+
 def faq_item(question: str, answer: str, index: int):
     return rx.el.li(
         rx.chakra.accordion(
@@ -164,7 +165,7 @@ def faq():
                     class_name="text-violet-9",
                 ),
                 ".",
-                class_name="font-md text-balance text-slate-11",
+                class_name="font-md text-slate-11 text-start text-wrap",
             ),
             class_name="section-header",
         ),
@@ -173,7 +174,7 @@ def faq():
                 faq_item(question=item["Q"], answer=item["A"], index=index)
                 for index, item in enumerate(faq_items)
             ],
-            class_name="flex flex-col gap-2 w-full",
+            class_name="flex flex-col gap-4 w-full",
         ),
         id="faq",
         class_name="section-content",

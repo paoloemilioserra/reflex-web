@@ -28,7 +28,8 @@ def change(
             class_name="flex flex-row justify-between items-start border-slate-5 pb-3 md:pb-4 border-b w-full",
         ),
         rx.el.h3(
-            description, class_name="pt-3 md:pt-4 pb-2 md:pb-3 font-md text-balance text-slate-12"
+            description,
+            class_name="pt-3 md:pt-4 pb-2 md:pb-3 font-md text-balance text-slate-12",
         ),
         rx.el.ul(
             *[
@@ -438,19 +439,22 @@ def changelog_content():
 def changelog():
     return rx.el.section(
         # pill(text="Timeline"),
-        h1_title(title="Changelog"),
         rx.box(
-            rx.el.h2(
-                "Reflex has new releases and features coming every week! Make sure to star and watch on ",
-                rx.link(
-                    "GitHub",
-                    underline="always",
-                    href=constants.GITHUB_URL,
-                    class_name="text-violet-9",
+            h1_title(title="Changelog"),
+            rx.box(
+                rx.el.h2(
+                    "Reflex has new releases and features coming every week! Make sure to star and watch on ",
+                    rx.link(
+                        "GitHub",
+                        underline="always",
+                        href=constants.GITHUB_URL,
+                        class_name="text-violet-9",
+                    ),
+                    " to stay up to date.",
                 ),
-                " to stay up to date.",
+                class_name="border-slate-4 bg-slate-2 p-4 md:p-6 border rounded-xl w-full md:font-md text-slate-11 text-small text-start text-wrap",
             ),
-            class_name="border-slate-4 bg-slate-2 p-4 md:p-6 border rounded-xl w-full md:font-md text-slate-11 text-small",
+            class_name="section-header",
         ),
         changelog_content(),
         id="changelog",

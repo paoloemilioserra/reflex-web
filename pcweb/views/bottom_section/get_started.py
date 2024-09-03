@@ -40,7 +40,7 @@ def get_started() -> rx.Component:
         rx.box(
             rx.el.h2(
                 "Get started easily",
-                class_name="inline-block bg-clip-text bg-gradient-to-r from-slate-12 to-slate-11 w-full font-x-large text-balance text-transparent",
+                class_name="gradient-heading font-x-large",
             ),
             rx.el.h3(
                 "Run this code and you should see your first app.",
