@@ -1,66 +1,9 @@
 from typing import Callable
 
 import reflex as rx
-from pcweb import styles
 from pcweb.route import Route
 
 DEFAULT_TITLE = "Web Apps in Pure Python"
-
-
-def spotlight():
-    return rx.flex(
-        rx.html(
-            """
-<html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="/css/spotlight.css" />
-  </head>
-  <body style="margin: 0; background: none">
-    <input type="hidden" id="anPageName" name="page" value="landing-page" />
-    <div class="container-center-horizontal">
-      <div class="landing-page screen">
-        <div class="flex-col">
-          <div class="overlap-group1">
-            <div class="group-9">
-              <div class="vector-container">
-                <img class="vector-2" src="/spotlight_img/vector-2.webp" alt="Vector 2" />
-                <img class="vector-2-1 vector-2-3" src="/spotlight_img/vector-2.webp" alt="Vector 2" />
-              </div>
-              <div class="vector-container-1">
-                <img class="vector-3" src="/spotlight_img/vector-2.webp" alt="Vector 3" />
-                <img class="vector-3-1" src="/spotlight_img/vector-2.webp" alt="Vector 3" />
-              </div>
-              <img class="vector-2-2 vector-2-3" src="/spotlight_img/vector-2.webp" alt="Vector 2" />
-              <img class="vector-3-2" src="/spotlight_img/vector-2.webp" alt="Vector 3" />
-            </div>
-            <div class="overlap-group">
-              <img class="group-6" src="/spotlight_img/group-6.webp" alt="Group 6" />
-              <img class="subtract" src="/spotlight_img/subtract.webp" alt="Subtract" />
-            </div>
-            <img class="rectangle-7" src="/spotlight_img/rectangle-7.webp" alt="Rectangle 7" />
-            <img class="rectangle-8" src="/spotlight_img/rectangle-8.webp" alt="Rectangle 8" />
-            <img class="rectangle-9" src="/spotlight_img/rectangle-9.webp" alt="Rectangle 9" />
-            <div class="rectangle-13"></div>
-            <div class="rectangle-18"></div>
-            <img class="rectangle-10" src="/spotlight_img/rectangle-10.svg" alt="Rectangle 10" />
-          </div>
-          <div class="rectangle-17"></div>
-        </div>
-        <img class="vector" src="/spotlight_img/vector.webp" alt="Vector" />
-      </div>
-    </div>
-  </body>
-</html>
-"""
-        ),
-        z_index=-1,
-        position="absolute",
-        width="100%",
-        height="100%",
-        align_items="start",
-        justify_content="center",
-        opacity=0.97,
-    )
 
 
 def webpage(
@@ -113,28 +56,23 @@ def webpage(
 
             # Wrap the component in the template.
             return rx.box(
-                # *landing_patterns(),
+                *landing_patterns(),
                 navbar(),
-                # spotlight(),
-                # rx.box(
-                #     class_name="mt-24 md:mt-[8.5rem]",
-                # ),
                 rx.el.main(
                     contents(*children, **props),
                     rx.box(class_name="flex-grow"),
-                    class_name="mt-24 md:mt-52 w-full",
+                    class_name="mt-24 md:mt-52 w-full z-[1]",
                 ),
                 bottom_section(),
                 bottom_logo(),
                 footer(),
-                class_name="relative flex flex-col justify-start items-center bg-slate-1 w-full h-full min-h-screen font-instrument-sans overflow-hidden",
+                class_name="relative flex flex-col justify-start items-center w-full h-full min-h-screen font-instrument-sans overflow-hidden",
                 **props,
             )
 
         return Route(
             path=path,
             title=title,
-            # background_color="#131217",
             component=wrapper,
             add_as_page=add_as_page,
         )

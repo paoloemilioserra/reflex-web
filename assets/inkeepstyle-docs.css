@@ -1,7 +1,7 @@
 [data-theme='light'] .ikp-search-bar-trigger__container,
 [data-theme='dark'] .ikp-search-bar-trigger__container {
   display: flex;
-  width: 211px;
+  width: 256px;
   height: 32px;
   padding: 6px;
   justify-content: space-between;

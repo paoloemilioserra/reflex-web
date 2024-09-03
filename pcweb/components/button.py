@@ -10,7 +10,7 @@ after_class_name = "after:absolute after:inset-[1px] after:border-t after:rounde
 
 def get_variant_class(variant: str) -> str:
     return (
-        f"bg-gradient-to-b from-[--{variant}-9] to-[--{variant}-10] hover:to-[--{variant}-9] text-white"
+        f"bg-gradient-to-b from-[--{variant}-9] to-[--{variant}-9] hover:to-[--{variant}-10] text-white"
         + " "
         + after_class_name
     )

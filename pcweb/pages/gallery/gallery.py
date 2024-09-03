@@ -78,7 +78,7 @@ def gallery_heading() -> rx.Component:
                 class_name="code-style",
             ),
             " to run a showcase app locally.",
-            class_name="font-md text-balance text-slate-11",
+            class_name="font-md text-balance text-slate-10",
         ),
         class_name="section-header",
     )
@@ -192,7 +192,7 @@ def gallery() -> rx.Component:
             h1_title(title="Community Showcase"),
             rx.el.h2(
                 "Check out what the community is building with Reflex.",
-                class_name="font-md text-balance text-slate-11",
+                class_name="font-md text-balance text-slate-10",
             ),
             class_name="section-header",
         ),

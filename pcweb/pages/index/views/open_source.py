@@ -24,7 +24,7 @@ def stat(icon: str, stat: str, text: str) -> rx.Component:
 
 def stats() -> rx.Component:
     return rx.box(
-        stat("star", f"{GITHUB_STARS}+", "stars"),
+        stat("star", f"{GITHUB_STARS:,}+", "stars"),
         stat("fork", "1,100+", "forks"),
         stat("eye_big", "145+", "watch"),
         class_name="justify-center gap-10 grid grid-cols-3",

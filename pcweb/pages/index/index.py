@@ -6,9 +6,6 @@ from .views.companies import companies
 from pcweb.pages.index.components.stat import stat
 from .views.deploy import deploy
 from .views.open_source import open_source
-from .components.stats import stats
-from .components.news_letter import news_letter_section
-from .demos.demos import demos
 
 
 @webpage(path="/", title="Reflex · Web apps in Pure Python")
@@ -24,5 +21,5 @@ def index() -> rx.Component:
         stat(stat="5,000+", text="projects created monthly"),
         deploy(),
         open_source(),
-        class_name="bg-slate-1 flex flex-col gap-32 w-full max-w-[67rem] justify-center items-center mx-auto",
+        class_name="flex flex-col gap-32 w-full max-w-[67rem] justify-center items-center mx-auto",
     )

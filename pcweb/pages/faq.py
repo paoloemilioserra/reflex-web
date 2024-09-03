@@ -165,7 +165,7 @@ def faq():
                     class_name="text-violet-9",
                 ),
                 ".",
-                class_name="font-md text-slate-11 text-start text-wrap",
+                class_name="font-md text-balance text-slate-10",
             ),
             class_name="section-header",
         ),

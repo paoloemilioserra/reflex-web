@@ -452,7 +452,7 @@ def changelog():
                     ),
                     " to stay up to date.",
                 ),
-                class_name="border-slate-4 bg-slate-2 p-4 md:p-6 border rounded-xl w-full md:font-md text-slate-11 text-small text-start text-wrap",
+                class_name="font-md text-balance text-slate-10",
             ),
             class_name="section-header",
         ),

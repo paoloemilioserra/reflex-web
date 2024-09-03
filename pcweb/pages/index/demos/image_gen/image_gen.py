@@ -1,8 +1,11 @@
 import reflex as rx
 from ..style import demo_height
+from pcweb.components.button import button
+import replicate
 
 try:
     import openai
+
     openai_client = openai.OpenAI()
 except:
     openai_client = None
@@ -19,112 +22,66 @@ class ImageGenState(rx.State):
         """Get the image from the prompt."""
         prompt = form_data["prompt"]
         if prompt == "":
-            return rx.window_alert("Prompt Empty")
+            return rx.toast("Prompt is empty")
 
         self.processing, self.complete = True, False
         yield
-        response = openai_client.images.generate(
-            prompt=prompt, n=1, size="512x512"
+        input = {"prompt": prompt}
+
+        output = replicate.run(
+            "black-forest-labs/flux-schnell",
+            input=input,
         )
-        self.image_url = response.data[0].url
+        self.image_url = output[0]
         self.processing, self.complete = False, True
 
-def config_button():
-    return rx.menu.root(
-        rx.menu.trigger(
-            rx.button(
-                rx.icon("ellipsis"),
-                variant="soft",
-            ),
-        ),
-        rx.menu.content(
-            rx.menu.item("Share", shortcut="⌘ E"),
-            rx.menu.item("Duplicate", shortcut="⌘ D"),
-            rx.menu.separator(),
-            rx.menu.item("Archive", shortcut="⌘ N"),
-            rx.menu.sub(
-                rx.menu.sub_trigger("More"),
-                rx.menu.sub_content(
-                    rx.menu.item("Move to project…"),
-                    rx.menu.item("Move to folder…"),
-                    rx.menu.separator(),
-                    rx.menu.item("Advanced options…"),
-                ),
-            ),
-            rx.menu.separator(),
-            rx.menu.item("Add to favorites"),
-            rx.menu.separator(),
-            rx.menu.item("Delete", shortcut="⌘ ⌫", color="red"),
-        ),
-    )
-
-def setting_section():
-    return rx.vstack(
-        rx.heading("Settings"),
-        rx.input(placeholder="Seed", width="100%"),
-        rx.select(["Model 1", "Model 2", "Model 3"], default_value="Model 1", width="100%"),
-        rx.text("Temperature"),
-        rx.slider(default_value=25, width="100%"),
-        rx.text("Width"),
-        rx.slider(default_value=50, width="100%"),
-        rx.text("Height"),
-        rx.slider(default_value=75, width="100%"),
-        rx.text("Share Results"),
-        rx.switch(),
-        rx.button("Save", width="100%", variant="outline"),
-        width="40%",
-        height="100%",
-        border_left="1px solid #2F2B37;",
-        padding="1.25em",
-        align_items="start",
-        justify_content="center",
-        spacing="2",
-        display=["none", "none", "flex", "flex", "flex", "flex"],
-    )
-
-def content():
-    return rx.flex(
-        rx.hstack(
-            config_button(),
-            width="100%", 
-            justify_content="right", 
-        ),
-        rx.center(
-            generator(),
-            width="100%",
-            height="100%",
-            overflow="hidden",
-        ),
-        direction="column",
-        width=["100%", "100%", "60%", "60%", "60%", "60%"],
-        height="100%",
-        padding="1.25em",
-    )
-
-def generator():
-    return rx.form(
-        rx.vstack(
-            rx.cond(
-                ImageGenState.processing,
-                rx.center("Processing...", width="15em", height="15em"),
-                rx.cond(
-                    ImageGenState.image_url,
-                    rx.image(src=ImageGenState.image_url, width="15em", height="15em"),
-                    rx.center(rx.icon("images"), width="15em", height="15em"),
-                ),
-            ),
-            rx.input(placeholder="Enter description", name="prompt", width="100%"),
-            rx.button("Generate Image ->", width="100%", disabled=ImageGenState.processing),
-        ),
-        on_submit=ImageGenState.get_image,
-    )
 
 def image_gen():
-    return rx.theme(
-        rx.hstack(
-        content(),
-        setting_section(),
-        padding_x="1em",
-        height=demo_height,
-    ),
+    return rx.box(
+        rx.skeleton(
+            rx.fragment(
+                rx.cond(
+                    ImageGenState.image_url,
+                    rx.image(
+                        src=ImageGenState.image_url,
+                        class_name="rounded-lg w-auto max-w-full h-full max-h-full aspect-square flex-1",
+                    ),
+                    rx.box(
+                        rx.icon("images", size=26, class_name="!text-slate-9"),
+                        class_name="flex justify-center items-center border-slate-4 border rounded-lg w-full max-w-full h-full max-h-full bg-slate-1 flex-1",
+                    ),
+                ),
+                loading=True,
+            ),
+        ),
+        rx.form(
+            rx.box(
+                rx.el.input(
+                    placeholder="What do you want to see?",
+                    name="prompt",
+                    type="text",
+                    class_name="box-border border-slate-5 focus:border-violet-9 focus:border-1 bg-white-1 p-[0.5rem_0.75rem] border rounded-[10px] font-small text-slate-11 placeholder:text-slate-9 outline-none focus:outline-none w-full",
+                ),
+                rx.form.submit(
+                    button(
+                        text=rx.cond(
+                            ImageGenState.processing, "Generating...", "Generate"
+                        ),
+                        style={
+                            "input:placeholder-shown + &": {
+                                "opacity": "0.65",
+                                "cursor": "default",
+                                "_hover": {
+                                    "background": "linear-gradient(180deg, var(--violet-9) 0%, var(--violet-10) 100%)"
+                                },
+                            },
+                        },
+                    ),
+                    as_child=True,
+                ),
+                class_name="flex flex-row gap-2 align-center",
+            ),
+            on_submit=ImageGenState.get_image,
+        ),
+        class_name="flex flex-col items-center gap-4 p-10",
     )

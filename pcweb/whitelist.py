@@ -12,12 +12,12 @@
 WHITELISTED_PAGES = [
     # "/docs/getting-started/introduction",
     # "/docs/library/datadisplay/avatar",
-    "/blog",
-    "/docs/custom-components/",
+    # "/blog",
+    # "/docs/custom-components/",
     "/faq",
-    "/gallery",
-    "/changelog",
-    "/errors",
+    # "/gallery",
+    # "/changelog",
+    # "/errors",
 ]
 
 def _check_whitelisted_path(path):
