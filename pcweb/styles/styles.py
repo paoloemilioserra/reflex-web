@@ -74,7 +74,7 @@ DOC_BORDER_RADIUS = "6px"
 
 # The base application style.
 BASE_STYLE = {
-    "background_color": rx.color("mauve", 1),
+    "background_color": "var(--c-slate-1)",
     "::selection": {
         "background_color": rx.color("accent", 5, True),
     },
