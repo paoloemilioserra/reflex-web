@@ -33,23 +33,23 @@ def definition(title: str, *children) -> rx.Component:
 
 @rx.memo
 def text_comp(text: rx.Var[str]) -> rx.Component:
-    return rx.text(text, style=fonts.base | {"margin_bottom": "1em", "color": c_color("slate", 11)})
+    return rx.text(text, class_name="font-base text-slate-11 mb-4")
 
 @rx.memo
 def list_comp(text: rx.Var[str]) -> rx.Component:
-    return rx.list_item(text, style=fonts.base | {"margin_bottom": "1em", "color": c_color("slate", 11)})
+    return rx.list_item(text, class_name="font-base text-slate-11 mb-4")
 
 
 @rx.memo
 def code_comp(text: rx.Var[str]) -> rx.Component:
-    style = {
-        "color": c_color("violet", 9),
-        "border_radius": "4px",
-        "border": f"1px solid {c_color('violet', 4)}",
-        "background": c_color("violet", 3),
-        **fonts.code,
-    }
-    return rx.code(text, style=style)
+    # style = {
+    #     "color": c_color("violet", 9),
+    #     "border_radius": "4px",
+    #     "border": f"1px solid {c_color('violet', 4)}",
+    #     "background": c_color("violet", 3),
+    #     **fonts.code,
+    # }
+    return rx.code(text, class_name="code-style")
 
 
 def doclink(text: str, href: str, **props) -> rx.Component:
@@ -64,7 +64,6 @@ def doclink(text: str, href: str, **props) -> rx.Component:
         The styled link.
     """
     return rx.link(text, underline="always", href=href, **props, class_name="text-violet-9")
-
 
 
 def doclink2(text: str, **props) -> rx.Component:

@@ -80,8 +80,8 @@ error_message(
     solution=[
                 h4_comp_error(text="This is caused by using an older version of nodejs."),
                 rx.el.ul(
-                    rx.el.li("Ensure the latest version of reflex is being used: `pip install reflex --upgrade`."),
-                    rx.el.li("Remove the .web and ~/.reflex directories and re-run `reflex init`."),
+                    rx.el.li(markdown_error(text="Ensure the latest version of reflex is being used: `pip install reflex --upgrade`.")),
+                    rx.el.li(markdown_error(text="Remove the .web and ~/.reflex directories and re-run `reflex init`.")),
                     class_name="list-disc pl-4 space-y-2",
                 ),
     ],

@@ -1211,5 +1211,5 @@ def style_grid(
                 ),
             ),
         ),
-        class_name="flex flex-col justify-center items-center gap-6 border-slate-4 bg-slate-2 p-6 border rounded-xl",
+        class_name="flex flex-col justify-center items-center gap-6 border-slate-4 bg-slate-2 p-6 border rounded-xl mb-4",
     )

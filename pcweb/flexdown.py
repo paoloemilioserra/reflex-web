@@ -111,7 +111,9 @@ class AlertBlock(flexdown.blocks.MarkdownBlock):
                                 color=f"{rx.color(color, 11)}",
                             ),
                             (
-                                rx.markdown(title, margin_y="0px", style=get_code_style(color))
+                                rx.markdown(
+                                    title, margin_y="0px", style=get_code_style(color)
+                                )
                                 if title
                                 else self.render_fn(content=content)
                             ),
@@ -208,31 +210,20 @@ class SectionBlock(flexdown.blocks.Block):
         ]
 
         return rx.box(
-            rx.vstack(
-                *[
-                    rx.fragment(
+            *[
+                rx.fragment(
+                    rx.text(
                         rx.text(
-                            rx.chakra.span(
-                                header,
-                                font_weight="bold",
-                            ),
-                            width="100%",
+                            header,
+                            class_name="font-md text-slate-12 font-bold tracking-[-0.0225rem]",
                         ),
-                        rx.box(
-                            markdown(section),
-                            width="100%",
-                        ),
-                    )
-                    for header, section in sections
-                ],
-                text_align="left",
-                margin_y="1em",
-                width="100%",
-            ),
-            border_left=f"1.5px {c_color('slate', 4)} solid",
-            padding_left="1em",
-            width="100%",
-            align_items="center",
+                        width="100%",
+                    ),
+                    markdown(section),
+                )
+                for header, section in sections
+            ],
+            class_name="border-l border-slate-4 w-full pl-6 mb-10 text-left flex flex-col gap-4 [&>p]:mb-0",
         )
 
 
