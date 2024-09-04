@@ -49,7 +49,7 @@
   backdrop-filter: blur(20px);
 }
 
-@media (max-width: 62em) {
+@media (max-width: 80em) {
   [data-theme='light'] .ikp-search-bar-trigger__container,
   [data-theme='dark'] .ikp-search-bar-trigger__container {
     padding: 2px 12px;

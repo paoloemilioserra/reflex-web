@@ -1,42 +1,42 @@
 import reflex as rx
-from pcweb.components.button import button
+from pcweb.components.button import icon_button
 import random
 
 data = [
     {
-        "name": "Jan",
+        "month": "Jan",
         "Mobile": random.randint(100, 500),
-        "Desktop": random.randint(400, 800),
+        "Desktop": random.randint(400, 700),
     },
     {
-        "name": "Feb",
+        "month": "Feb",
         "Mobile": random.randint(100, 500),
-        "Desktop": random.randint(400, 800),
+        "Desktop": random.randint(400, 700),
     },
     {
-        "name": "Mar",
+        "month": "Mar",
         "Mobile": random.randint(100, 500),
-        "Desktop": random.randint(400, 800),
+        "Desktop": random.randint(400, 700),
     },
     {
-        "name": "Apr",
+        "month": "Apr",
         "Mobile": random.randint(100, 500),
-        "Desktop": random.randint(400, 800),
+        "Desktop": random.randint(400, 700),
     },
     {
-        "name": "May",
+        "month": "May",
         "Mobile": random.randint(100, 500),
-        "Desktop": random.randint(400, 800),
+        "Desktop": random.randint(400, 700),
     },
     {
-        "name": "Jun",
+        "month": "Jun",
         "Mobile": random.randint(100, 500),
-        "Desktop": random.randint(400, 800),
+        "Desktop": random.randint(400, 700),
     },
     {
-        "name": "Jul",
+        "month": "Jul",
         "Mobile": random.randint(100, 500),
-        "Desktop": random.randint(400, 800),
+        "Desktop": random.randint(400, 700),
     },
 ]
 
@@ -47,9 +47,9 @@ class ChartsState(rx.State):
     def randomize_data(self):
         self.data = [
             {
-                "name": item["name"],
+                "month": item["month"],
                 "Mobile": random.randint(100, 500),
-                "Desktop": random.randint(400, 800),
+                "Desktop": random.randint(400, 700),
             }
             for item in self.data
         ]
@@ -79,7 +79,7 @@ def charts():
 }
 """
         ),
-        button("Randomize", variant="secondary", on_click=ChartsState.randomize_data),
+        icon_button("Randomize", "dice", variant="secondary", on_click=ChartsState.randomize_data),
         rx.recharts.area_chart(
             rx.el.svg.defs(
                 rx.el.svg.linear_gradient(
@@ -179,7 +179,7 @@ def charts():
             rx.recharts.x_axis(
                 # interval="preserveStartEnd",  # This prop doesn't exist in the current reflex version
                 include_hidden=True,
-                data_key="name",
+                data_key="month",
                 stroke="currentColor",
                 type_="category",
                 class_name="!font-small text-slate-9 [&>line]:!text-slateA-3",
@@ -189,3 +189,86 @@ def charts():
         ),
         class_name="flex flex-col items-end gap-6 p-8 h-full overflow-hidden",
     )
+
+
+charts_code = """data = [
+    {
+        "month": "Jan",
+        "Mobile": random.randint(100, 500),
+        "Desktop": random.randint(400, 700),
+    },
+    ...
+]
+
+
+class ChartsState(rx.State):
+    data = data
+
+    def randomize_data(self):
+        self.data = [
+            {
+                "month": item["month"],
+                "Mobile": random.randint(100, 500),
+                "Desktop": random.randint(400, 700),
+            }
+            for item in self.data
+        ]
+
+def chart():
+    return rx.box(
+        rx.button("Randomize", on_click=ChartsState.randomize_data, class_name="button"),
+        rx.recharts.area_chart(
+            rx.el.svg.defs(
+                rx.el.svg.linear_gradient(
+                    rx.el.svg.stop(
+                        stop_color=rx.color("violet", 7), offset="5%", stop_opacity=0.8
+                    ),
+                    rx.el.svg.stop(
+                        stop_color=rx.color("violet", 7), offset="95%", stop_opacity=0.1
+                    ),
+                    x1=0,
+                    x2=0,
+                    y1=0,
+                    y2=1,
+                    id="gradientPurple",
+                ),
+            ),
+            rx.el.svg.defs(
+                rx.el.svg.linear_gradient(
+                    rx.el.svg.stop(
+                        stop_color=rx.color("slate", 7), offset="5%", stop_opacity=0.8
+                    ),
+                    rx.el.svg.stop(
+                        stop_color=rx.color("slate", 7), offset="95%", stop_opacity=0.1
+                    ),
+                    x1=0,
+                    x2=0,
+                    y1=0,
+                    y2=1,
+                    id="gradientSlate",
+                ),
+            ),
+            rx.recharts.area(
+                data_key="Mobile",
+                stroke=rx.color("violet", 8),
+                fill="url(#gradientPurple)",
+                type_="natural",
+            ),
+            rx.recharts.area(
+                data_key="Desktop",
+                stroke=rx.color("slate", 8),
+                fill="url(#gradientSlate)",
+                type_="natural"
+            ),
+            rx.recharts.graphing_tooltip(),
+            rx.recharts.cartesian_grid(horizontal=True, vertical=False),
+            rx.recharts.x_axis(
+                data_key="name",
+                type_="category",
+            ),
+            data=ChartsState.data,
+            class_name="chart",
+        ),
+        class_name="chart-container",
+    )
+"""

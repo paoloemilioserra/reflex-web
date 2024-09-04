@@ -50,6 +50,7 @@ def hero() -> rx.Component:
                 "$ pip install reflex",
                 class_name="font-['JetBrains_Mono'] font-medium font-small text-[0.8125rem] text-center text-slate-9 leading-6",
             ),
+            on_click=rx.set_clipboard("pip install reflex"),
             class_name="flex flex-row items-center gap-3 hover:bg-slate-3 px-3 py-2 rounded-xl cursor-pointer transition-bg",
         ),
         # Demo section

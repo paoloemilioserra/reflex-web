@@ -27,7 +27,7 @@ class ImageGenState(rx.State):
         self.processing = False
 
 
-def image_gen_2():
+def image_gen() -> rx.Component:
     return rx.box(
         rx.skeleton(
             rx.box(
@@ -43,7 +43,7 @@ def image_gen_2():
                         class_name="flex justify-center items-center border-slate-4 border bg-slate-1 w-full h-full rounded-[1.125rem]",
                     ),
                 ),
-                class_name="h-full w-full flex justify-center items-center overflow-hidden rounded-[1.125rem] aspect-square",
+                class_name="h-full w-full flex justify-center items-center overflow-hidden rounded-[1.125rem] aspect-square shadow-small",
             ),
             loading=ImageGenState.processing,
             class_name="rounded-xl w-full h-full",
@@ -53,7 +53,7 @@ def image_gen_2():
                 placeholder="What do you want to see?",
                 name="prompt",
                 type="text",
-                class_name="box-border border-slate-5 focus:border-violet-9 focus:border-1 bg-white-1 p-[0.5rem_0.75rem] border rounded-[10px] font-small text-slate-11 placeholder:text-slate-9 outline-none focus:outline-none w-full",
+                class_name="shadow-small box-border border-slate-5 focus:border-violet-9 focus:border-1 bg-white-1 p-[0.5rem_0.75rem] border rounded-[10px] font-small text-slate-11 placeholder:text-slate-9 outline-none focus:outline-none w-full",
             ),
             button(
                 text=rx.cond(ImageGenState.processing, "Generating...", "Generate"),
@@ -76,77 +76,6 @@ def image_gen_2():
         ),
         class_name="flex flex-col items-center gap-4 p-8 h-full overflow-hidden",
     )
-
-
-def image_gen():
-    return rx.vstack(
-        rx.skeleton(
-            rx.flex(
-                rx.cond(
-                    ImageGenState.image_url,
-                    rx.image(
-                        src=ImageGenState.image_url,
-                        border_radius="0.75rem",
-                        width="auto",
-                        height="full",
-                        aspect_ratio="1/1",
-                        object_fit="contain",
-                    ),
-                    rx.flex(
-                        rx.icon("images", size=26, color=rx.color("slate", 7)),
-                        justify="center",
-                        align="center",
-                        border="1px solid",
-                        border_color=rx.color("slate", 4),
-                        bg=rx.color("slate", 1),
-                        border_radius="0.75rem",
-                        width="auto",
-                        height="100%",
-                        aspect_ratio="1/1",
-                    ),
-                ),
-                height="100%",
-                width="auto",
-                justify="center",
-                align="center",
-                overflow="hidden",
-                aspect_ratio="1/1",
-            ),
-            loading=ImageGenState.processing,
-            border_radius="0.75rem",
-            width="auto",
-            height="100%",
-            aspect_ratio="1/1",
-        ),
-        rx.form(
-            rx.input(
-                placeholder="What do you want to see?",
-                name="prompt",
-                type="text",
-                radius="large",
-                width="100%",
-            ),
-            rx.button(
-                rx.cond(ImageGenState.processing, "Generating...", "Generate"),
-                cursor="pointer",
-                loading=ImageGenState.processing,
-                type="submit",
-            ),
-            display="flex",
-            flex_direction="row",
-            gap="1rem",
-            align_items="center",
-            reset_on_submit=True,
-            on_submit=ImageGenState.get_image,
-        ),
-        padding="2.5rem",
-        gap="1rem",
-        height="100%",
-        overflow="hidden",
-        align="center",
-        font_family="Instrument Sans",
-    )
-
 
 image_gen_code = """class ImageGenState(rx.State):
 
@@ -197,7 +126,6 @@ def image_gen():
             ),
             rx.button(
                 rx.cond(ImageGenState.processing, "Generating...", "Generate"),
-                cursor="pointer",
                 loading=ImageGenState.processing,
                 type="submit",
                 class_name="button"

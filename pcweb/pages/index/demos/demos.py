@@ -1,11 +1,12 @@
 import reflex as rx
 
-from .auth.auth import auth
-from .forms.forms import forms
-from .dashboard.dashboard import dashboard
-from .image_gen.image_gen import image_gen, image_gen_code, image_gen_2
-from .charts.charts import charts
-from reflex_type_animation import type_animation
+from .forms.forms import form, form_code
+from pcweb.pages.gallery import gallery
+from .image_gen.image_gen import image_gen, image_gen_code
+from .charts.charts import charts, charts_code
+
+# from .auth.auth import auth, auth_code
+from .react.react import react, react_code
 
 
 class DemoState(rx.State):
@@ -16,124 +17,12 @@ class DemoState(rx.State):
         self.demo = demo
 
 
-# def example_button(text):
-#     return rx.button(
-#     text,
-#     border_radius="8px;",
-#     border="1px solid var(--c-slate-5);",
-#     color=rx.cond(
-#         DemoState.demo == text,
-#         "white",
-#         "var(--c-slate-9)",
-#     ),
-#     background= rx.cond(
-#         DemoState.demo == text,
-#         "var(--c-violet-9)",
-#         "var(--c-slate-2)",
-#     ),
-#     backdrop_filter= "blur(2px);",
-#     on_click= lambda: DemoState.set_demo(text)
-# )
-
-# def heading():
-#     return rx.vstack(
-#         type_animation(
-#             sequence=[
-#                 "Build web apps, faster.",
-#                 1000,
-#                 "Build internal tools, faster.",
-#                 1000,
-#                 "Build AI apps, faster.",
-#                 1000,
-#                 "Build web apps, faster.",
-#             ],
-#             font_size=["24px", "30px", "44px", "44px", "44px", "44px"],
-#             text_align="left",
-#             color="var(--c-slate-11)",
-#             font_weight="bold",
-#             line_height="1",
-#         ),
-#         rx.el.h3(
-#             "Create your whole app in a single language. Don't worry about writing APIs to connect your frontend and backend.",
-#             color="var(--c-slate-10)",
-#             font_size=[".8em", ".8em", "1em", "1em", "1em", "1em"],
-#             text_align="center",
-#             class_name="font-small"
-#         ),
-#         padding_y="1em",
-#     )
-
-# def more_examples():
-#     return rx.link(
-#                 rx.button(
-#                     "More Examples",
-#                     rx.icon(
-#                         "chevron-right",
-#                         size=18,
-#                         stroke_width="1px",
-#                         padding_left=".1em",
-#                     ),
-#                     background="var(--c-slate-2)",
-#                     color="var(--c-slate-9)",
-#                     border_radius="8px;",
-#                     border="1px solid var(--c-slate-5);",
-#                     text_wrap="nowrap",
-#                 ),
-#                 href="/gallery",
-#             )
-
-# def demos():
-#     return rx.flex(
-#         heading(),
-#         rx.hstack(
-#             rx.hstack(
-#                 example_button("Image Gen"),
-#                 example_button("Forms"),
-#                 example_button("Auth"),
-#                 example_button("Dashboard"),
-#                 max_width="35em",
-#                 overflow_x="scroll",
-#                 scrollbar_width= "none"
-#             ),
-#             rx.spacer(),
-#             more_examples(),
-#             align_items="left",
-#             width="100%",
-#         ),
-#         rx.box(
-#             rx.match(
-#                 DemoState.demo,
-#                 ("Forms", forms()),
-#                 ("Dashboard", dashboard()),
-#                 ("Auth", auth()),
-#                 ("Image Generator", image_gen()),
-#                 image_gen()
-#             ),
-#             border_radius= "10px;",
-#             border= "1px solid var(--c-slate-5);",
-#             background_color= "var(--c-slate-2)",
-#             overflow="hidden",
-#             width="100%",
-#         ),
-#         padding_bottom="4em",
-#         width="100%",
-#         direction="column",
-#         # background_image="url(/grid.png)",
-#         background_position= ["50% 50%;", "50% 40%;", "50% 70%;", "50% 70%;", "50% 70%;", "50% 70%;"],
-#         background_repeat= "no-repeat;",
-#         background_size= "auto;",
-#         padding_top="5em",
-#         gap="1em",
-#         class_name="bg-slate-1"
-#     )
-
-
 def tab(name: str, icon: str) -> rx.Component:
     is_selected = DemoState.demo == name
     return rx.box(
         rx.icon(tag=icon, size=16),
         name,
-        class_name="flex flex-row justify-center items-center gap-2 hover:bg-slate-3 px-3 py-[0.125rem] rounded-[0.625rem] h-8 font-small text-slate-9 transition-bg cursor-pointer box-border"
+        class_name="box-border flex flex-row justify-center items-center gap-2 hover:bg-slate-3 px-3 py-[0.125rem] rounded-[0.625rem] h-8 font-small text-slate-9 transition-bg cursor-pointer"
         + rx.cond(is_selected, " border border-slate-5 bg-slate-1", ""),
         on_click=DemoState.set_demo(name),
     )
@@ -255,22 +144,28 @@ def demo_section() -> rx.Component:
         rx.box(
             tab("Image Gen", "wand-sparkles"),
             tab("Forms", "scan-text"),
-            tab("Charts", "layout-panel-left"),
-            tab("Authorization", "folder-open-dot"),
-            tab("More", "layers"),
+            tab("Charts", "area-chart"),
+            tab("Custom", "atom"),
+            rx.link(
+                rx.box(
+                    rx.icon(tag="layers", size=16),
+                    "More",
+                    class_name="box-border flex flex-row justify-center items-center gap-2 hover:bg-slate-3 px-3 py-[0.125rem] rounded-[0.625rem] h-8 font-small text-slate-9 transition-bg cursor-pointer",
+                ),
+                href=gallery.path,
+                underline="none",
+            ),
             class_name="flex flex-row items-center gap-2 border-slate-4 p-2 border-b",
         ),
-        # Preview
-        # TODO: Add the real previews
+        # Previews
         rx.box(
             rx.box(
                 rx.match(
                     DemoState.demo,
                     ("Image Gen", code_block(image_gen_code)),
-                    ("Forms", code_block(image_gen_code)),
-                    ("Charts", code_block(image_gen_code)),
-                    ("Authorization", code_block(image_gen_code)),
-                    # ("More", more()),
+                    ("Forms", code_block(form_code)),
+                    ("Charts", code_block(charts_code)),
+                    ("Custom", code_block(react_code)),
                     image_gen(),
                 ),
                 class_name="w-1/2 overflow-auto",
@@ -278,11 +173,10 @@ def demo_section() -> rx.Component:
             rx.box(
                 rx.match(
                     DemoState.demo,
-                    ("Image Gen", image_gen_2()),
-                    ("Forms", image_gen()),
+                    ("Image Gen", image_gen()),
+                    ("Forms", form()),
                     ("Charts", charts()),
-                    ("Authorization", auth()),
-                    # ("More", more()),
+                    ("Custom", react()),
                     image_gen(),
                 ),
                 class_name="w-1/2 h-auto",
