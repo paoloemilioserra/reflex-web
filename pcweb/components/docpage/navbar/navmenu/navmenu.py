@@ -84,9 +84,9 @@ class NavMenuList(NavMenu):
     as_child: Var[bool] = False
 
     # class_name: Var[str] = (
-    #     "m-0 flex list-none h-full gap-0 md:gap-6 flex-row align-center"
+    #     "m-0 flex list-none h-full gap-0 lg:gap-6 flex-row align-center"
     # )
-    
+
     # @classmethod
     # def create(cls, *children, add_cn="", **props):
     #     """Create a NavMenuList component.
@@ -140,7 +140,7 @@ class NavMenuTrigger(NavMenu):
     alias = "RadixNavigationMenuTrigger"
 
     as_child: Var[bool] = False
-    
+
     class_name: Var[str] = "outline-none user-select-none"
 
     # def add_style(self) -> Style:

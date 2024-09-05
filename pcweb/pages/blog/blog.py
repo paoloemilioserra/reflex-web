@@ -57,7 +57,7 @@ def first_post_card(meta: dict, path: str) -> rx.Component:
         href=path,
         is_external=False,
         underline="none",
-        class_name="box-border md:flex flex-row flex-shrink-0 gap-3 border-slate-5 hidden bg-slate-1 shadow-large border border-solid rounded-xl w-full overflow-hidden group",
+        class_name="box-border lg:flex flex-row flex-shrink-0 gap-3 border-slate-5 hidden bg-slate-1 shadow-large border border-solid rounded-xl w-full overflow-hidden group",
     )
 
 
@@ -129,7 +129,7 @@ def component_grid() -> rx.Component:
         posts.append(card_content(meta=meta, path=path))
     return rx.box(
         *posts,
-        class_name="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-[320px] w-full mb-4 md:[&>*:first-child]:hidden",
+        class_name="gap-6 grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-[320px] w-full mb-4 lg:[&>*:first-child]:hidden",
     )
 
 

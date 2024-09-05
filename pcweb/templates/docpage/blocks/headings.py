@@ -53,17 +53,7 @@ def h1_comp(text: rx.Var[str]) -> rx.Component:
     return h_comp_common(
         text=text,
         heading="h1",
-        # style={
-        #     # "color": c_color("slate", 12),
-        #     "font-size": ["32px", "48px"],
-        #     "font-style": "normal",
-        #     "font-weight": "600",
-        #     "line-height": ["48px", "56px"],
-        #     "letter-spacing": "-2.4px",
-        # },
-        # margin_bottom="24px",
-        # scroll_margin="4em",
-        class_name="font-xx-large",
+        class_name="font-x-large lg:font-xx-large",
     )
 
 
@@ -72,12 +62,8 @@ def h1_comp_xd(text: rx.Var[str]) -> rx.Component:
     return h_comp_common(
         text=text,
         heading="h1",
-        # style=fonts.xx_large,
-        # margin_bottom="24px",
-        # margin_top="1.5em",
-        # scroll_margin="4em",
         convert_to_str=True,
-        class_name="font-xx-large",
+        class_name="font-x-large lg:font-xx-large",
     )
 
 
@@ -86,11 +72,7 @@ def h2_comp(text: rx.Var[str]) -> rx.Component:
     return h_comp_common(
         text=text,
         heading="h2",
-        # style=fonts.x_large,
-        # margin_bottom="24px",
-        # margin_top=["24px", "40px"],
-        # scroll_margin="5em",
-        class_name="font-x-large",
+        class_name="font-large lg:font-x-large",
     )
 
 
@@ -99,12 +81,8 @@ def h2_comp_xd(text: rx.Var[str]) -> rx.Component:
     return h_comp_common(
         text=text,
         heading="h2",
-        # style=fonts.x_large,
-        # margin_bottom="24px",
-        # margin_top="0px",
-        # scroll_margin="5em",
         convert_to_str=True,
-        class_name="font-x-large",
+        class_name="font-large lg:font-x-large",
     )
 
 
@@ -113,11 +91,6 @@ def h3_comp(text: rx.Var[str]) -> rx.Component:
     return h_comp_common(
         text=text,
         heading="h3",
-        # font_size=styles.H4_FONT_SIZE,
-        # font_weight=fw["subheading"],
-        # margin_top="1em",
-        # margin_bottom="0em",
-        # scroll_margin="5em",
         class_name="font-large",
     )
 
@@ -127,10 +100,6 @@ def h3_comp_xd(text: rx.Var[str]) -> rx.Component:
     return h_comp_common(
         text=text,
         heading="h3",
-        # style=fonts.large,
-        # margin_bottom="24px",
-        # margin_top="24px",
-        # scroll_margin="5em",
         convert_to_str=True,
         class_name="font-large",
     )
@@ -141,9 +110,6 @@ def h4_comp(text: rx.Var[str]) -> rx.Component:
     return h_comp_common(
         text=text,
         heading="h4",
-        # font_size=styles.H4_FONT_SIZE,
-        # font_weight=fw["subheading"],
-        # margin_top="1em",
         scroll_margin="6em",
         class_name="font-md-smbold",
     )
@@ -154,9 +120,6 @@ def h4_comp_xd(text: rx.Var[str]) -> rx.Component:
     return h_comp_common(
         text=text,
         heading="h4",
-        # style=fonts.medium,
-        # margin_bottom="24px",
-        # scroll_margin="6em",
         convert_to_str=True,
         class_name="font-md-smbold",
     )

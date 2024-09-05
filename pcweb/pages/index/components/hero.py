@@ -113,6 +113,7 @@ def hero_section_buttons(mobile=False):
         width="100%",
     )
 
+
 text_code = """def form_field(
     label: str, placeholder: str, type: str, name: str
 ) -> rx.Component:
@@ -206,11 +207,12 @@ def event_form() -> rx.Component:
     )
 """
 
+
 def tab(name: str, icon: str, is_selected: bool) -> rx.Component:
     return rx.box(
         rx.icon(tag=icon, size=16),
         name,
-        class_name="flex flex-row justify-center items-center gap-2 hover:bg-slate-3 px-3 py-[0.125rem] rounded-[0.625rem] h-8 font-small text-slate-9 transition-bg cursor-pointer"
+        class_name="flex flex-row justify-center items-center gap-2 hover:bg-slate-3 px-3 py-0.5 rounded-[0.625rem] h-8 font-small text-slate-9 transition-bg cursor-pointer"
         + (" border border-slate-5" if is_selected else ""),
     )
 
@@ -221,13 +223,15 @@ def code_block(code: str) -> rx.Component:
         language="python",
         # wrap_long_lines=True,
         class_name="demo-code-block border-slate-4 !p-8 border-r",
-        )
+    )
+
 
 def preview_block() -> rx.Component:
     return rx.box(
         rx.text("Preview"),
-        class_name="flex justify-center items-center p-8 w-full h-full"
+        class_name="flex justify-center items-center p-8 w-full h-full",
     )
+
 
 def demo_section() -> rx.Component:
     return rx.box(
@@ -242,7 +246,11 @@ def demo_section() -> rx.Component:
         ),
         # Preview
         # TODO: Add the real previews
-        rx.box(code_block(text_code), preview_block(), class_name="grid grid-cols-2 w-full h-full overflow-hidden"),
+        rx.box(
+            code_block(text_code),
+            preview_block(),
+            class_name="grid grid-cols-2 w-full h-full overflow-hidden",
+        ),
         class_name="flex flex-col border-slate-4 bg-slate-2 shadow-large border rounded-[1.125rem] w-full max-w-[67rem] h-full max-h-[35rem] overflow-hidden",
     )
 
@@ -296,5 +304,5 @@ def hero_section() -> rx.Component:
         ),
         # Demo section
         demo_section(),
-        class_name="flex flex-col justify-center items-center gap-8 mx-auto px-4 md:px-6 w-full max-w-6xl",
+        class_name="flex flex-col justify-center items-center gap-8 mx-auto px-4 lg:px-6 w-full max-w-6xl",
     )

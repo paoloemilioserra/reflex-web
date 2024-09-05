@@ -10,7 +10,8 @@
 # - Incorrect: WHITELISTED_PAGES = ["/docs/getting-started/introduction/"]
 
 WHITELISTED_PAGES = [
-    "/docs/getting-started/introduction",
+    # "/docs/getting-started/introduction",
+    "/docs/getting-started",
     # "/docs/library/datadisplay/avatar",
     # "/docs/getting-started",
     # "/blog",

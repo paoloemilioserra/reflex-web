@@ -22,7 +22,7 @@ def tab(name: str, icon: str) -> rx.Component:
     return rx.box(
         rx.icon(tag=icon, size=16),
         name,
-        class_name="box-border flex flex-row justify-center items-center gap-2 hover:bg-slate-3 px-3 py-[0.125rem] rounded-[0.625rem] h-8 font-small text-slate-9 transition-bg cursor-pointer"
+        class_name="box-border flex flex-row justify-center items-center gap-2 hover:bg-slate-3 px-3 py-0.5 rounded-[0.625rem] h-8 font-small text-slate-9 transition-bg cursor-pointer"
         + rx.cond(is_selected, " border border-slate-5 bg-slate-1", ""),
         on_click=DemoState.set_demo(name),
     )
@@ -151,7 +151,7 @@ def demo_section() -> rx.Component:
                 rx.box(
                     rx.icon(tag="layers", size=16),
                     "More",
-                    class_name="box-border flex flex-row justify-center items-center gap-2 hover:bg-slate-3 px-3 py-[0.125rem] rounded-[0.625rem] h-8 font-small text-slate-9 transition-bg cursor-pointer",
+                    class_name="box-border flex flex-row justify-center items-center gap-2 hover:bg-slate-3 px-3 py-0.5 rounded-[0.625rem] h-8 font-small text-slate-9 transition-bg cursor-pointer",
                 ),
                 href=gallery.path,
                 underline="none",

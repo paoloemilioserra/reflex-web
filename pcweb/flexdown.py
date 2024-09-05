@@ -87,7 +87,7 @@ class AlertBlock(flexdown.blocks.MarkdownBlock):
                             tag=icon_tag,
                             size=18,
                             color=rx.color(color, 11),
-                            class_name="shrink-0"
+                            class_name="shrink-0",
                         ),
                         (
                             rx.markdown(
@@ -98,12 +98,12 @@ class AlertBlock(flexdown.blocks.MarkdownBlock):
                         ),
                         rx.spacer(),
                         rx.chakra.accordion_icon(color=rx.color(color, 11)),
-                        class_name="flex items-center gap-4 !bg-transparent hover:!bg-transparent !p-4 md:!p-6 justify-start",
+                        class_name="flex items-center gap-4 !bg-transparent hover:!bg-transparent !p-4 lg:!p-6 justify-start",
                     ),
                     (
                         rx.chakra.accordion_panel(
                             markdown(content),
-                            class_name="!p-[0rem_1rem_1rem_1rem] md:!p-[0rem_1.5rem_1.5rem_1.5rem] font-small text-slate-11 text-start [&>code]:!font-code",
+                            class_name="!p-[0rem_1rem_1rem_1rem] lg:!p-[0rem_1.5rem_1.5rem_1.5rem] font-small text-slate-11 text-start [&>code]:!font-code",
                         )
                         if title
                         else rx.fragment()
@@ -124,14 +124,14 @@ class AlertBlock(flexdown.blocks.MarkdownBlock):
                         tag=icon_tag,
                         size=18,
                         color=rx.color(color, 11),
-                        class_name="shrink-0"
+                        class_name="shrink-0",
                     ),
                     rx.markdown(
                         title,
                         color=rx.color(color, 11),
                         class_name="!my-0 font-base markdown-code",
                     ),
-                    class_name="flex items-center gap-4 !p-4 md:!p-6",
+                    class_name="flex items-center gap-4 !p-4 lg:!p-6",
                 ),
                 border=f"1px solid {rx.color(color, 4)}",
                 background_color=f"{rx.color(color, 3)}",
@@ -298,22 +298,25 @@ class VideoBlock(flexdown.blocks.MarkdownBlock):
             rx.chakra.accordion_item(
                 rx.chakra.accordion_button(
                     (
-                        rx.markdown(title, class_name="!my-0 font-base markdown-code text-blue-11")
+                        rx.markdown(
+                            title,
+                            class_name="!my-0 font-base markdown-code text-blue-11",
+                        )
                         if title
                         else rx.markdown("Video Description")
                     ),
                     rx.spacer(),
                     rx.chakra.accordion_icon(color=rx.color(color, 11)),
-                    class_name="flex items-center gap-4 !bg-transparent hover:!bg-transparent !p-4 md:!p-6 justify-start",
+                    class_name="flex items-center gap-4 !bg-transparent hover:!bg-transparent !p-4 lg:!p-6 justify-start",
                 ),
                 rx.chakra.accordion_panel(
                     rx.video(
                         url=url,
-                        height="500px", 
+                        height="500px",
                         width="100%",
                         class_name="rounded-xl overflow-hidden",
                     ),
-                    class_name="!p-[0rem_1rem_1rem_1rem] md:!p-[0rem_1.5rem_1.5rem_1.5rem]",
+                    class_name="!p-[0rem_1rem_1rem_1rem] lg:!p-[0rem_1.5rem_1.5rem_1.5rem]",
                 ),
                 class_name="border-none",
             ),

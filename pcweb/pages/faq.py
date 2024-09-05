@@ -135,11 +135,11 @@ def faq_item(question: str, answer: str, index: int):
                     ),
                     rx.chakra.spacer(),
                     rx.chakra.accordion_icon(color="var(--c-slate-9)"),
-                    class_name="!bg-transparent hover:!bg-transparent !p-4 md:!p-6",
+                    class_name="!bg-transparent hover:!bg-transparent !p-4 lg:!p-6",
                 ),
                 rx.chakra.accordion_panel(
                     answer,
-                    class_name="!p-[0rem_1rem_1rem_1rem] md:!p-[0rem_1.5rem_1.5rem_1.5rem] font-small text-slate-11 text-start [&>code]:!font-code",
+                    class_name="!p-[0rem_1rem_1rem_1rem] lg:!p-[0rem_1.5rem_1.5rem_1.5rem] font-small text-slate-11 text-start [&>code]:!font-code",
                 ),
                 class_name="border-none",
             ),

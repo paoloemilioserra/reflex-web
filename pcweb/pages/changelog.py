@@ -25,11 +25,11 @@ def change(
                 underline="none",
                 href=link,
             ),
-            class_name="flex flex-row justify-between items-start border-slate-5 pb-3 md:pb-4 border-b w-full",
+            class_name="flex flex-row justify-between items-start border-slate-5 pb-3 lg:pb-4 border-b w-full",
         ),
         rx.el.h3(
             description,
-            class_name="pt-3 md:pt-4 pb-2 md:pb-3 font-md text-balance text-slate-12",
+            class_name="pt-3 lg:pt-4 pb-2 lg:pb-3 font-md text-balance text-slate-12",
         ),
         rx.el.ul(
             *[
@@ -42,7 +42,7 @@ def change(
             list_style_type="disc",
             class_name="space-y-2 pl-4 w-full",
         ),
-        class_name="flex flex-col gap-0 border-slate-5 bg-slate-2 shadow-large p-4 md:p-6 border rounded-xl w-full",
+        class_name="flex flex-col gap-0 border-slate-5 bg-slate-2 shadow-large p-4 lg:p-6 border rounded-xl w-full",
     )
 
 

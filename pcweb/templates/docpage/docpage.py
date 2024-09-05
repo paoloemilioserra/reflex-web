@@ -145,57 +145,39 @@ def feedback_content() -> rx.Component:
 
 
 def feedback_button() -> rx.Component:
+    thumb_cn = " flex flex-row items-center justify-center gap-2 text-slate-9 whitespace-nowrap border border-slate-5 bg-slate-1 shadow-large cursor-pointer transition-bg hover:bg-slate-3 font-small"
     return rx.popover.root(
-        rx.hstack(
+        rx.box(
             rx.popover.trigger(
-                rx.hstack(
-                    rx.icon(tag="thumbs-up", size=15, color=c_color("slate", 9)),
+                rx.box(
+                    rx.icon(tag="thumbs-up", size=15, class_name="!text-slate-9"),
                     rx.text(
                         "Yes",
                     ),
-                    style=st.thumb_pill_style,
-                    border_radius="20px 0 0 20px",
-                    padding="2px 12px",
-                    gap="8px",
-                    border_right="none",
-                    width="100%",
+                    # style=st.thumb_pill_style,
+                    class_name="w-full gap-2 border-r-0 px-3 py-0.5 rounded-[20px_0_0_20px]"
+                    + thumb_cn,
                 ),
                 on_click=FeedbackState.set_score(1),
             ),
             rx.popover.trigger(
-                rx.hstack(
-                    rx.icon(tag="thumbs-down", size=15, color=c_color("slate", 9)),
+                rx.box(
+                    rx.icon(tag="thumbs-down", size=15, class_name="!text-slate-9"),
                     rx.text(
                         "No",
                     ),
-                    style=st.thumb_pill_style,
-                    gap="8px",
-                    padding="2px 12px",
-                    border_radius="0 20px 20px 0",
-                    width="100%",
+                    # style=st.thumb_pill_style,
+                    class_name="w-full gap-2 px-3 py-0.5 rounded-[0_20px_20px_0]"
+                    + thumb_cn,
                 ),
                 on_click=FeedbackState.set_score(0),
             ),
-            align_items="center",
-            gap="0px",
-            width=["100%", "100%", "auto", "auto", "auto"],
+            class_name="w-full lg:w-auto items-center flex flex-row",
         ),
         rx.popover.content(
             feedback_content(),
-            bg="transparent",
-            box_shadow="None",
-            overflow="visible",
-            left=["0px", "0px", "-255px", "-255px", "-255px"],
-            padding="0px",
-            border="none",
             align="start",
-            transform_origin=[
-                "bottom",
-                "bottom",
-                "bottom right",
-                "bottom right",
-                "bottom right",
-            ],
+            class_name="border-none left-0 lg:left-[-255px] origin-bottom lg:origin-bottom-right !p-0 overflow-visible !shadow-none !bg-transparent",
             avoid_collisions=True,
         ),
     )
@@ -206,89 +188,49 @@ def link_pill(text: str, href: str) -> rx.Component:
         text,
         href=href,
         underline="none",
-        class_name="desktop-only flex flex-row justify-center items-center gap-2 lg:border-slate-5 bg-slate-3 lg:bg-slate-1 hover:bg-slate-3 shadow-none lg:shadow-large px-3 py-[0.125rem] lg:border lg:border-solid border-none rounded-lg lg:rounded-full w-auto font-small font-small text-slate-9 !hover:text-slate-11 hover:!text-slate-9 truncate whitespace-nowrap transition-bg transition-color cursor-pointer",
+        class_name="desktop-only flex flex-row justify-center items-center gap-2 lg:border-slate-5 bg-slate-3 lg:bg-slate-1 hover:bg-slate-3 shadow-none lg:shadow-large px-3 py-0.5 lg:border lg:border-solid border-none rounded-lg lg:rounded-full w-auto font-small font-small text-slate-9 !hover:text-slate-11 hover:!text-slate-9 truncate whitespace-nowrap transition-bg transition-color cursor-pointer",
     )
 
 
-def social_menu_item(
-    icon: str,
-    url="/",
-    border: bool = False,
-    border_color: list = [
-        f"1px solid {c_color('slate', 1)}",
-        f"1px solid {c_color('slate', 1)}",
-        f"1px solid {c_color('slate', 5)}",
-        f"1px solid {c_color('slate', 5)}",
-        f"1px solid {c_color('slate', 5)}",
-    ],
-    **props,
-) -> rx.Component:
-    return rx.link(
-        rx.box(
-            get_icon(icon=icon, class_name="!text-slate-9"),
-            style={
-                "display": "flex",
-                "padding": "4px 12px",
-                "justify-content": "center",
-                "align-items": "center",
-                "gap": "8px",
-                "align-self": "stretch",
-                "cursor": "pointer",
-                ":hover": {"background_color": c_color("slate", 3)},
-                "transition": "background 0.075s ease-out",
-                "overflow": "hidden",
-            },
-            _hover={
-                "background_color": c_color("slate", 3),
-            },
-            **props,
-            overflow="hidden",
-            border_left=border_color if border else "none",
-            border_right=border_color if border else "none",
-        ),
-        width="100%",
-        href=url,
-        is_external=True,
-    )
-
-
-# def menu_socials() -> rx.Component:
-#     return rx.box(
-#         rx.hstack(
-#             social_menu_item("github", GITHUB_URL),
-#             social_menu_item("twitter", TWITTER_URL, border=True),
-#             social_menu_item("discord", DISCORD_URL),
-#             gap="0px",
-#             width="auto",
-#             align="center",
+# def social_menu_item(
+#     icon: str,
+#     url="/",
+#     border: bool = False,
+#     border_color: list = [
+#         f"1px solid {c_color('slate', 1)}",
+#         f"1px solid {c_color('slate', 1)}",
+#         f"1px solid {c_color('slate', 5)}",
+#         f"1px solid {c_color('slate', 5)}",
+#         f"1px solid {c_color('slate', 5)}",
+#     ],
+#     **props,
+# ) -> rx.Component:
+#     return rx.link(
+#         rx.box(
+#             get_icon(icon=icon, class_name="!text-slate-9"),
+#             style={
+#                 "display": "flex",
+#                 "padding": "4px 12px",
+#                 "justify-content": "center",
+#                 "align-items": "center",
+#                 "gap": "8px",
+#                 "align-self": "stretch",
+#                 "cursor": "pointer",
+#                 ":hover": {"background_color": c_color("slate", 3)},
+#                 "transition": "background 0.075s ease-out",
+#                 "overflow": "hidden",
+#             },
+#             _hover={
+#                 "background_color": c_color("slate", 3),
+#             },
+#             **props,
+#             overflow="hidden",
+#             border_left=border_color if border else "none",
+#             border_right=border_color if border else "none",
 #         ),
-#         style={
-#             "border-radius": ["8px", "8px", "20px", "20px", "20px"],
-#             "overflow": "hidden",
-#             "height": "auto",
-#             "border": [
-#                 "none",
-#                 "none",
-#                 f"1px solid {c_color('slate', 5)}",
-#                 f"1px solid {c_color('slate', 5)}",
-#                 f"1px solid {c_color('slate', 5)}",
-#             ],
-#             "background": [
-#                 c_color("slate", 3),
-#                 c_color("slate", 3),
-#                 c_color("slate", 1),
-#                 c_color("slate", 1),
-#                 c_color("slate", 1),
-#             ],
-#             "box-shadow": [
-#                 "none",
-#                 "none",
-#                 shadows["large"],
-#                 shadows["large"],
-#                 shadows["large"],
-#             ],
-#         },
-#         width=["100%", "100%", "auto", "auto", "auto"],
+#         width="100%",
+#         href=url,
+#         is_external=True,
 #     )
 
 
@@ -325,14 +267,10 @@ def docpage_footer(path: str):
                     "Edit this page",
                     f"https://github.com/reflex-dev/reflex-web/tree/main{path}.md",
                 ),
-                class_name="desktop-only flex flex-row items-center gap-2 w-auto",
+                class_name="desktop-only flex-row items-center gap-2 w-auto",
             ),
             class_name="flex flex-row justify-center lg:justify-between items-center border-slate-4 border-y-0 lg:border-y pt-0 lg:pt-8 pb-6 lg:pb-8 w-full",
         ),
-        # rx.box(
-        #     menu_socials(),
-        #     class_name="mobile-only",
-        # ),
         rx.box(newsletter_form(), class_name="pt-8 pb-10"),
         rx.box(
             rx.box(
@@ -379,46 +317,46 @@ def docpage_footer(path: str):
     )
 
 
-def drawer_item(text: str, href: str):
-    return rx.link(
-        text,
-        href=href,
-        display="flex",
-        underline="none",
-        justify_content="center",
-        align_items="center",
-        padding="14px 16px",
-        width="100%",
-        color=c_color("slate", 9),
-        _hover={
-            "color": c_color("slate", 9),
-        },
-        style={
-            ":hover": {
-                "color": c_color("slate", 9),
-            },
-            **small,
-        },
-        border_bottom=f"1px solid {c_color('slate', 4)}",
-    )
+# def drawer_item(text: str, href: str):
+#     return rx.link(
+#         text,
+#         href=href,
+#         display="flex",
+#         underline="none",
+#         justify_content="center",
+#         align_items="center",
+#         padding="14px 16px",
+#         width="100%",
+#         color=c_color("slate", 9),
+#         _hover={
+#             "color": c_color("slate", 9),
+#         },
+#         style={
+#             ":hover": {
+#                 "color": c_color("slate", 9),
+#             },
+#             **small,
+#         },
+#         border_bottom=f"1px solid {c_color('slate', 4)}",
+#     )
 
 
-def drawer_socials():
-    return rx.hstack(
-        social_menu_item("github", GITHUB_URL, height="47px"),
-        social_menu_item(
-            "twitter",
-            TWITTER_URL,
-            border=True,
-            border_color=[f"1px solid {c_color('slate', 4)}"],
-            height="47px",
-        ),
-        social_menu_item("discord", DISCORD_URL, height="47px"),
-        border_bottom=f"1px solid {c_color('slate', 4)}",
-        gap="0px",
-        width="100%",
-        align="center",
-    )
+# def drawer_socials():
+#     return rx.hstack(
+#         social_menu_item("github", GITHUB_URL, height="47px"),
+#         social_menu_item(
+#             "twitter",
+#             TWITTER_URL,
+#             border=True,
+#             border_color=[f"1px solid {c_color('slate', 4)}"],
+#             height="47px",
+#         ),
+#         social_menu_item("discord", DISCORD_URL, height="47px"),
+#         border_bottom=f"1px solid {c_color('slate', 4)}",
+#         gap="0px",
+#         width="100%",
+#         align="center",
+#     )
 
 
 def breadcrumb(path: str, nav_sidebar: rx.Component):
@@ -465,16 +403,16 @@ def breadcrumb(path: str, nav_sidebar: rx.Component):
     return rx.box(
         rx.box(
             *breadcrumbs,
-            class_name="flex flex-row items-center gap-[5px] md:gap-4 overflow-hidden",
+            class_name="flex flex-row items-center gap-[5px] lg:gap-4 overflow-hidden",
         ),
         docs_sidebar_drawer(
             nav_sidebar,
             trigger=rx.el.button(
-                rx.icon(tag="chevron-down", size=14, class_name="text-slate-9"),
+                rx.icon(tag="chevron-down", size=14, class_name="!text-slate-9"),
                 class_name="p-[0.563rem] mobile-only",
             ),
         ),
-        class_name="relative z-10 flex flex-row justify-between items-center gap-4 md:gap-0 border-slate-4 bg-slate-1 mt-12 md:mt-16 lg:mt-[119px] mb-6 md:mb-12 p-[0.5rem_0.75rem_0.5rem_1rem] sm:p-[0.5rem_1.25rem_0.5rem_1.5rem] md:p-0 border-b md:border-none w-full",
+        class_name="relative z-10 flex flex-row justify-between items-center gap-4 lg:gap-0 border-slate-4 bg-slate-1 mt-12 lg:mt-[119px] mb-6 lg:mb-12 p-[0.5rem_1rem_0.5rem_1rem] lg:p-0 border-b lg:border-none w-full",
     )
 
 
@@ -608,11 +546,11 @@ def docpage(
                                     icon="arrow_right", transform="rotate(180deg)"
                                 ),
                                 "Back",
-                                class_name="flex flex-row justify-center md:justify-start items-center gap-2 rounded-lg w-full",
+                                class_name="flex flex-row justify-center lg:justify-start items-center gap-2 rounded-lg w-full",
                             ),
                             underline="none",
                             href=prev.link,
-                            class_name="px-1.5 md:px-0 py-0.5 md:py-0 rounded-lg md:w-auto font-small text-slate-9 hover:!text-slate-11 transition-color",
+                            class_name="px-1.5 lg:px-0 py-0.5 lg:py-0 rounded-lg lg:w-auto font-small text-slate-9 hover:!text-slate-11 transition-color",
                         ),
                         rx.text(next_prev_name, class_name="font-smbold text-slate-12"),
                         class_name="flex flex-col justify-start gap-1",
@@ -634,11 +572,11 @@ def docpage(
                             rx.box(
                                 "Next",
                                 get_icon(icon="arrow_right"),
-                                class_name="flex flex-row justify-center md:justify-end items-center gap-2 px-1.5 md:px-0 py-0.5 md:py-0 rounded-lg w-full md:w-auto",
+                                class_name="flex flex-row justify-center lg:justify-end items-center gap-2 px-1.5 lg:px-0 py-0.5 lg:py-0 rounded-lg w-full lg:w-auto",
                             ),
                             underline="none",
                             href=next.link,
-                            class_name="w-full md:w-auto font-small text-slate-9 hover:!text-slate-11 transition-color",
+                            class_name="w-full lg:w-auto font-small text-slate-9 hover:!text-slate-11 transition-color",
                         ),
                         rx.text(next_prev_name, class_name="font-smbold text-slate-12"),
                         class_name="flex flex-col justify-start gap-1 px-4 py-2",
@@ -662,7 +600,7 @@ def docpage(
                 rx.el.main(
                     rx.box(
                         sidebar,
-                        class_name="md:flex hidden mt-[105px] w-full max-w-[17.5rem] h-full shrink-0",
+                        class_name="mt-[90px] h-full shrink-0 desktop-only w-[20%]",
                     ),
                     rx.box(
                         rx.box(
@@ -672,13 +610,13 @@ def docpage(
                             rx.el.article(comp),
                             rx.el.nav(
                                 *links,
-                                class_name="flex flex-row gap-2 mt-8 md:mt-10 mb-6 md:mb-12",
+                                class_name="flex flex-row gap-2 mt-8 lg:mt-10 mb-6 lg:mb-12",
                             ),
                             docpage_footer(path=path),
-                            class_name="mt-[105px] sm:mt-[145px] md:mt-0",
+                            class_name="lg:mt-0 mt-6 px-4 lg:px-0",
                         ),
-                        class_name="h-full"
-                        + (" w-full max-w-[85rem]" if right_sidebar else ""),
+                        class_name="h-full w-full"
+                        + (" lg:max-w-[55%]" if right_sidebar else ""),
                     ),
                     rx.el.nav(
                         rx.box(
@@ -730,10 +668,10 @@ def docpage(
                             ),
                             class_name="fixed flex flex-col justify-start gap-4 p-[0.875rem_0.5rem_0px_0.5rem] w-full max-w-[280px] max-h-[80vh] overflow-hidden",
                         ),
-                        class_name="mt-[105px] w-full max-w-[17.5rem] h-full shrink-0"
-                        + (" hidden xl:flex" if right_sidebar else " hidden"),
+                        class_name="mt-[90px] h-full shrink-0 w-[20%]"
+                        + (" hidden 2xl:flex" if right_sidebar else " hidden"),
                     ),
-                    class_name="flex flex-row justify-center gap-24 mx-auto mt-0 px-6 max-w-[100rem] h-full min-h-screen",
+                    class_name="flex flex-row justify-center lg:gap-14 xl:gap-24 mx-auto mt-0 max-w-[min(100%,94.5em)] h-full min-h-screen",
                 ),
                 class_name="flex flex-col justify-center bg-slate-1 w-full",
             )
@@ -769,12 +707,12 @@ def hover_item(component: rx.Component, component_str: str) -> rx.Component:
         rx.hover_card.content(
             rx.el.button(
                 get_icon(icon="copy", class_name="p-[5px]"),
-                rx.el.p(
+                rx.text(
                     component_str,
                     class_name="flex-1 font-small truncate",
                 ),
                 on_click=rx.set_clipboard(component_str),
-                class_name="flex flex-row items-center gap-1.5 border-slate-5 bg-slate-1 hover:bg-slate-3 shadow-small pr-1.5 border rounded-md w-full max-w-[300px] text-slate-9 transition-bg cursor-pointer",
+                class_name="flex flex-row items-center gap-1.5 border-slate-5 bg-slate-1 hover:bg-slate-3 shadow-small pr-1.5 border rounded-md w-full max-w-[300px] text-slate-11 transition-bg cursor-pointer",
             ),
         ),
     )

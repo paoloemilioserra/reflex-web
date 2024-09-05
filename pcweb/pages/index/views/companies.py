@@ -30,7 +30,7 @@ def companies() -> rx.Component:
             ),
             rx.el.span(
                 "Trusted by industry leading teams",
-                class_name="px-2 py-[0.125rem] font-small text-center text-slate-9",
+                class_name="px-2 py-0.5 font-small text-center text-slate-9",
             ),
             rx.box(
                 class_name="bg-gradient-to-r from-15% from-slate-4 to-slate-2 w-[12.5rem] h-[0.125rem]"

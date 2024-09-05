@@ -124,12 +124,15 @@
         line-height: 1.25rem;
         letter-spacing: -0.01094rem;
     }
+
     .tab-style:hover {
         color: var(--c-slate-11);
     }
+
     .tab-style[data-state='active'] {
         color: var(--c-violet-9);
     }
+
     .tab-style:not([data-state='active']) {
         color: var(--c-slate-11);
     }
@@ -215,6 +218,16 @@
         letter-spacing: -0.015rem;
     }
 
+    .font-large {
+        font-family: "Instrument Sans";
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 2rem;
+        /* 133.333% */
+        letter-spacing: -0.03rem;
+    }
+
     .font-x-large {
         font-family: var(--font-instrument-sans);
         font-size: 2rem;
@@ -246,11 +259,11 @@
     }
 
     .mobile-only {
-        @apply flex sm:hidden;
+        @apply flex lg:hidden;
     }
 
     .desktop-only {
-        @apply hidden md:flex;
+        @apply hidden lg:flex;
     }
 
     .text-balance {
@@ -282,11 +295,11 @@
     }
 
     .section-content {
-        @apply flex flex-col justify-center items-center gap-10 mx-auto mb-20 px-4 md:px-6 w-full max-w-6xl mt-4;
+        @apply flex flex-col justify-center items-center gap-10 mx-auto mb-20 px-4 lg:px-6 w-full max-w-6xl mt-4;
     }
 
     .section-header {
-        @apply flex flex-col justify-center items-start md:items-center gap-6 w-full text-start md:text-center;
+        @apply flex flex-col justify-center items-start lg:items-center gap-6 w-full text-start lg:text-center;
     }
 
     .gradient-heading {
@@ -296,7 +309,7 @@
     /* .tab-style {
         @apply text-slate-9 cursor-pointer hover:text-slate-11 px-2 py-1 text-sm font-medium data-[state='active']:text-violet-9 not-[data-state='active']:text-slate-11;
     } */
-    
+
     @keyframes enterFromRight {
         from {
             opacity: 0;
@@ -444,7 +457,7 @@
     text-decoration-color: color-mix(in srgb, var(--c-violet-8) 75%, transparent);
 } */
 
-.mobile-only {
+/* .mobile-only {
     display: none;
 }
 
@@ -462,4 +475,4 @@
     .desktop-only {
         display: none;
     }
-}
+} */

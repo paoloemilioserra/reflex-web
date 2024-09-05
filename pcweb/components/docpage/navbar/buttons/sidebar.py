@@ -17,7 +17,8 @@ def social_menu_item(
 ) -> rx.Component:
     return rx.link(
         get_icon(icon=icon, class_name="!text-slate-9"),
-        class_name="flex justify-center items-center gap-2 hover:bg-slate-3 px-4 py-[0.875rem] w-full h-[47px] transition-bg overflow-hidden" + (" border-slate-4 border-x border-solid border-y-0" if border else ""),
+        class_name="flex justify-center items-center gap-2 hover:bg-slate-3 px-4 py-[0.875rem] w-full h-[47px] transition-bg overflow-hidden"
+        + (" border-slate-4 border-x border-solid border-y-0" if border else ""),
         href=url,
         is_external=True,
     )
@@ -84,22 +85,11 @@ def navbar_sidebar_drawer(trigger) -> rx.Component:
                             ),
                         ),
                         on_click=toggle_color_mode,
-                        class_name="flex flex-row justify-center items-center px-3 py-[0.125rem] w-full h-[47px]",
+                        class_name="flex flex-row justify-center items-center px-3 py-0.5 w-full h-[47px]",
                     ),
                     class_name="flex flex-col items-center bg-slate-1 w-full h-full",
                 ),
-                style={
-                    "@media (min-width: 0em)": {
-                        "inset": "48px auto auto auto",
-                    },
-                    "@media (min-width: 30em)": {
-                        "inset": "64px auto auto auto",
-                    },
-                    "@media (min-width: 48em)": {
-                        "inset": "64px auto auto auto",
-                    },
-                },
-                class_name="!bg-transparent w-full h-full !outline-none",
+                class_name="!bg-transparent w-full h-full !outline-none !top-[47px]",
             )
         ),
         direction="bottom",
@@ -111,20 +101,20 @@ def docs_sidebar_drawer(sidebar: rx.Component, trigger) -> rx.Component:
         rx.drawer.trigger(trigger, as_child=True),
         rx.drawer.portal(
             rx.drawer.overlay(
-                class_name="bg-[rgba(0,0,0,0.1)] blur-[4px]",
+                class_name="!bg-[rgba(0,0,0,0.1)] backdrop-blur-[4px]",
             ),
             rx.drawer.content(
                 rx.box(
                     rx.drawer.close(
                         rx.box(
-                            class_name="top-[-12px] absolute flex-shrink-0 bg-slate-9 rounded-full w-[96px] h-[5px]",
+                            class_name="absolute left-1/2 transform -translate-x-1/2 top-[-12px] flex-shrink-0 bg-slate-9 rounded-full w-[96px] h-[5px]",
                         ),
                         as_child=True,
                     ),
                     sidebar,
                     class_name="relative flex flex-col w-full",
                 ),
-                class_name="top-[64px] flex-col !bg-slate-1 rounded-[24px_24px_0px_0px] w-full h-full !outline-none",
+                class_name="!top-[4rem] flex-col !bg-slate-1 rounded-[24px_24px_0px_0px] w-full h-full !outline-none",
             ),
         ),
     )

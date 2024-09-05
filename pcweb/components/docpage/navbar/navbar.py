@@ -259,7 +259,7 @@ def new_menu_trigger(title: str, url: str = None, active_str: str = "") -> rx.Co
     return new_nav_menu.trigger(
         rx.text(
             title,
-            class_name="p-[1.406rem_0px] font-small text-slate-9 hover:text-slate-11 transition-color",
+            class_name="p-[1.406rem_0px] font-small text-slate-9 hover:text-slate-11 transition-color desktop-only",
         )
     )
 
@@ -268,15 +268,13 @@ def logo() -> rx.Component:
     return rx.link(
         rx.color_mode_cond(
             rx.image(
-                src="/logos/light/reflex.svg",
-                alt="Reflex Logo",
+                src="/logos/light/reflex.svg", alt="Reflex Logo", class_name="shrink-0"
             ),
             rx.image(
-                src="/logos/dark/reflex.svg",
-                alt="Reflex Logo",
+                src="/logos/dark/reflex.svg", alt="Reflex Logo", class_name="shrink-0"
             ),
         ),
-        class_name="flex flex-shrink-0 mr-5",
+        class_name="flex shrink-0 mr-5",
         href="/",
     )
 
@@ -308,7 +306,7 @@ def new_component_section() -> rx.Component:
             new_nav_menu.item(
                 link_item("Hosting", hosting.deploy_quick_start.path, "hosting"),
             ),
-            class_name="desktop-only flex flex-row items-center gap-0 md:gap-7 m-0 h-full list-none",
+            class_name="desktop-only flex flex-row items-center gap-0 lg:gap-7 m-0 h-full list-none",
         ),
         new_nav_menu.list(
             rx.box(
@@ -319,7 +317,7 @@ def new_component_section() -> rx.Component:
                     github(),
                 ),
                 align_items="center",
-                class_name="flex md:flex-row flex-row-reverse items-center gap-2 m-0 h-full",
+                class_name="flex lg:flex-row flex-row-reverse items-center gap-2 m-0 h-full",
             ),
             new_nav_menu.item(
                 new_discord(),
@@ -333,7 +331,7 @@ def new_component_section() -> rx.Component:
                 rx.link(
                     button(
                         "Get Started",
-                        class_name="!h-8 !font-small-smbold !rounded-[0.625rem]",
+                        class_name="!h-8 !font-small-smbold !rounded-[0.625rem] whitespace-nowrap",
                     ),
                     underline="none",
                     href=getting_started.introduction.path,
@@ -344,7 +342,7 @@ def new_component_section() -> rx.Component:
                 navbar_sidebar_button(),
                 class_name="mobile-only",
             ),
-            class_name="flex md:flex-row flex-row-reverse gap-2 m-0 h-full list-none items-center",
+            class_name="flex flex-row gap-2 m-0 h-full list-none items-center",
         ),
         rx.box(
             new_nav_menu.viewport(),
@@ -356,5 +354,5 @@ def new_component_section() -> rx.Component:
 def navbar() -> rx.Component:
     return rx.el.header(
         new_component_section(),
-        class_name="top-0 z-[9999] fixed flex flex-row items-center gap-12 bg-slate-1 shadow-[inset_0_-1px_0_0_var(--c-slate-4)] px-4 md:px-6 w-screen h-[48px] md:h-[65px]",
+        class_name="top-0 z-[9999] fixed flex flex-row items-center gap-12 bg-slate-1 shadow-[inset_0_-1px_0_0_var(--c-slate-4)] px-4 lg:px-6 w-screen h-[48px] lg:h-[65px]",
     )

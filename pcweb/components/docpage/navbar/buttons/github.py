@@ -14,7 +14,7 @@ def github() -> rx.Component:
                 f"{GITHUB_STARS/1000:.1f}K",
                 class_name="font-small",
             ),
-            class_name="text-slate-9 flex-row gap-2 hover:bg-slate-3 flex justify-center rounded-[10px] border border-slate-5 bg-slate-1 transition-bg cursor-pointer shadow-large py-[0.125rem] px-3 items-center h-8",
+            class_name="text-slate-9 flex-row gap-2 hover:bg-slate-3 flex justify-center rounded-[10px] border border-slate-5 bg-slate-1 transition-bg cursor-pointer shadow-large py-0.5 px-3 items-center h-8",
         ),
         href=GITHUB_URL,
         underline="none",

@@ -61,7 +61,7 @@ def webpage(
                 rx.el.main(
                     contents(*children, **props),
                     rx.box(class_name="flex-grow"),
-                    class_name="mt-24 md:mt-52 w-full z-[1]",
+                    class_name="mt-24 lg:mt-52 w-full z-[1]",
                 ),
                 bottom_section(),
                 bottom_logo(),

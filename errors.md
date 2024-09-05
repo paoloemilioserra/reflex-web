@@ -53,11 +53,11 @@ def error_message(heading: str, error_code: str, solution: rx.Component, error_t
                     ),
                     rx.chakra.spacer(),
                     rx.chakra.accordion_icon(color="var(--c-slate-9)"),
-                    class_name="!bg-transparent !hover:bg-transparent !p-4 md:!p-6 gap-4 md:gap-32",
+                    class_name="!bg-transparent !hover:bg-transparent !p-4 lg:!p-6 gap-4 lg:gap-32",
                 ),
                 rx.chakra.accordion_panel(
                     *solution,
-                    class_name="!p-[0rem_1rem_1rem_1rem] md:!p-[0rem_1.5rem_1.5rem_1.5rem] font-small text-slate-11 text-start flex flex-col gap-3 [&>code]:!font-code",
+                    class_name="!p-[0rem_1rem_1rem_1rem] lg:!p-[0rem_1.5rem_1.5rem_1.5rem] font-small text-slate-11 text-start flex flex-col gap-3 [&>code]:!font-code",
                 ),
                 class_name="border-none",
             ),

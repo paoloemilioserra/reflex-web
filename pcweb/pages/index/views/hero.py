@@ -55,5 +55,5 @@ def hero() -> rx.Component:
         ),
         # Demo section
         demo_section(),
-        class_name="flex flex-col justify-center items-center gap-8 mx-auto px-4 md:px-6 w-full max-w-6xl",
+        class_name="flex flex-col justify-center items-center gap-8 mx-auto px-4 lg:px-6 w-full max-w-6xl",
     )

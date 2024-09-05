@@ -95,7 +95,7 @@ def more_posts(current_post: dict) -> rx.Component:
         ),
         rx.box(
             *posts,
-            class_name="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-[320px] w-full mb-4 blog-grid",
+            class_name="gap-6 grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-[320px] w-full mb-4 blog-grid",
         ),
         class_name="flex flex-col gap-10 mt-20",
     )
@@ -111,7 +111,7 @@ def page(document, route) -> rx.Component:
                 rx.box(
                     get_icon("arrow_right", class_name="rotate-180"),
                     "Back to Blog",
-                    class_name="box-border flex justify-center items-center gap-2 border-slate-5 bg-slate-1 hover:bg-slate-3 -mb-4 px-3 py-[0.125rem] border rounded-full font-small text-slate-9 transition-bg cursor-pointer",
+                    class_name="box-border flex justify-center items-center gap-2 border-slate-5 bg-slate-1 hover:bg-slate-3 -mb-4 px-3 py-0.5 border rounded-full font-small text-slate-9 transition-bg cursor-pointer",
                 ),
                 underline="none",
                 href="/blog",

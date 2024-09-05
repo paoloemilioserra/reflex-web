@@ -44,7 +44,7 @@ def community_component_grid() -> rx.Component:
                 lambda app: community_code_card(app=app),
             ),
         ),
-        class_name="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-[320px] w-full",
+        class_name="gap-6 grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-[320px] w-full",
     )
 
 
