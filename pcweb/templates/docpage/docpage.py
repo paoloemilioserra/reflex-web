@@ -15,28 +15,16 @@ from pcweb.styles.shadows import shadows
 import pcweb.templates.docpage.styles as st
 from reflex.components.radix.themes.base import LiteralAccentColor
 from pcweb.constants import GITHUB_URL, TWITTER_URL, DISCORD_URL
-
-
-
+from pcweb.components.button import button
 
 
 def footer_link(text: str, href: str):
     return rx.link(
         text,
-        _hover={
-            "color": c_color("slate", 11),
-        },
-        style={
-            ":hover": {
-                "color": c_color("slate", 11),
-            }
-        },
-        class_name="font-small text-slate-9 transition-color",
+        class_name="font-small text-slate-9 hover:!text-slate-11 transition-color",
         href=href,
         underline="none",
     )
-
-
 
 
 def footer_link_flex(heading: str, links):
@@ -213,16 +201,12 @@ def feedback_button() -> rx.Component:
     )
 
 
-def link_pill(text, href):
+def link_pill(text: str, href: str) -> rx.Component:
     return rx.link(
         text,
-        style=st.pill_style,
         href=href,
         underline="none",
-        _hover={
-            "background-color": c_color("slate", 3),
-            "color": c_color("slate", 9),
-        },
+        class_name="desktop-only flex flex-row justify-center items-center gap-2 lg:border-slate-5 bg-slate-3 lg:bg-slate-1 hover:bg-slate-3 shadow-none lg:shadow-large px-3 py-[0.125rem] lg:border lg:border-solid border-none rounded-lg lg:rounded-full w-auto font-small font-small text-slate-9 !hover:text-slate-11 hover:!text-slate-9 truncate whitespace-nowrap transition-bg transition-color cursor-pointer",
     )
 
 
@@ -241,7 +225,7 @@ def social_menu_item(
 ) -> rx.Component:
     return rx.link(
         rx.box(
-            get_icon(icon=icon, color=c_color("slate", 9)),
+            get_icon(icon=icon, class_name="!text-slate-9"),
             style={
                 "display": "flex",
                 "padding": "4px 12px",
@@ -268,44 +252,44 @@ def social_menu_item(
     )
 
 
-def menu_socials() -> rx.Component:
-    return rx.box(
-        rx.hstack(
-            social_menu_item("github", GITHUB_URL),
-            social_menu_item("twitter", TWITTER_URL, border=True),
-            social_menu_item("discord", DISCORD_URL),
-            gap="0px",
-            width="auto",
-            align="center",
-        ),
-        style={
-            "border-radius": ["8px", "8px", "20px", "20px", "20px"],
-            "overflow": "hidden",
-            "height": "auto",
-            "border": [
-                "none",
-                "none",
-                f"1px solid {c_color('slate', 5)}",
-                f"1px solid {c_color('slate', 5)}",
-                f"1px solid {c_color('slate', 5)}",
-            ],
-            "background": [
-                c_color("slate", 3),
-                c_color("slate", 3),
-                c_color("slate", 1),
-                c_color("slate", 1),
-                c_color("slate", 1),
-            ],
-            "box-shadow": [
-                "none",
-                "none",
-                shadows["large"],
-                shadows["large"],
-                shadows["large"],
-            ],
-        },
-        width=["100%", "100%", "auto", "auto", "auto"],
-    )
+# def menu_socials() -> rx.Component:
+#     return rx.box(
+#         rx.hstack(
+#             social_menu_item("github", GITHUB_URL),
+#             social_menu_item("twitter", TWITTER_URL, border=True),
+#             social_menu_item("discord", DISCORD_URL),
+#             gap="0px",
+#             width="auto",
+#             align="center",
+#         ),
+#         style={
+#             "border-radius": ["8px", "8px", "20px", "20px", "20px"],
+#             "overflow": "hidden",
+#             "height": "auto",
+#             "border": [
+#                 "none",
+#                 "none",
+#                 f"1px solid {c_color('slate', 5)}",
+#                 f"1px solid {c_color('slate', 5)}",
+#                 f"1px solid {c_color('slate', 5)}",
+#             ],
+#             "background": [
+#                 c_color("slate", 3),
+#                 c_color("slate", 3),
+#                 c_color("slate", 1),
+#                 c_color("slate", 1),
+#                 c_color("slate", 1),
+#             ],
+#             "box-shadow": [
+#                 "none",
+#                 "none",
+#                 shadows["large"],
+#                 shadows["large"],
+#                 shadows["large"],
+#             ],
+#         },
+#         width=["100%", "100%", "auto", "auto", "auto"],
+#     )
 
 
 @rx.memo
@@ -320,87 +304,38 @@ def docpage_footer(path: str):
     from pcweb.pages.errors import errors
     from pcweb.signup import IndexState
     from pcweb.constants import ROADMAP_URL, GITHUB_DISCUSSIONS_URL
+    from pcweb.views.footer import newsletter_form, menu_socials
 
     return rx.el.footer(
-        rx.flex(
-            rx.flex(
+        rx.box(
+            rx.box(
                 rx.text(
                     "Did you find this useful?",
-                    color=[
-                        c_color("slate", 11),
-                        c_color("slate", 11),
-                        c_color("slate", 9),
-                        c_color("slate", 9),
-                        c_color("slate", 9),
-                    ],
-                    style={**small},
-                    white_space="nowrap",
+                    class_name="font-small text-slate-11 lg:text-slate-9 whitespace-nowrap",
                 ),
                 feedback_button(),
-                width="100%",
-                padding=["16px", "16px", "0px", "0px", "0px"],
-                align_items="center",
-                border_radius="8px",
-                gap=["12px", "12px", "16px", "16px", "16px"],
-                background_color=[
-                    c_color("slate", 3),
-                    c_color("slate", 3),
-                    "transparent",
-                    "transparent",
-                    "transparent",
-                ],
-                flex_direction=["column", "column", "row", "row", "row"],
+                class_name="flex lg:flex-row flex-col items-center gap-3 lg:gap-4 bg-slate-3 lg:bg-transparent p-4 lg:p-0 rounded-lg w-full",
             ),
-            rx.flex(
-                rx.desktop_only(
-                    link_pill(
-                        "Raise an issue",
-                        href=f"https://github.com/reflex-dev/reflex-web/issues/new?title=Issue with reflex.dev documentation&amp;body=Path: {path}",
-                    )
+            rx.box(
+                link_pill(
+                    "Raise an issue",
+                    href=f"https://github.com/reflex-dev/reflex-web/issues/new?title=Issue with reflex.dev documentation&amp;body=Path: {path}",
                 ),
-                rx.desktop_only(
-                    link_pill(
-                        "Edit this page",
-                        f"https://github.com/reflex-dev/reflex-web/tree/main{path}.md",
-                    ),
+                link_pill(
+                    "Edit this page",
+                    f"https://github.com/reflex-dev/reflex-web/tree/main{path}.md",
                 ),
-                display=["none", "none", "flex", "flex", "flex"],
-                gap="8px",
+                class_name="desktop-only flex flex-row items-center gap-2 w-auto",
             ),
-            padding_top=["0px", "0px", "32px", "32px"],
-            padding_bottom=["24px", "24px", "32px", "32px"],
-            justify_content=["center", "center", "center", "space-between"],
-            align_items="center",
-            width="100%",
+            class_name="flex flex-row justify-center lg:justify-between items-center border-slate-4 border-y-0 lg:border-y pt-0 lg:pt-8 pb-6 lg:pb-8 w-full",
         ),
-        rx.flex(
-            rx.flex(
-                menu_socials(),
-                gap="8px",
-                width=["100%", "100%", "auto", "auto", "auto"],
-                margin_bottom=["24px", "24px", "0px", "0px", "0px"],
-                display=["flex", "flex", "none", "none", "none"],
-            ),
-            # rx.flex(
-            #     link_pill("Home", "/"),
-            #     link_pill("Gallery", gallery.path),
-            #     link_pill("Changelog", changelog.path),
-            #     link_pill("Introduction", getting_started.introduction.path),
-            #     link_pill("Hosting", hosting.deploy_quick_start.path),
-            #     gap="8px",
-            #     flex_direction=["column", "column", "row", "row", "row"],
-            #     flex_shrink=0,
-            #     width=["100%", "100%", "auto", "auto", "auto"],
-            #     display=["none", "none", "none", "none", "none"], # Replaced for the new footer layout
-            # ),
-            justify="between",
-            padding_y="0px",
-            align_items="center",
-            width="100%",
-            flex_direction=["column", "column", "row", "row", "row"],
-        ),
-        rx.flex(
-            rx.flex(
+        # rx.box(
+        #     menu_socials(),
+        #     class_name="mobile-only",
+        # ),
+        rx.box(newsletter_form(), class_name="pt-8 pb-10"),
+        rx.box(
+            rx.box(
                 footer_link_flex(
                     "Links",
                     [
@@ -428,131 +363,19 @@ def docpage_footer(path: str):
                         footer_link("Forum", GITHUB_DISCUSSIONS_URL),
                     ],
                 ),
-                flex_wrap="wrap",
-                gap="48px",
-                width="100%",
-                justify_content="space-between",
+                class_name="flex flex-wrap justify-between gap-12 w-full",
             ),
-            rx.flex(
-                rx.el.h4(
-                    "Join Newsletter",
-                    class_name="font-semibold text-slate-12 text-sm tracking-[-0.01313rem]",
-                ),
-                rx.text(
-                    "Get the latest updates and news about Reflex.",
-                    style=small,
-                    color=c_color("slate", 9),
-                ),
-                rx.cond(
-                    IndexState.signed_up,
-                    rx.flex(
-                        rx.hstack(
-                            rx.icon(
-                                tag="circle-check",
-                                size=14,
-                                color=c_color("violet", 9),
-                            ),
-                            rx.text(
-                                "Thanks for subscribing!",
-                                style=small_semibold,
-                                color=c_color("slate", 11),
-                            ),
-                            gap="8px",
-                            align_items="center",
-                        ),
-                        rx.el.button(
-                            "Sign up for another email.",
-                            style=small,
-                            color=c_color("slate", 9),
-                            background_color=c_color("slate", 3),
-                            border_radius="10px",
-                            padding="8px 14px",
-                            cursor="pointer",
-                            _hover={"background_color": c_color("slate", 4)},
-                            on_click=IndexState.signup_for_another_user,
-                        ),
-                        gap="8px",
-                        flex_wrap="wrap",
-                        flex_direction="column",
-                    ),
-                    rx.form(
-                        rx.flex(
-                            rx.el.input(
-                                placeholder="Your email",
-                                name="input_email",
-                                type="email",
-                                padding="8px 12px",
-                                color=c_color("slate", 11),
-                                background_color=c_color("white", 1),
-                                border_radius="10px",
-                                border=f"1px solid {c_color('slate', 5)}",
-                                box_sizing="border-box",
-                                outline="none",
-                                style={
-                                    "&::placeholder": {"color": c_color("slate", 9)},
-                                },
-                                _focus={
-                                    "outline": f"2px solid {c_color('violet', 9)}",
-                                },
-                                **small,
-                            ),
-                            rx.form.submit(
-                                rx.el.button(
-                                    "Subscribe",
-                                    display="flex",
-                                    padding="8px 14px",
-                                    justify_content="center",
-                                    background_color=c_color("slate", 4),
-                                    border_radius="10px",
-                                    align_items="center",
-                                    color=c_color("slate", 9),
-                                    cursor="pointer",
-                                    _hover={"background_color": c_color("slate", 5)},
-                                    transition="background 0.075s ease-out",
-                                    **small_semibold,
-                                ),
-                                as_child=True,
-                            ),
-                            gap="8px",
-                            align_items="center",
-                        ),
-                        on_submit=IndexState.signup,
-                    ),
-                ),
-                flex_direction="column",
-                align_items="start",
-                gap="16px",
-            ),
-            rx.flex(
+            rx.box(
                 rx.text(
                     "Copyright © 2024 Pynecone, Inc.",
-                    style=small,
-                    color=c_color("slate", 9),
+                    class_name="font-small text-slate-9",
                 ),
-                rx.flex(
-                    menu_socials(),
-                    gap="8px",
-                    width=["100%", "100%", "auto", "auto", "auto"],
-                    margin_bottom=["0px", "0px", "8px", "8px", "8px"],
-                    display=["none", "none", "flex", "flex", "flex"],
-                ),
-                justify_content="space-between",
-                flex_direction="row",
-                align_items="center",
-                width="100%",
+                menu_socials(),
+                class_name="flex flex-row justify-between items-center w-full",
             ),
-            justify_content="space-between",
-            flex_direction="column",
-            width="100%",
-            gap="40px",
-            border_top=f"1px solid {c_color('slate', 4)}",
-            padding_y=["24px", "24px", "32px", "32px", "32px"],
-            display="flex",
+            class_name="flex flex-col justify-between gap-10 py-6 lg:py-8 w-full",
         ),
-        display="flex",
-        max_width=["100%", "auto"],
-        padding_bottom=["16px", "16px", "32px", "32px", "32px"],
-        flex_direction="column",
+        class_name="flex flex-col max-w-full lg:max-w-auto",
     )
 
 
@@ -617,7 +440,7 @@ def breadcrumb(path: str, nav_sidebar: rx.Component):
         breadcrumbs.append(
             rx.text(
                 segments[i],
-                class_name="text-slate-9 font-small"
+                class_name="font-small text-slate-9"
                 + (" truncate" if i == len(segments) - 1 else ""),
             )
         )
@@ -639,7 +462,7 @@ def breadcrumb(path: str, nav_sidebar: rx.Component):
             )
 
     # Return the list of breadcrumb items with separators
-    return rx.flex(
+    return rx.box(
         rx.box(
             *breadcrumbs,
             class_name="flex flex-row items-center gap-[5px] md:gap-4 overflow-hidden",
@@ -778,24 +601,26 @@ def docpage(
                     else prev.names
                 )
                 links.append(
-                    rx.link(
-                        rx.box(
-                            get_icon(icon="arrow_right", transform="rotate(180deg)"),
-                            next_prev_name,
-                            class_name="flex flex-row justify-center md:justify-start items-center gap-2 rounded-lg w-full",
+                    rx.box(
+                        rx.link(
+                            rx.box(
+                                get_icon(
+                                    icon="arrow_right", transform="rotate(180deg)"
+                                ),
+                                "Back",
+                                class_name="flex flex-row justify-center md:justify-start items-center gap-2 rounded-lg w-full",
+                            ),
+                            underline="none",
+                            href=prev.link,
+                            class_name="px-1.5 md:px-0 py-0.5 md:py-0 rounded-lg md:w-auto font-small text-slate-9 hover:!text-slate-11 transition-color",
                         ),
-                        underline="none",
-                        href=prev.link,
-                        _hover={"color": "var(--c-slate-11)"},
-                        style={
-                            ":hover": {"color": c_color("slate", 11)},
-                        },
-                        class_name="bg-slate-3 md:bg-transparent px-1.5 md:px-0 py-0.5 md:py-0 rounded-lg md:w-auto font-small text-slate-9 hover:text-slate-11 transition-color",
+                        rx.text(next_prev_name, class_name="font-smbold text-slate-12"),
+                        class_name="flex flex-col justify-start gap-1",
                     )
                 )
             else:
                 links.append(rx.fragment())
-
+            links.append(rx.spacer())
             # Create the next component link.
             if next:
                 next_prev_name = (
@@ -804,20 +629,20 @@ def docpage(
                     else next.names
                 )
                 links.append(
-                    rx.link(
-                        rx.box(
-                            next_prev_name,
-                            get_icon(icon="arrow_right"),
-                            class_name="flex flex-row justify-center md:justify-end items-center gap-2 bg-slate-3 md:bg-transparent px-1.5 md:px-0 py-0.5 md:py-0 rounded-lg w-full md:w-auto",
+                    rx.box(
+                        rx.link(
+                            rx.box(
+                                "Next",
+                                get_icon(icon="arrow_right"),
+                                class_name="flex flex-row justify-center md:justify-end items-center gap-2 px-1.5 md:px-0 py-0.5 md:py-0 rounded-lg w-full md:w-auto",
+                            ),
+                            underline="none",
+                            href=next.link,
+                            class_name="w-full md:w-auto font-small text-slate-9 hover:!text-slate-11 transition-color",
                         ),
-                        underline="none",
-                        href=next.link,
-                        _hover={"color": "var(--c-slate-11)"},
-                        style={
-                            ":hover": {"color": "var(--c-slate-11)"},
-                        },
-                        class_name="w-full md:w-auto font-small text-slate-9 hover:text-slate-11 transition-color",
-                    ),
+                        rx.text(next_prev_name, class_name="font-smbold text-slate-12"),
+                        class_name="flex flex-col justify-start gap-1 px-4 py-2",
+                    )
                 )
             else:
                 links.append(rx.fragment())
@@ -832,33 +657,28 @@ def docpage(
                 toc, comp = comp
 
             # Return the templated page.
-            return rx.flex(
+            return rx.box(
                 navbar(),
                 rx.el.main(
                     rx.box(
                         sidebar,
-                        class_name="md:flex hidden mt-[105px] w-[24%] h-full shrink-0",
+                        class_name="md:flex hidden mt-[105px] w-full max-w-[17.5rem] h-full shrink-0",
                     ),
                     rx.box(
                         rx.box(
                             breadcrumb(path=path, nav_sidebar=nav_sidebar),
-                            class_name="px-0 md:px-12 lg:px-24",
                         ),
                         rx.box(
                             rx.el.article(comp),
                             rx.el.nav(
                                 *links,
-                                class_name="flex flex-row justify-between gap-2 mt-8 md:mt-10 mb-6 md:mb-12",
+                                class_name="flex flex-row gap-2 mt-8 md:mt-10 mb-6 md:mb-12",
                             ),
                             docpage_footer(path=path),
-                            class_name="mt-[105px] sm:mt-[145px] md:mt-0 px-4 sm:px-6 md:px-12 lg:px-24",
+                            class_name="mt-[105px] sm:mt-[145px] md:mt-0",
                         ),
                         class_name="h-full"
-                        + (
-                            " w-full md:w-[90%] lg:w-[70%] xl:w-[60%]"
-                            if right_sidebar
-                            else ""
-                        ),
+                        + (" w-full max-w-[85rem]" if right_sidebar else ""),
                     ),
                     rx.el.nav(
                         rx.box(
@@ -872,20 +692,7 @@ def docpage(
                                         rx.el.li(
                                             rx.link(
                                                 text,
-                                                style={
-                                                    "transition": "color 0.035s ease-out",
-                                                    "color": c_color("slate", 9),
-                                                    "overflow": "hidden",
-                                                    "text-overflow": "ellipsis",
-                                                    "white-space": "nowrap",
-                                                    **small,
-                                                    ":hover": {
-                                                        "color": c_color("slate", 11),
-                                                    },
-                                                },
-                                                _hover={
-                                                    "color": c_color("slate", 11),
-                                                },
+                                                class_name="font-small text-slate-9 hover:!text-slate-11 truncate transition-color",
                                                 underline="none",
                                                 href=path
                                                 + "#"
@@ -897,17 +704,7 @@ def docpage(
                                             rx.list_item(
                                                 rx.link(
                                                     text,
-                                                    style={
-                                                        ":hover": {
-                                                            "color": c_color(
-                                                                "slate", 11
-                                                            ),
-                                                        },
-                                                    },
-                                                    _hover={
-                                                        "color": c_color("slate", 11),
-                                                    },
-                                                    class_name="font-small text-slate-9 truncate transition-color",
+                                                    class_name="font-small text-slate-9 hover:!text-slate-11 truncate transition-color",
                                                     underline="none",
                                                     href=path
                                                     + "#"
@@ -918,18 +715,8 @@ def docpage(
                                             else rx.el.li(
                                                 rx.link(
                                                     text,
-                                                    style={
-                                                        ":hover": {
-                                                            "color": c_color(
-                                                                "slate", 11
-                                                            ),
-                                                        },
-                                                    },
-                                                    _hover={
-                                                        "color": c_color("slate", 11),
-                                                    },
                                                     underline="none",
-                                                    class_name="pl-6 font-small text-slate-9 truncate transition-color",
+                                                    class_name="pl-6 font-small text-slate-9 hover:!text-slate-11 truncate transition-color",
                                                     href=path
                                                     + "#"
                                                     + text.lower().replace(" ", "-"),
@@ -941,13 +728,12 @@ def docpage(
                                 ],
                                 class_name="flex flex-col gap-4 list-none",
                             ),
-                            padding="14px 8px 0px 8px",
                             class_name="fixed flex flex-col justify-start gap-4 p-[0.875rem_0.5rem_0px_0.5rem] w-full max-w-[280px] max-h-[80vh] overflow-hidden",
                         ),
-                        class_name="mt-[105px] w-[18%] h-full shrink-0"
+                        class_name="mt-[105px] w-full max-w-[17.5rem] h-full shrink-0"
                         + (" hidden xl:flex" if right_sidebar else " hidden"),
                     ),
-                    class_name="flex flex-row mx-auto mt-0 max-w-[110em] h-full min-h-screen",
+                    class_name="flex flex-row justify-center gap-24 mx-auto mt-0 px-6 max-w-[100rem] h-full min-h-screen",
                 ),
                 class_name="flex flex-col justify-center bg-slate-1 w-full",
             )
@@ -1197,7 +983,7 @@ def style_grid(
                             ),
                             on_click=RadixDocState.setvar("color", color),
                             background_color=f"var(--{color}-9)",
-                            class_name="relative cursor-pointer size-[30px] shrink-0 rounded-md"
+                            class_name="relative rounded-md cursor-pointer shrink-0 size-[30px]"
                             + rx.cond(
                                 RadixDocState.color == color,
                                 " border-2 border-gray-12",
@@ -1211,5 +997,5 @@ def style_grid(
                 ),
             ),
         ),
-        class_name="flex flex-col justify-center items-center gap-6 border-slate-4 bg-slate-2 p-6 border rounded-xl mb-4",
+        class_name="flex flex-col justify-center items-center gap-6 border-slate-4 bg-slate-2 mb-4 p-6 border rounded-xl",
     )

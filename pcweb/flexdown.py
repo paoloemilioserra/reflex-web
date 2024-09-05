@@ -67,7 +67,15 @@ class AlertBlock(flexdown.blocks.MarkdownBlock):
             "error": "red",
         }
 
+        icons = {
+            "info": "info",
+            "success": "circle_check",
+            "warning": "triangle_alert",
+            "error": "ban",
+        }
+
         color = colors.get(status, "blue")
+        icon_tag = icons.get("status", "info")
 
         has_content = bool(content.strip())
 
@@ -75,117 +83,59 @@ class AlertBlock(flexdown.blocks.MarkdownBlock):
             return rx.chakra.accordion(
                 rx.chakra.accordion_item(
                     rx.chakra.accordion_button(
-                        rx.hstack(
-                            rx.box(
-                                rx.match(
-                                    status,
-                                    (
-                                        "info",
-                                        rx.icon(
-                                            tag="info", size=18, margin_right=".5em"
-                                        ),
-                                    ),
-                                    (
-                                        "success",
-                                        rx.icon(
-                                            tag="circle_check",
-                                            size=18,
-                                            margin_right=".5em",
-                                        ),
-                                    ),
-                                    (
-                                        "warning",
-                                        rx.icon(
-                                            tag="triangle_alert",
-                                            size=18,
-                                            margin_right=".5em",
-                                        ),
-                                    ),
-                                    (
-                                        "error",
-                                        rx.icon(
-                                            tag="ban", size=18, margin_right=".5em"
-                                        ),
-                                    ),
-                                ),
-                                color=f"{rx.color(color, 11)}",
-                            ),
-                            (
-                                rx.markdown(
-                                    title, margin_y="0px", style=get_code_style(color)
-                                )
-                                if title
-                                else self.render_fn(content=content)
-                            ),
-                            rx.spacer(),
-                            rx.chakra.accordion_icon(color=f"{rx.color(color, 11)}"),
-                            align_items="center",
-                            justify_content="left",
-                            text_align="left",
-                            spacing="2",
-                            width="100%",
+                        rx.icon(
+                            tag=icon_tag,
+                            size=18,
+                            color=rx.color(color, 11),
+                            class_name="shrink-0"
                         ),
-                        padding="0px",
-                        color=f"{rx.color(color, 11)}",
-                        border_radius="12px",
-                        _hover={},
+                        (
+                            rx.markdown(
+                                title, class_name="!my-0 font-base markdown-code"
+                            )
+                            if title
+                            else self.render_fn(content=content)
+                        ),
+                        rx.spacer(),
+                        rx.chakra.accordion_icon(color=rx.color(color, 11)),
+                        class_name="flex items-center gap-4 !bg-transparent hover:!bg-transparent !p-4 md:!p-6 justify-start",
                     ),
                     (
                         rx.chakra.accordion_panel(
-                            markdown(content), padding="0px", margin_top="16px"
+                            markdown(content),
+                            class_name="!p-[0rem_1rem_1rem_1rem] md:!p-[0rem_1.5rem_1.5rem_1.5rem] font-small text-slate-11 text-start [&>code]:!font-code",
                         )
                         if title
                         else rx.fragment()
                     ),
-                    border_radius="12px",
-                    padding=["16px", "24px"],
-                    background_color=f"{rx.color(color, 3)}",
-                    border=f"1px solid {rx.color(color, 4)}",
-                    allow_toggle=True,
+                    color=rx.color(color, 11),
+                    class_name="border-none",
                 ),
                 is_disabled=True,
                 allow_toggle=True,
-                width="100%",
-                margin_bottom="16px",
+                background_color=rx.color(color, 3),
+                border=f"1px solid {rx.color(color, 4)}",
+                class_name="mb-4 rounded-xl w-full",
             )
         else:
-            return rx.vstack(
-                rx.hstack(
-                    rx.box(
-                        rx.match(
-                            status,
-                            ("info", rx.icon(tag="info", size=18, margin_right=".5em")),
-                            (
-                                "success",
-                                rx.icon(
-                                    tag="circle_check", size=18, margin_right=".5em"
-                                ),
-                            ),
-                            (
-                                "warning",
-                                rx.icon(
-                                    tag="triangle_alert", size=18, margin_right=".5em"
-                                ),
-                            ),
-                            ("error", rx.icon(tag="ban", size=18, margin_right=".5em")),
-                        ),
-                        color=f"{rx.color(color, 11)}",
+            return rx.box(
+                rx.box(
+                    rx.icon(
+                        tag=icon_tag,
+                        size=18,
+                        color=rx.color(color, 11),
+                        class_name="shrink-0"
                     ),
                     rx.markdown(
                         title,
-                        color=f"{rx.color(color, 11)}",
-                        margin_y="0px",
-                        style=get_code_style(color),
+                        color=rx.color(color, 11),
+                        class_name="!my-0 font-base markdown-code",
                     ),
-                    align_items="center",
-                    width="100%",
-                    spacing="1",
-                    padding=["16px", "24px"],
+                    class_name="flex items-center gap-4 !p-4 md:!p-6",
                 ),
                 border=f"1px solid {rx.color(color, 4)}",
                 background_color=f"{rx.color(color, 3)}",
-                border_radius="12px",
-                margin_bottom="16px",
+                class_name="mb-4 rounded-xl w-full",
             )
 
 
@@ -215,7 +165,7 @@ class SectionBlock(flexdown.blocks.Block):
                     rx.text(
                         rx.text(
                             header,
-                            class_name="font-md text-slate-12 font-bold tracking-[-0.0225rem]",
+                            class_name="font-bold font-md text-slate-12 tracking-[-0.0225rem]",
                         ),
                         width="100%",
                     ),
@@ -347,49 +297,31 @@ class VideoBlock(flexdown.blocks.MarkdownBlock):
         return rx.chakra.accordion(
             rx.chakra.accordion_item(
                 rx.chakra.accordion_button(
-                    rx.hstack(
-                        (
-                            rx.markdown(
-                                title,
-                                margin_y="0px",
-                                style=get_code_style(color),
-                            )
-                            if title
-                            else rx.markdown("Video Description")
-                        ),
-                        rx.spacer(),
-                        rx.chakra.accordion_icon(color=f"{rx.color(color, 11)}"),
-                        align_items="center",
-                        justify_content="left",
-                        text_align="left",
-                        spacing="2",
-                        width="100%",
+                    (
+                        rx.markdown(title, class_name="!my-0 font-base markdown-code text-blue-11")
+                        if title
+                        else rx.markdown("Video Description")
                     ),
-                    padding="0px",
-                    color=f"{rx.color(color, 11)}",
-                    _hover={},
+                    rx.spacer(),
+                    rx.chakra.accordion_icon(color=rx.color(color, 11)),
+                    class_name="flex items-center gap-4 !bg-transparent hover:!bg-transparent !p-4 md:!p-6 justify-start",
                 ),
                 rx.chakra.accordion_panel(
                     rx.video(
                         url=url,
+                        height="500px", 
                         width="100%",
-                        height="500px",
-                        border_radius="10px",
-                        overflow="hidden",
+                        class_name="rounded-xl overflow-hidden",
                     ),
-                    margin_top="16px",
-                    padding="0px",
+                    class_name="!p-[0rem_1rem_1rem_1rem] md:!p-[0rem_1.5rem_1.5rem_1.5rem]",
                 ),
-                border_radius="12px",
-                border=f"1px solid {rx.color(color, 4)}",
-                background_color=f"{rx.color(color, 3)}",
-                allow_toggle=True,
-                padding=["16px", "24px"],
+                class_name="border-none",
             ),
-            margin_bottom="16px",
             is_disabled=True,
             allow_toggle=True,
-            width="100%",
+            background_color=rx.color(color, 3),
+            border=f"1px solid {rx.color(color, 4)}",
+            class_name="mb-4 rounded-xl w-full",
         )
 
 

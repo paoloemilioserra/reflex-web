@@ -31,7 +31,7 @@ def footer_link_flex(heading: str, links: list[rx.Component]) -> rx.Component:
     return rx.box(
         rx.el.h4(
             heading,
-            class_name="text-slate-12 font-smbold",
+            class_name="font-smbold text-slate-12",
         ),
         *links,
         class_name="flex flex-col gap-4",
@@ -40,26 +40,22 @@ def footer_link_flex(heading: str, links: list[rx.Component]) -> rx.Component:
 
 def social_menu_item(icon: str, url: str = "/", border: bool = False) -> rx.Component:
     return rx.link(
-        rx.box(
-            get_icon(icon=icon),
-            class_name="flex justify-center items-center text-slate-9 gap-2 bg-slate-1 hover:bg-slate-3 p-[0.125rem_0.75rem] transition-bg cursor-pointer overflow-hidden"
-            + (" border-x border-slate-5" if border else ""),
-        ),
-        class_name="flex w-full",
+        get_icon(icon=icon),
+        class_name="flex justify-center items-center gap-2 bg-slate-1 hover:bg-slate-3 p-[0.125rem_0.75rem] text-slate-9 hover:!text-slate-9 transition-bg cursor-pointer overflow-hidden" + (" border-slate-5 border-x border-solid border-y-0" if border else ""),
         href=url,
         is_external=True,
     )
 
 
 def menu_socials() -> rx.Component:
-    return rx.el.div(
+    return rx.box(
         rx.box(
             social_menu_item("github", GITHUB_URL),
             social_menu_item("twitter", TWITTER_URL, border=True),
             social_menu_item("discord", DISCORD_URL),
-            class_name="flex flex-row gap-0 h-full align-center",
+            class_name="flex flex-row h-full align-center",
         ),
-        class_name="md:border-slate-5 bg-slate-3 md:bg-slate-1 shadow-none md:shadow-large md:border rounded-lg md:rounded-[20px] h-6 overflow-hidden",
+        class_name="border-slate-5 bg-slate-1 shadow-large shadow-none border rounded-full h-6 overflow-hidden",
     )
 
 
@@ -87,7 +83,7 @@ def newsletter_form() -> rx.Component:
                             "Thanks for subscribing!",
                             class_name="font-smbold text-slate-11",
                         ),
-                        class_name="flex flex-row gap-2 items-center",
+                        class_name="flex flex-row items-center gap-2",
                     ),
                     rx.el.button(
                         "Sign up for another email",
@@ -131,7 +127,7 @@ def footer() -> rx.Component:
                     "© 2024 Pynecone, Inc.",
                     class_name="font-small text-slate-9",
                 ),
-                class_name="flex flex-col justify-between gap-4 items-start self-stretch",
+                class_name="flex flex-col justify-between items-start gap-4 self-stretch",
             ),
             footer_link_flex(
                 "Links",
@@ -161,7 +157,7 @@ def footer() -> rx.Component:
                 ],
             ),
             newsletter_form(),
-            class_name="flex flex-row flex-wrap justify-between gap-[4.5rem] w-full max-w-[94.5rem] p-[3rem_1rem_3rem_1.5rem]",
+            class_name="flex flex-row flex-wrap justify-between gap-[4.5rem] p-[3rem_1rem_3rem_1.5rem] w-full max-w-[94.5rem]",
         ),
-        class_name="flex border-slate-4 border-t w-full justify-center",
+        class_name="flex justify-center border-slate-4 border-t w-full",
     )

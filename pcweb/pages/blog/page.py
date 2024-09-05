@@ -145,7 +145,7 @@ def page(document, route) -> rx.Component:
             ),
             rx.box(
                 xd.render(document, "blog.md"),
-                class_name="flex flex-col gap-4 w-full max-w-2xl markdown-code",
+                class_name="flex flex-col gap-4 w-full max-w-2xl",
             ),
             more_posts(meta),
             class_name="flex flex-col justify-center items-center gap-12 max-w-full",

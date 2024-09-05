@@ -2,7 +2,6 @@ import reflex as rx
 from pcweb.components.button import button
 from pcweb.signup import IndexState
 
-
 def newsletter() -> rx.Component:
     return rx.el.section(
         rx.box(
@@ -31,11 +30,6 @@ def newsletter() -> rx.Component:
                     ),
                     class_name="flex flex-row items-center gap-2",
                 ),
-                # rx.el.button(
-                #     "Sign up for another email",
-                #     class_name="bg-slate-3 hover:bg-slate-4 px-3 py-2 rounded-[10px] font-small text-slate-9 cursor-pointer",
-                #     on_click=IndexState.signup_for_another_user,
-                # ),
                 button(
                     "Sign up for another email",
                     variant="secondary",

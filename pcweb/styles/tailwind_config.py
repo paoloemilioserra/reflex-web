@@ -5,7 +5,7 @@ tw_config = {
     "darkMode": "class",
     "theme": {
         "fontFamily": {
-            "code": ["Source Code Pro", "monospace"],
+            "code": ["JetBrains Mono", "monospace"],
         },
         "colors": {**radix_colors_dict, **custom_colors_dict, "transparent": "transparent"},
         "boxShadow": {

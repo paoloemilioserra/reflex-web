@@ -135,7 +135,7 @@ def faq_item(question: str, answer: str, index: int):
                     ),
                     rx.chakra.spacer(),
                     rx.chakra.accordion_icon(color="var(--c-slate-9)"),
-                    class_name="!bg-transparent !hover:bg-transparent !p-4 md:!p-6",
+                    class_name="!bg-transparent hover:!bg-transparent !p-4 md:!p-6",
                 ),
                 rx.chakra.accordion_panel(
                     answer,

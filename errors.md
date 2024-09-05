@@ -23,9 +23,9 @@ def code_block_error(code: str):
         rx.code_block(
             code,
             language="python",
-            class_name="!bg-transparent text-slate-12 !p-4 md:!p-5 !m-0 [&>code]:!font-code [&>code]:!bg-transparent",
+            class_name="code-block !bg-slate-1",
         ),
-        class_name="p-2 rounded-lg border border-slate-5 bg-slate-1 relative w-full !font-code",
+        # class_name="!font-code",
     )
 
 @rx.memo

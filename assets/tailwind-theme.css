@@ -27,7 +27,7 @@
         font-size: 0.835rem;
         font-style: normal;
         font-weight: 500;
-        line-height: 1.5rem;
+        line-height: normal;
         letter-spacing: -0.00406rem;
         color: var(--c-violet-9);
         background-color: var(--c-violet-3);
@@ -38,11 +38,11 @@
     }
 
     .code-error-style {
-        font-family: var(--font-source-code-pro);
+        font-family: var(--font-jetbrains);
         font-size: 0.835rem;
         font-style: normal;
         font-weight: 500;
-        line-height: 1.5rem;
+        line-height: normal;
         letter-spacing: -0.00406rem;
         color: var(--red-11);
         background-color: var(--red-3);
@@ -107,7 +107,7 @@
     .code-block>* {
         background: transparent !important;
         font-family: var(--font-jetbrains) !important;
-        font-size: 0.95rem !important;
+        font-size: 0.875rem !important;
         font-style: normal !important;
         font-weight: 500 !important;
         line-height: 1.5rem !important;
